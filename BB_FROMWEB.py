@@ -11,7 +11,7 @@ print ('▀▄▀▄▀▄ STOP AIRBNB ▄▀▄▀▄▀')
 
 wbx = load_workbook(path_RESULT.filename)
 ws = wbx.active
-ws.cell(row=1, column=1).value = 'name_mois'
+ws.cell(row=1, column=i).value = 'name_mois'
 wbx.save(path_RESULT.filename)
 
 print (toto)
