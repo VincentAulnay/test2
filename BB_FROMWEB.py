@@ -53,9 +53,6 @@ while up==0:
 print(i)
 
 #-------EMAIL VALUE-----------
-#sender = 'vincent.aulnay@gmail.com'
-#sender_password = '@Vincent94'
-#receivers = 'vincent.aulnay@gmail.com'
 
 #s = smtplib.SMTP('smtp.gmail.com', 587)
 #s.starttls()
@@ -80,8 +77,8 @@ Hr=dt.datetime.now().hour
 #------RECUP INFO CALANDAR------
 
 def email(DIR2,NAMEFile,now):
-	sender = 'vincent.aulnay@gmail.com'
-	sender_password = '@Vincent94'
+	sender = 'stopairbnb.vincent@gmail.com'
+	sender_password = '@STOP94AIRBNB'
 	receivers = 'vincent.aulnay@gmail.com'
 
 	s = smtplib.SMTP('smtp.gmail.com', 587)
