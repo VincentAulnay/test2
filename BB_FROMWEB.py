@@ -786,31 +786,24 @@ while end==0:
 					pass
 				try:
 				#-----RECUPERATION CALANDAR MOIS 3--------
-					if XP_CMP=='YES':
-						print('   ---')
-						#if C_mois==0:
-						#	name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, XP_mois_3))).text
-						#	year_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'calendar') and contains(@class ,'learfix')]/div[3]/h4/span[2]"))).text
-						#	print(name_mois3+' - '+year_mois1)
-						#	run_c=Colonne_mois(name_mois3,i,year_mois3)
-						#	m3_write=c_write
-						#	m3_newmonth=new_month
-						#if z==0: #check si nuit dispo en vide dans excel
-							#bookW = xlrd.open_workbook(path_RESULT.filename)
-							#sheet_readW = bookW.sheet_by_index(0)
-							#c=(sheet_readW.ncols)-6
-							#c=ws.cell(row=j, column=c_write+2).value
-						#d=sheet_readW.cell(j,c).value
-						d=ws.cell(row=j, column=m3_write+2).value
-						if d==None:
-							print('le mois N+2 est '+name_mois3)
-							#run_day=Statu_day3(1,m3_write,j)
-							run_resday=Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
-						else:
-							print('le mois N+2 est '+name_mois3)
-							run_resday=Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
-							print('Jours disponible déjà capturés')
-							z=1
+					print('   ---')
+					#if C_mois==0:
+					#	name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, XP_mois_3))).text
+					#	year_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'calendar') and contains(@class ,'learfix')]/div[3]/h4/span[2]"))).text
+					#	print(name_mois3+' - '+year_mois1)
+					#	run_c=Colonne_mois(name_mois3,i,year_mois3)
+					#	m3_write=c_write
+					#	m3_newmonth=new_month
+					#if z==0: #check si nuit dispo en vide dans excel
+						#bookW = xlrd.open_workbook(path_RESULT.filename)
+						#sheet_readW = bookW.sheet_by_index(0)
+						#c=(sheet_readW.ncols)-6
+						#c=ws.cell(row=j, column=c_write+2).value
+					#d=sheet_readW.cell(j,c).value
+					#d=ws.cell(row=j, column=m3_write+2).value
+					print('le mois N+2 est '+name_mois3)
+					#run_day=Statu_day3(1,m3_write,j)
+					run_resday=Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
 				except:
 					print('PAS DE MOIS 3')
 					pass
@@ -831,6 +824,7 @@ while end==0:
 		print ('|  |       |  |   |  |\ \ |  |')
 		print ('|  |       |  |   |  | \ \|  |')
 		print ('|__|       |__|   |__|  \____|')
+		rootdriver.quit()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
 		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
