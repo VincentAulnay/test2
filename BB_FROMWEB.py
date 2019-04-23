@@ -644,9 +644,6 @@ end=0
 C_mois=0
 EE=0
 Tr=0
-j=2
-z=0
-end=0
 C_mois=0
 date = int(datetime.datetime.now().day)
 #Hr=dt.datetime.now().hour
@@ -661,7 +658,10 @@ while end==0:
 			print(h)
 			if 'airbnb' in h:
 				rootdriver.get(h)
-				time.sleep(3)
+				if j==2:
+					time.sleep(5)
+				else:
+					time.sleep(1)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				ResAirbnb=''
