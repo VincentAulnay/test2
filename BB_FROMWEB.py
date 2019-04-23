@@ -204,10 +204,11 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 			i=i+1
 		except:
 			break
-
+	print (li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
+			print(ca)
 			#-------DATE DU JOUR-------
 			date = int(datetime.datetime.now().day)
 			month = int(datetime.datetime.now().month)
