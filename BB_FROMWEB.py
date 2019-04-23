@@ -659,9 +659,9 @@ while end==0:
 			if 'airbnb' in h:
 				rootdriver.get(h)
 				if j==2:
-					time.sleep(5)
+					time.sleep(3)
 				else:
-					time.sleep(1)
+					time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				ResAirbnb=''
