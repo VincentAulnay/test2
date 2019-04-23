@@ -833,7 +833,7 @@ while end==0:
 
 
 print('FIN')
-exist()
+
 
 
 
