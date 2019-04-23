@@ -832,7 +832,7 @@ while end==0:
 		wait = WebDriverWait(rootdriver, 3)
 
 
-
+print('FIN')
 
 
 
