@@ -628,11 +628,11 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 	
 #-----OPEN GOOGLE CHROME and AIRBNB PAGE---------
 
-rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
-#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
+#rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
+rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 #rootdriver.set_page_load_timeout(2)
 rootdriver.set_window_size(2000, 1000)
-wait = WebDriverWait(rootdriver, 3)
+wait = WebDriverWait(rootdriver, 5)
 
 #nrow=(sheet_read.nrows)+1
 
@@ -658,10 +658,11 @@ while end==0:
 			print(h)
 			if 'airbnb' in h:
 				rootdriver.get(h)
-				if j==2:
-					time.sleep(3)
-				else:
-					time.sleep(2)
+				WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
+				#if j==2:
+				#	time.sleep(3)
+				#else:
+				#	time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				ResAirbnb=''
@@ -826,8 +827,8 @@ while end==0:
 		rootdriver.quit()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
-		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
-		#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
+		#rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
+		rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 		rootdriver.set_window_size(1000, 1500)
 		wait = WebDriverWait(rootdriver, 3)
 
