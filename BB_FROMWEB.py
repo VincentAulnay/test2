@@ -658,8 +658,12 @@ while end==0:
 			print(h)
 			if 'airbnb' in h:
 				rootdriver.get(h)
-				WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
-				time.sleep(1)
+				try:
+					WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
+					time.sleep(1)
+				except:
+					print('ANNONCE PLUS LA !!!')
+					pass
 				#if j==2:
 				#	time.sleep(3)
 				#else:
