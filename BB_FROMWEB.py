@@ -820,7 +820,7 @@ while end==0:
 		now = str(datetime.datetime.now())[:19]
 		now = now.replace(":","_")
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		#run=email(DIR2,NAMEFile,now)
+		run=email(DIR2,NAMEFile,now)
 		Tr=date
 		print ('_______    ___    ___     ___')
 		print ('|      |   |  |   |  \    |  |')
