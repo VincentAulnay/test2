@@ -59,7 +59,7 @@ print(i)
 #s.login(sender, sender_password)
 
 #-----RECUP INFO XPATH FROM EXCEL------
-book_GMAIL = xlrd.open_workbook('/home/pi/Deskto/GMAIL_ACCOUNT.xls')
+book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
 sheet_GMAIL = book_GMAIL.sheet_by_index(0)
 ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
 PSW_GMAIL=sheet_GMAIL.cell(1,1).value
