@@ -22,12 +22,12 @@ from email import encoders
 from openpyxl import load_workbook
 
 
+
 chrome_options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
 chrome_options.add_experimental_option("prefs", prefs)
 
 print ('▀▄▀▄▀▄ STOP ▄▀▄▀▄▀')
-
 
 
 #-----EXCEL RESULT OPEN AND READ-----
@@ -59,15 +59,12 @@ print(i)
 #s.login(sender, sender_password)
 
 #-----RECUP INFO XPATH FROM EXCEL------
-#book_XPATH = xlrd.open_workbook('/home/pi/Documents/PV/XPATH_.xls')
-#sheet_XPATH = book_XPATH.sheet_by_index(0)
-#X_comment=sheet_XPATH.cell(17,2).value
-#XP_update=sheet_XPATH.cell(32,2).value
-#XP_mois_1=sheet_XPATH.cell(30,2).value
-#XP_mois_2=sheet_XPATH.cell(31,2).value
-#XP_mois_3=sheet_XPATH.cell(33,3).value
-#XP_next=sheet_XPATH.cell(34,2).value
-#XP_CMP=sheet_XPATH.cell(35,2).value
+book_GMAIL = xlrd.open_workbook('D:/MON_FICHIER/GMAIL_ACCOUNT.xls')
+sheet_GMAIL = book_GMAIL.sheet_by_index(0)
+ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
+PSW_GMAIL=sheet_GMAIL.cell(1,1).value
+RECEIVER=sheet_GMAIL.cell(2,1).value
+
 
 #-------DATE DU JOUR-------
 date = int(datetime.datetime.now().day)
@@ -77,9 +74,9 @@ Hr=dt.datetime.now().hour
 #------RECUP INFO CALANDAR------
 
 def email(DIR2,NAMEFile,now):
-	sender = 'stopairbnb.vincent@gmail.com'
-	sender_password = '@STOP94AIRBNB'
-	receivers = 'vincent.aulnay@gmail.com'
+	sender = ADRESS_GMAIL
+	sender_password = PSW_GMAIL
+	receivers = RECEIVER
 
 	s = smtplib.SMTP('smtp.gmail.com', 587)
 	s.starttls()
@@ -170,13 +167,16 @@ def A_Colonne_mois(name_mois,c):
 			break
 		elif this_month==None:
 			ws.cell(row=1, column=c+1).value = name_mois
-			ws.cell(row=1, column=c+2).value = 'calendar y a 3 mois'
-			ws.cell(row=1, column=c+3).value = 'jours disponible y a 3 mois'
-			ws.cell(row=1, column=c+4).value = 'total réservé'
-			ws.cell(row=1, column=c+5).value = 'NB_Comment'
-			ws.cell(row=1, column=c+6).value = 'DIF_Comment'
-			ws.cell(row=1, column=c+7).value = 'DIF_Nuitée'
-			ws.cell(row=1, column=c+8).value = 'SOM_Nuitée'
+			ws.cell(row=1, column=c+2).value = 'NB_COMMENT'
+			ws.cell(row=1, column=c+3).value = 'DIF_COMMENT'
+			ws.cell(row=1, column=c+4).value = 'NB_/A'
+			ws.cell(row=1, column=c+5).value = 'NB_NO/A'
+			ws.cell(row=1, column=c+6).value = 'SUM_NB'
+			ws.cell(row=1, column=c+7).value = 'nJ_/A'
+			ws.cell(row=1, column=c+8).value = 'nJ_NO/A'
+			ws.cell(row=1, column=c+9).value = 'SUM_nJ'
+			ws.cell(row=1, column=c+10).value = 'SUM_all_nJ/A'
+			ws.cell(row=1, column=c+11).value = 'SUM_all_nJ'
 			c_write=c+1
 			find_month=1
 			new_month=1
@@ -274,7 +274,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 	try:
 		Bcomment=soup.find('button', attrs={"class": "_ff6jfq"})
 		Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
-		ws.cell(row=j, column=c_write+4).value=Scomment
+		ws.cell(row=j, column=c_write+1).value=Scomment
 	except:
 		print('NO COMMENT')
 		pass
@@ -485,7 +485,7 @@ def Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo):
 					t=t.replace("]","")
 					r=str(ca)+';    '+t
 					lenli=len(lie)+len(LB)
-					ws.cell(row=j, column=c_write+3).value=lenli
+					#ws.cell(row=j, column=c_write+3).value=lenli
 			else:
 				t=ResAirbnb+toto+':'+str(li)
 				t=t.replace("[","")
@@ -493,7 +493,7 @@ def Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo):
 				r=t
 				#print(r)
 				lenli=len(li)
-				ws.cell(row=j, column=c_write+3).value=lenli
+				#ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
 				ws.cell(row=j, column=c_write).value=r
@@ -505,7 +505,7 @@ def Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo):
 		Bcomment=soup.find('h2', attrs={"class": "review-summary__header-overview-headline"})
 		Scomment=Bcomment.find('span').text
 		Pcomment=Scomment.split(' ')
-		ws.cell(row=j, column=c_write+4).value=Pcomment[0]
+		ws.cell(row=j, column=c_write+1).value=Pcomment[0]
 	except:
 		print('NO COMMENT')
 		pass
@@ -625,7 +625,207 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 		pass
 	#wb.save(path_RESULT.filename)
 
-	
+def COMPUTE_M1(name_mois1):
+	Dif_c=1
+	if Dif_c==1:
+		up=0
+		i=1
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up==name_mois1:
+				up=1
+			else:
+				i=i+1
+		print('Cmois='+str(i))
+		Cmois=i
+
+		up=0
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='NB_COMMENT':
+				up=1
+			else:
+				i=i+1
+		print('Ccomment1='+str(i))
+		Ccomment1=i
+
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='DIF_COMMENT':
+				up=1
+			else:
+				i=i+1
+		print('DIF_Comment='+str(i))
+		DIF_Comment=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='NB_/A':
+				up=1
+			else:
+				i=i+1
+		print('NB_/A='+str(i))
+		C_nbA=i
+
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='NB_NO/A':
+				up=1
+			else:
+				i=i+1
+		print('NB_NO/A='+str(i))
+		C_nbnoA=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='SUM_NB':
+				up=1
+			else:
+				i=i+1
+		print('SUM_NB='+str(i))
+		C_SUMnb=i
+
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='nJ_/A':
+				up=1
+			else:
+				i=i+1
+		print('nJ_/A='+str(i))
+		C_nJA=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='nJ_NO/A':
+				up=1
+			else:
+				i=i+1
+		print('nJ_NO/A='+str(i))
+		C_NOnJA=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='SUM_nJ':
+				up=1
+			else:
+				i=i+1
+		print('SUM_nJ='+str(i))
+		C_SUMnJ=i
+
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='SUM_all_nJ':
+				up=1
+			else:
+				i=i+1
+		print('SUM_all_nJ='+str(i))
+		C_SUM_all_nJ=i
+		
+		up=0
+		i=Cmois
+		try:
+			while up==0:
+				V_up=ws.cell(row=1, column=i).value
+				if V_up=='NB_COMMENT':
+					up=1
+				else:
+					i=i-1
+			print('Ccommont2='+str(i))
+			Ccomment2=i
+			NOC2=0
+		except:
+			NOC2=1
+			print ('NOC2=====1')
+	c=2
+	while c<=nrow:
+		if NOC2==0:
+			V1=ws.cell(row=c, column=Ccomment1).value
+			V2=ws.cell(row=c, column=Ccomment2).value
+			try:
+				DIF=int(V1)-int(V2)
+				#print('ANNONCE:'+str(c)+('   DIF:')+str(DIF))
+				ws.cell(row=c, column=DIF_Comment).value=DIF
+			except:
+				pass
+	#--------COUNT NB/A and NB NO/A---------
+		STR_NBA=ws.cell(row=c, column=Cmois).value
+		continu=1
+		if STR_NBA==None:
+			continu=0
+		if continu==1:
+			count_AP=0
+			count_AP=STR_NBA.count('/A/P')
+			count_NBA=0
+			count_NBA=STR_NBA.count('/A')
+			real_NBA=count_NBA-count_AP
+			#print (('NB_/A ===')+str(real_NBA))
+			count_D=0
+			count_P=0
+			count=0
+			count_P=STR_NBA.count('/P')
+			count_D=STR_NBA.count('/D')
+			count=STR_NBA.count(':')
+			NBNOA=count-count_D-count_NBA-count_P+count_AP
+			#print (('NB_NO/A ===')+str(NBNOA))
+			ws.cell(row=c, column=C_nbA).value=real_NBA
+			ws.cell(row=c, column=C_nbnoA).value=NBNOA
+			write=int(NBNOA)+int(real_NBA)
+			ws.cell(row=c, column=C_SUMnb).value=write
+		#---------COUNT nJ ---------
+			list=STR_NBA.split(';')
+			B=['/P', '/D', '/A/P']
+			blacklist = re.compile('|'.join([re.escape(word) for word in B]))
+			newL=[word for word in list if not blacklist.search(word)]
+			#[x for x in list if not x.startswith('/A/P') and not x.startswith('/D') and not x.startswith('/P')]
+			#[x for x in list if not any(bad in x for bad in B)]
+			#-----/A--------
+			BA=['/A']
+			blacklistA = re.compile('|'.join([re.escape(wordA) for wordA in BA]))
+			newLforA=[wordA for wordA in newL if blacklistA.search(wordA)]
+			newLfornoA=[wordA for wordA in newL if not blacklistA.search(wordA)]
+			nAlen=len(newLforA)
+			rr=0
+			nbA=0
+			while rr<nAlen:
+				pnlA=newLforA[rr].split(':')
+				del pnlA[0]
+				pla=pnlA[0].split(',')
+				nbA=nbA+len(pla)
+				rr=rr+1
+			#print (('nb/A ::  ')+str(nbA))
+			ws.cell(row=c, column=C_nJA).value=nbA
+			nAlen=len(newLfornoA)
+			rr=0
+			nobA=0
+			while rr<nAlen:
+				pnlA=newLfornoA[rr].split(':')
+				del pnlA[0]
+				pla=pnlA[0].split(',')
+				nbnoA=nobA+len(pla)
+				rr=rr+1
+			print (('nbNO/A ::  ')+str(nobA))
+			ws.cell(row=c, column=C_NOnJA).value=nbnoA
+			write=int(nbA)+int(nbnoA)
+			ws.cell(row=c, column=C_SUMnJ).value=write
+		c=c+1
+
+		
 #-----OPEN GOOGLE CHROME and AIRBNB PAGE---------
 
 rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
@@ -819,7 +1019,7 @@ while end==0:
 		end=1
 		now = str(datetime.datetime.now())[:19]
 		now = now.replace(":","_")
-		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
+		
 		run=email(DIR2,NAMEFile,now)
 		Tr=date
 		print ('_______    ___    ___     ___')
@@ -829,6 +1029,11 @@ while end==0:
 		print ('|  |       |  |   |  |\ \ |  |')
 		print ('|  |       |  |   |  | \ \|  |')
 		print ('|__|       |__|   |__|  \____|')
+		COMPUTE_M1(name_mois1)
+		COMPUTE_M1(name_mois2)
+		wbx.save(path_RESULT.filename)
+		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
+		time.sleep(20)
 		rootdriver.quit()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
@@ -839,17 +1044,3 @@ while end==0:
 
 
 print('FIN')
-
-
-
-
-
-
-
-	
-
-
-
-
-
-
