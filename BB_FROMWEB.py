@@ -1019,8 +1019,6 @@ while end==0:
 		end=1
 		now = str(datetime.datetime.now())[:19]
 		now = now.replace(":","_")
-		
-		run=email(DIR2,NAMEFile,now)
 		Tr=date
 		print ('_______    ___    ___     ___')
 		print ('|      |   |  |   |  \    |  |')
@@ -1033,7 +1031,7 @@ while end==0:
 		COMPUTE_M1(name_mois2)
 		wbx.save(path_RESULT.filename)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		time.sleep(20)
+		run=email(DIR2,NAMEFile,now)
 		rootdriver.quit()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
