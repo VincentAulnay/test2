@@ -1009,6 +1009,7 @@ while end==0:
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		#run=email(DIR2,NAMEFile,now)
 		rootdriver.quit()
+		wbx.close()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
 		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
