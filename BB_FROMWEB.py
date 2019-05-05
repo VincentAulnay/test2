@@ -797,26 +797,33 @@ def COMPUTE_M1(name_mois1):
 			nAlen=len(newLforA)
 			rr=0
 			nbA=0
-			while rr<nAlen:
-				pnlA=newLforA[rr].split(':')
-				del pnlA[0]
-				pla=pnlA[0].split(',')
-				nbA=nbA+len(pla)
-				rr=rr+1
+			print ('LALALA')
+			try:
+				while rr<nAlen:
+					pnlA=newLforA[rr].split(':')
+					del pnlA[0]
+					pla=pnlA[0].split(',')
+					nbA=nbA+len(pla)
+					rr=rr+1
+			except:
+				pass
 			print (('nJ/A ::  ')+str(nbA))
 			ws.cell(row=c, column=C_nJA).value=nbA
 			nAlen=len(newLfornoA)
 			rr=0
 			NnoJA=0
 			print ('ICI')
-			while rr<nAlen:
-				pnlA=newLfornoA[rr].split(':')
-				del pnlA[0]
-				pla=pnlA[0].split(',')
-				print (pla)
-				NnoJA=NnoJA+len(pla)
-				print ('AACC')
-				rr=rr+1
+			try:
+				while rr<nAlen:
+					pnlA=newLfornoA[rr].split(':')
+					del pnlA[0]
+					pla=pnlA[0].split(',')
+					print (pla)
+					NnoJA=NnoJA+len(pla)
+					print ('AACC')
+					rr=rr+1
+			except:
+				pass
 			print ('AA')
 			print (('nbNO/A ::  ')+str(NnoJA))
 			ws.cell(row=c, column=C_NOnJA).value=NnoJA
