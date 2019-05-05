@@ -868,13 +868,14 @@ while end==0:
 				rootdriver.get(h)
 				try:
 					WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
-					time.sleep(1)
+					time.sleep(2)
 				except:
 					print('ANNONCE PLUS LA !!!')
 					pass
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				ResAirbnb=''
+				time.sleep(1)
 				try:
 					update=soup.find('div', attrs={"class":u"_q401y8m"})
 					V_up=update.find('span').text
