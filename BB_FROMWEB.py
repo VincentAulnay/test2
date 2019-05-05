@@ -872,7 +872,7 @@ while end==0:
 					WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
 					time.sleep(2)
 				except:
-					#print('ANNONCE PLUS LA !!!')
+					print('ANNONCE PLUS LA !!!')
 					pass
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
@@ -882,7 +882,7 @@ while end==0:
 					#update=soup.find('div', attrs={"class":u"_q401y8m"})
 					#V_up=update.find('span').text
 					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']/span"))).text
-					#print (V_up)
+					print (V_up)
 					ws.cell(row=j, column=i).value=V_up
 					#wbx.save(path_RESULT.filename)
 					if V_up!="Mis à jour aujourd'hui":
