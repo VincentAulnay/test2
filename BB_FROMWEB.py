@@ -2,8 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-import xlwt
-import xlrd
+#import xlwt
+#import xlrd
 import time
 from xlutils.copy import copy
 import datetime
@@ -34,25 +34,25 @@ print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
 
 #-----EXCEL RESULT OPEN AND READ-----
 
-book = xlrd.open_workbook(path_RESULT.filename)
-wb=copy(book)
-sheet_write = wb.get_sheet(0)
-sheet_read = book.sheet_by_index(0)
+#book = xlrd.open_workbook(path_RESULT.filename)
+#wb=copy(book)
+#sheet_write = wb.get_sheet(0)
+#sheet_read = book.sheet_by_index(0)
 
 wbx = load_workbook(path_RESULT.filename)
 ws = wbx.active
 
 #-------FIND COLUMN UPDATE------
 up=0
-i=1
+k=1
 while up==0:
 	#V_up=sheet_read.cell(0,i).value
-	V_up=ws.cell(row=1, column=i).value
+	V_up=ws.cell(row=1, column=k).value
 	if V_up=='UPDATE_CALENDAR':
 		up=1
 	else:
-		i=i+1
-print(i)
+		k=k+1
+print('V_UP est à la cellule: '+str(k))
 
 #-------EMAIL VALUE-----------
 
@@ -377,7 +377,7 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 				ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
-				sheet_write.write(j,c_write,r)
+				#sheet_write.write(j,c_write,r)
 				ws.cell(row=j, column=c_write).value=r
 	except:
 		pass
@@ -616,7 +616,7 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 				ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
-				sheet_write.write(j,c_write,r)
+				#sheet_write.write(j,c_write,r)
 				ws.cell(row=j, column=c_write).value=r
 	except:
 		pass
@@ -881,9 +881,9 @@ while end==0:
 				try:
 					#update=soup.find('div', attrs={"class":u"_q401y8m"})
 					#V_up=update.find('span').text
-					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']/span"))).text
+					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
 					print (V_up)
-					ws.cell(row=j, column=i).value=V_up
+					ws.cell(row=j, column=k).value=V_up
 					#wbx.save(path_RESULT.filename)
 					if V_up!="Mis à jour aujourd'hui":
 						ResAirbnb='/A'
