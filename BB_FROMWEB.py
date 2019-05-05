@@ -37,15 +37,15 @@ wb=copy(book)
 sheet_write = wb.get_sheet(0)
 sheet_read = book.sheet_by_index(0)
 
-wbxn = load_workbook(path_RESULT.filename)
-wsn = wbxn.active
+wbx = load_workbook(path_RESULT.filename)
+ws = wbx.active
 
 #-------FIND COLUMN UPDATE------
 up=0
 i=1
 while up==0:
 	#V_up=sheet_read.cell(0,i).value
-	V_up=wsn.cell(row=1, column=i).value
+	V_up=ws.cell(row=1, column=i).value
 	if V_up=='UPDATE_CALENDAR':
 		up=1
 	else:
@@ -816,8 +816,11 @@ def COMPUTE_M1(name_mois1):
 				rr=rr+1
 			print (('nbNO/A ::  ')+str(nobA))
 			ws.cell(row=c, column=C_NOnJA).value=nbnoA
+			print ('AAAA')
 			write=int(nbA)+int(nbnoA)
+			print ('ABBB')
 			ws.cell(row=c, column=C_SUMnJ).value=write
+			print ('AACC')
 		c=c+1
 
 		
@@ -831,7 +834,7 @@ wait = WebDriverWait(rootdriver, 5)
 
 #nrow=(sheet_read.nrows)+1
 
-nrow=wsn.max_row
+nrow=ws.max_row
 print('NROW'+str(nrow))
 j=2
 z=0
@@ -841,8 +844,8 @@ Tr=0
 C_mois=0
 date = int(datetime.datetime.now().day)
 #Hr=dt.datetime.now().hour
-wbx = load_workbook(path_RESULT.filename)
-ws = wbx.active
+#wbx = load_workbook(path_RESULT.filename)
+#ws = wbx.active
 while end==0:
 	try:
 		while j<=nrow:
@@ -982,7 +985,9 @@ while end==0:
 		wbx = load_workbook(path_RESULT.filename)
 		ws = wbx.active
 		COMPUTE_M1(name_mois1)
+		print ('COMP_1')
 		COMPUTE_M1(name_mois2)
+		print ('COMP_2')
 		wbx.save(path_RESULT.filename)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		run=email(DIR2,NAMEFile,now)
