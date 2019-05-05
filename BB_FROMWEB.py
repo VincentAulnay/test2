@@ -874,22 +874,33 @@ while end==0:
 				except:
 					print('ANNONCE PLUS LA !!!')
 					pass
+
+				ResAirbnb=''
+				
+				drive=0
+				while drive==0:
+					try:
+						#update=soup.find('div', attrs={"class":u"_q401y8m"})
+						#V_up=update.find('span').text
+						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
+						print (V_up)
+						ws.cell(row=j, column=k).value=V_up
+						#wbx.save(path_RESULT.filename)
+						drive=1
+						if V_up!="Mis à jour aujourd'hui":
+							ResAirbnb='/A'
+					except:
+						print ('V_up pas capturé')
+						rootdriver.quit()
+						rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
+						rootdriver.set_window_size(2000, 1000)
+						wait = WebDriverWait(rootdriver, 5)
+						rootdriver.get(h)
+						drive=0
+						pass
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
-				ResAirbnb=''
 				time.sleep(1)
-				try:
-					#update=soup.find('div', attrs={"class":u"_q401y8m"})
-					#V_up=update.find('span').text
-					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-					print (V_up)
-					ws.cell(row=j, column=k).value=V_up
-					#wbx.save(path_RESULT.filename)
-					if V_up!="Mis à jour aujourd'hui":
-						ResAirbnb='/A'
-				except:
-					print ('V_up pas capturé')
-					pass
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
 					if C_mois==0:
