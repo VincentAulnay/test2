@@ -903,10 +903,10 @@ while end==0:
 				drive=1
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
-				time.sleep(2)
+				time.sleep(3)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
-				time.sleep(1)
+				time.sleep(2)
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
 					if C_mois==0:
@@ -947,14 +947,16 @@ while end==0:
 				#-----RECUPERATION CALANDAR MOIS 3--------
 					print('   ---')
 					if C_mois==0:
-						#month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
-						#name_mois3=month31.find('strong').text
+						month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
+						name_mois3=month31.find('strong').text
 						print ('test M3')
 						mm3=0
 						u=0
 						while mm3==0:
-							time.sleep(3)
-							name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_gucugi'][3]/strong"))).text
+							#time.sleep(3)
+							month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
+							name_mois3=month31.find('strong').text
+							#name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_gucugi'][3]/strong"))).text
 							print ('name m3='+str(name_mois3))
 							if name_mois3==None:
 								mm3=0
