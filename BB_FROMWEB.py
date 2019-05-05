@@ -765,18 +765,19 @@ def COMPUTE_M1(name_mois1):
 			continu=0
 		if continu==1:
 			count_AP=0
-			count_AP=STR_NBA.count('/A/P')
-			count_NBA=0
-			count_NBA=STR_NBA.count('/A')
-			real_NBA=count_NBA-count_AP
-			#print (('NB_/A ===')+str(real_NBA))
 			count_D=0
 			count_P=0
 			count=0
+			count_NBA=0
+			count_AP=STR_NBA.count('/A/P')
+			count_NBA=STR_NBA.count('/A')
+			real_NBA=count_NBA-count_AP
+			#print (('NB_/A ===')+str(real_NBA))
 			count_P=STR_NBA.count('/P')
 			count_D=STR_NBA.count('/D')
 			count=STR_NBA.count(':')
-			NBNOA=count-count_D-count_NBA-count_P+count_AP
+			
+			NBNOA=count-count_D-real_NBA-count_P-count_AP
 			#print (('NB_NO/A ===')+str(NBNOA))
 			ws.cell(row=c, column=C_nbA).value=real_NBA
 			ws.cell(row=c, column=C_nbnoA).value=NBNOA
@@ -877,11 +878,13 @@ while end==0:
 				try:
 					update=soup.find('div', attrs={"class":u"_q401y8m"})
 					V_up=update.find('span').text
+					print (V_up)
 					ws.cell(row=j, column=i).value=V_up
 					#wbx.save(path_RESULT.filename)
 					if V_up!="Mis à jour aujourd'hui":
 						ResAirbnb='/A'
 				except:
+					print ('V_up pas capturé')
 					pass
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
