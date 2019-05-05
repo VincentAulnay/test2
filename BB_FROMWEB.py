@@ -39,7 +39,7 @@ print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
 #sheet_write = wb.get_sheet(0)
 #sheet_read = book.sheet_by_index(0)
 
-wbx = load_workbook(data_only=True, path_RESULT.filename)
+wbx = load_workbook(path_RESULT.filename, data_only=True)
 ws = wbx.active
 
 #-------FIND COLUMN UPDATE------
