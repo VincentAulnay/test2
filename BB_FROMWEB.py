@@ -29,7 +29,7 @@ chrome_options.add_experimental_option("prefs", prefs)
 chrome_options.add_argument("-headless")
 chrome_options.add_argument("-disable-gpu")
 
-print ('▀▄▀▄▀▄ STOP ▄▀▄▀▄▀')
+print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
 
 
 #-----EXCEL RESULT OPEN AND READ-----
@@ -52,7 +52,7 @@ while up==0:
 		up=1
 	else:
 		i=i+1
-print(i)
+#print(i)
 
 #-------EMAIL VALUE-----------
 
@@ -206,11 +206,11 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 			i=i+1
 		except:
 			break
-	print (li)
+	#print (li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
-			print(ca)
+			#print(ca)
 			#-------DATE DU JOUR-------
 			date = int(datetime.datetime.now().day)
 			month = int(datetime.datetime.now().month)
@@ -278,7 +278,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 		Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
 		ws.cell(row=j, column=c_write+1).value=Scomment
 	except:
-		print('NO COMMENT')
+		#print('NO COMMENT')
 		pass
 		#wbx.save(path_RESULT.filename)
 
@@ -305,7 +305,7 @@ def A_Statu_day3(date,c_write,j):
 	liste=set(liste)
 	lenli=len(liste)
 	ws.cell(row=j, column=c_write+2).value=lenli
-	print (liste)
+	#print (liste)
 	strli=str(liste)
 	str_repl_1=strli.replace("'","")
 	str_repl_2=str_repl_1.replace("{","") #
@@ -535,7 +535,7 @@ def Statu_day3(date,c_write,j):
 	lenli=len(liste)
 	#sheet_write.write(j,c_write+2,lenli)
 	ws.cell(row=j, column=c_write+2).value=lenli
-	print (liste)
+	#print (liste)
 	strli=str(liste)
 	str_repl_1=strli.replace("'","")
 	str_repl_2=str_repl_1.replace("{","") #
@@ -633,7 +633,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('Cmois='+str(i))
+		#print('Cmois='+str(i))
 		Cmois=i
 
 		up=0
@@ -643,7 +643,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('Ccomment1='+str(i))
+		#print('Ccomment1='+str(i))
 		Ccomment1=i
 
 		up=0
@@ -654,7 +654,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('DIF_Comment='+str(i))
+		#print('DIF_Comment='+str(i))
 		DIF_Comment=i
 		
 		up=0
@@ -665,7 +665,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('NB_/A='+str(i))
+		#print('NB_/A='+str(i))
 		C_nbA=i
 
 		up=0
@@ -676,7 +676,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('NB_NO/A='+str(i))
+		#print('NB_NO/A='+str(i))
 		C_nbnoA=i
 		
 		up=0
@@ -687,7 +687,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('SUM_NB='+str(i))
+		#print('SUM_NB='+str(i))
 		C_SUMnb=i
 
 		up=0
@@ -698,7 +698,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('nJ_/A='+str(i))
+		#print('nJ_/A='+str(i))
 		C_nJA=i
 		
 		up=0
@@ -709,7 +709,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('nJ_NO/A='+str(i))
+		#print('nJ_NO/A='+str(i))
 		C_NOnJA=i
 		
 		up=0
@@ -720,7 +720,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('SUM_nJ='+str(i))
+		#print('SUM_nJ='+str(i))
 		C_SUMnJ=i
 
 		up=0
@@ -731,7 +731,7 @@ def COMPUTE_M1(name_mois1):
 				up=1
 			else:
 				i=i+1
-		print('SUM_all_nJ='+str(i))
+		#print('SUM_all_nJ='+str(i))
 		C_SUM_all_nJ=i
 		
 		up=0
@@ -743,12 +743,12 @@ def COMPUTE_M1(name_mois1):
 					up=1
 				else:
 					i=i-1
-			print('Ccommont2='+str(i))
+			#print('Ccommont2='+str(i))
 			Ccomment2=i
 			NOC2=0
 		except:
 			NOC2=1
-			print ('NOC2=====1')
+			#print ('NOC2=====1')
 	c=2
 	while c<=nrow:
 		if NOC2==0:
@@ -800,7 +800,7 @@ def COMPUTE_M1(name_mois1):
 			nAlen=len(newLforA)
 			rr=0
 			nbA=0
-			print ('LALALA')
+			#print ('LALALA')
 			try:
 				while rr<nAlen:
 					pnlA=newLforA[rr].split(':')
@@ -810,30 +810,30 @@ def COMPUTE_M1(name_mois1):
 					rr=rr+1
 			except:
 				pass
-			print (('nJ/A ::  ')+str(nbA))
+			#print (('nJ/A ::  ')+str(nbA))
 			ws.cell(row=c, column=C_nJA).value=nbA
 			nAlen=len(newLfornoA)
 			rr=0
 			NnoJA=0
-			print ('ICI')
+			#print ('ICI')
 			try:
 				while rr<nAlen:
 					pnlA=newLfornoA[rr].split(':')
 					del pnlA[0]
 					pla=pnlA[0].split(',')
-					print (pla)
+					#print (pla)
 					NnoJA=NnoJA+len(pla)
-					print ('AACC')
+					#print ('AACC')
 					rr=rr+1
 			except:
 				pass
-			print ('AA')
-			print (('nbNO/A ::  ')+str(NnoJA))
+			#print ('AA')
+			#print (('nbNO/A ::  ')+str(NnoJA))
 			ws.cell(row=c, column=C_NOnJA).value=NnoJA
-			print ('AACC')
+			#print ('AACC')
 			write=int(nbA)+int(NnoJA)
 			ws.cell(row=c, column=C_SUMnJ).value=write
-			print ('AACC')
+			#print ('AACC')
 		c=c+1
 
 		
@@ -872,7 +872,7 @@ while end==0:
 					WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
 					time.sleep(2)
 				except:
-					print('ANNONCE PLUS LA !!!')
+					#print('ANNONCE PLUS LA !!!')
 					pass
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
@@ -882,7 +882,7 @@ while end==0:
 					#update=soup.find('div', attrs={"class":u"_q401y8m"})
 					#V_up=update.find('span').text
 					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']/span"))).text
-					print (V_up)
+					#print (V_up)
 					ws.cell(row=j, column=i).value=V_up
 					#wbx.save(path_RESULT.filename)
 					if V_up!="Mis à jour aujourd'hui":
@@ -1002,9 +1002,9 @@ while end==0:
 		wbx = load_workbook(path_RESULT.filename)
 		ws = wbx.active
 		COMPUTE_M1(name_mois1)
-		print ('COMP_1')
+		#print ('COMP_1')
 		COMPUTE_M1(name_mois2)
-		print ('COMP_2')
+		#print ('COMP_2')
 		wbx.save(path_RESULT.filename)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		run=email(DIR2,NAMEFile,now)
@@ -1017,4 +1017,4 @@ while end==0:
 		wait = WebDriverWait(rootdriver, 3)
 
 
-print('FIN')
+#print('FIN')
