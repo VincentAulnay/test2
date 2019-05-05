@@ -947,8 +947,10 @@ while end==0:
 				#-----RECUPERATION CALANDAR MOIS 3--------
 					print('   ---')
 					if C_mois==0:
-						month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
-						name_mois3=month31.find('strong').text
+						#month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
+						#name_mois3=month31.find('strong').text
+						name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_kuxo8ai']//div[@class='_gucugi']/strong"))).text
+						print (name_mois3)
 						run_c=A_Colonne_mois(name_mois3,i)
 						m3_write=c_write
 						m3_newmonth=new_month
