@@ -950,8 +950,17 @@ while end==0:
 						#month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
 						#name_mois3=month31.find('strong').text
 						print ('test M3')
-						name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_kuxo8ai']//div[@class='_gucugi']/strong"))).text
-						print (name_mois3)
+						mm3=0
+						while mm3=1
+							name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_kuxo8ai']//div[@class='_gucugi']/strong"))).text
+							print ('name m3='+str(name_mois3))
+							if name_mois3=='':
+								mm3=0
+								u=u+1
+							else:
+								mm3=1
+							if u==3:
+								mm3=1
 						run_c=A_Colonne_mois(name_mois3,k)
 						m3_write=c_write
 						m3_newmonth=new_month
