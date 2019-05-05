@@ -193,7 +193,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 	i=0
 	li=[]
 	if new_mo==1:
-		ResAirbnb=''
+		ResAirbnb='/D'
 	while i<=31:
 		try:
 			the_tr= month.findAll('td', attrs={"class": "_z39f86g"})[i]
@@ -302,7 +302,6 @@ def A_Statu_day3(date,c_write,j):
 	liste.sort()
 	liste=set(liste)
 	lenli=len(liste)
-	#sheet_write.write(j,c_write+2,lenli)
 	ws.cell(row=j, column=c_write+2).value=lenli
 	print (liste)
 	strli=str(liste)
@@ -310,7 +309,6 @@ def A_Statu_day3(date,c_write,j):
 	str_repl_2=str_repl_1.replace("{","") #
 	str_repl_3=str_repl_2.replace("}","") #
 	if str_repl_1!='set()':
-		#sheet_write.write(j,c_write+1,str_repl_3)
 		ws.cell(row=j, column=c_write+1).value=str_repl_3
 	#wb.save(path_RESULT.filename)
 	
@@ -319,7 +317,7 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 	i=0
 	li=[]
 	if new_mo==1:
-		ResAirbnb=''
+		ResAirbnb='/D'
 	while i<=31:
 		try:
 			the_tr= month5.findAll('td', attrs={"class": "_z39f86g"})[i]
@@ -331,9 +329,6 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 			break
 	try:
 		if len(li)>0:
-			#book_date = xlrd.open_workbook(path_RESULT.filename)
-			#sheet_date = book_date.sheet_by_index(0)
-			#ca=sheet_date.cell(j,c_write).value
 			ca=ws.cell(row=j, column=c_write).value
 			#-------DATE DU JOUR-------
 			date = int(datetime.datetime.now().day)
@@ -436,7 +431,7 @@ def Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo):
 	i=0
 	li=[]
 	if new_mo==1:
-		ResAirbnb=''
+		ResAirbnb='/D'
 	while i<=31:
 		try:
 			the_tr= month.findAll('div', {"class": re.compile("pm-unavailable")})[i]
@@ -554,7 +549,7 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 	i=0
 	li=[]
 	if new_mo==1:
-		ResAirbnb=''
+		ResAirbnb='/D'
 	while i<=31:
 		try:
 			#the_tr= month5.findAll('td', attrs={"class": "_z39f86g"})[i]
@@ -841,7 +836,6 @@ print('NROW'+str(nrow))
 j=2
 z=0
 end=0
-C_mois=0
 EE=0
 Tr=0
 C_mois=0
@@ -864,10 +858,6 @@ while end==0:
 				except:
 					print('ANNONCE PLUS LA !!!')
 					pass
-				#if j==2:
-				#	time.sleep(3)
-				#else:
-				#	time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				ResAirbnb=''
@@ -925,18 +915,7 @@ while end==0:
 						run_c=A_Colonne_mois(name_mois3,i)
 						m3_write=c_write
 						m3_newmonth=new_month
-					#if z==0: #check si nuit dispo en vide dans excel
-						#bookW = xlrd.open_workbook(path_RESULT.filename)
-						#sheet_readW = bookW.sheet_by_index(0)
-						#c=(sheet_readW.ncols)-6
-						#c=ws.cell(row=j, column=c_write+2).value
-					#d=sheet_readW.cell(j,c).value
 					d=ws.cell(row=j, column=m3_write+2).value
-					#if d==None:
-					#	print('le mois N+2 est '+name_mois3)
-					#	run_day=A_Statu_day3(1,m3_write,j)
-					#	run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
-					#else:
 					print('le mois N+2 est '+name_mois3)
 					run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
 					#print('Jours disponible déjà capturés')
@@ -964,13 +943,6 @@ while end==0:
 					pass
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
-					#if C_mois==0:
-					#	name_mois1 = wait.until(EC.presence_of_element_located((By.XPATH, XP_mois_1))).text
-					#	year_mois1 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'calendar') and contains(@class ,'learfix')]/div[1]/h4/span[2]"))).text
-					#	print(name_mois1+' - '+year_mois1)
-					#	run_c=Colonne_mois(name_mois1,i,year_mois1)
-					#	m1_write=c_write
-					#	m1_newmonth=new_month
 					print('   ---')
 					print('le mois N est '+name_mois1)
 					run_day=Statu_day2(date,m1_write,1,j,0,ResAirbnb,m1_newmonth)
@@ -978,12 +950,6 @@ while end==0:
 					pass
 				try:
 				#-----RECUPERATION CALANDAR MOIS 2--------
-					#if C_mois==0:
-					#	name_mois2 = wait.until(EC.presence_of_element_located((By.XPATH, XP_mois_2))).text
-					#	year_mois2 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'calendar') and contains(@class ,'learfix')]/div[2]/h4/span[2]"))).text
-					#	run_c=Colonne_mois(name_mois2,i,year_mois2)
-					#	m2_write=c_write
-					#	m2_newmonth=new_month
 					print('   ---')
 					print('le mois N+1 est '+name_mois2)
 					run_day=Statu_day2(1,m2_write,2,j,1,ResAirbnb,m2_newmonth)
@@ -992,20 +958,6 @@ while end==0:
 				try:
 				#-----RECUPERATION CALANDAR MOIS 3--------
 					print('   ---')
-					#if C_mois==0:
-					#	name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, XP_mois_3))).text
-					#	year_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[contains(@class, 'calendar') and contains(@class ,'learfix')]/div[3]/h4/span[2]"))).text
-					#	print(name_mois3+' - '+year_mois1)
-					#	run_c=Colonne_mois(name_mois3,i,year_mois3)
-					#	m3_write=c_write
-					#	m3_newmonth=new_month
-					#if z==0: #check si nuit dispo en vide dans excel
-						#bookW = xlrd.open_workbook(path_RESULT.filename)
-						#sheet_readW = bookW.sheet_by_index(0)
-						#c=(sheet_readW.ncols)-6
-						#c=ws.cell(row=j, column=c_write+2).value
-					#d=sheet_readW.cell(j,c).value
-					#d=ws.cell(row=j, column=m3_write+2).value
 					print('le mois N+2 est '+name_mois3)
 					#run_day=Statu_day3(1,m3_write,j)
 					run_resday=Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
