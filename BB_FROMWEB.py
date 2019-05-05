@@ -807,14 +807,17 @@ def COMPUTE_M1(name_mois1):
 			ws.cell(row=c, column=C_nJA).value=nbA
 			nAlen=len(newLfornoA)
 			rr=0
-			nobA=0
+			#nobA=0
+			nbnoA=0
 			while rr<nAlen:
 				pnlA=newLfornoA[rr].split(':')
-				del pnlA[0]
-				pla=pnlA[0].split(',')
-				nbnoA=nobA+len(pla)
+				#del pnlA[0]
+				pla=pnlA[1].split(',')
+				print (len(pla))
+				nbnoA=nbnoA+len(pla)
 				rr=rr+1
 			print (('nbNO/A ::  ')+str(nobA))
+			print ('A')
 			ws.cell(row=c, column=C_NOnJA).value=nbnoA
 			print ('AAAA')
 			write=int(nbA)+int(nbnoA)
