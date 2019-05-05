@@ -917,7 +917,7 @@ while end==0:
 						run_MN=MnumDay(MN1)
 						print (MNumday)
 						MNday1=MNumday
-						run_c=A_Colonne_mois(name_mois1,i)
+						run_c=A_Colonne_mois(name_mois1,k)
 						m1_write=c_write
 						m1_newmonth=new_month
 					print('   ---')
@@ -935,7 +935,7 @@ while end==0:
 						run_MN=MnumDay(MN2)
 						print (MNumday)
 						MNday2=MNumday
-						run_c=A_Colonne_mois(name_mois2,i)
+						run_c=A_Colonne_mois(name_mois2,k)
 						m2_write=c_write
 						m2_newmonth=new_month
 					print('   ---')
@@ -949,9 +949,10 @@ while end==0:
 					if C_mois==0:
 						#month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
 						#name_mois3=month31.find('strong').text
+						print ('test M3')
 						name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_kuxo8ai']//div[@class='_gucugi']/strong"))).text
 						print (name_mois3)
-						run_c=A_Colonne_mois(name_mois3,i)
+						run_c=A_Colonne_mois(name_mois3,k)
 						m3_write=c_write
 						m3_newmonth=new_month
 					d=ws.cell(row=j, column=m3_write+2).value
