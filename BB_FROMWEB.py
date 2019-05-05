@@ -903,6 +903,7 @@ while end==0:
 				drive=1
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
+				time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				time.sleep(1)
