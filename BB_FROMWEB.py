@@ -875,7 +875,7 @@ while end==0:
 					update=soup.find('div', attrs={"class":u"_q401y8m"})
 					V_up=update.find('span').text
 					ws.cell(row=j, column=i).value=V_up
-					wbx.save(path_RESULT.filename)
+					#wbx.save(path_RESULT.filename)
 					if V_up!="Mis à jour aujourd'hui":
 						ResAirbnb='/A'
 				except:
