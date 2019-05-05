@@ -879,8 +879,9 @@ while end==0:
 				ResAirbnb=''
 				time.sleep(1)
 				try:
-					update=soup.find('div', attrs={"class":u"_q401y8m"})
-					V_up=update.find('span').text
+					#update=soup.find('div', attrs={"class":u"_q401y8m"})
+					#V_up=update.find('span').text
+					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']/span"))).text
 					print (V_up)
 					ws.cell(row=j, column=i).value=V_up
 					#wbx.save(path_RESULT.filename)
