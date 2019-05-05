@@ -959,8 +959,10 @@ while end==0:
 							if name_mois3==None:
 								mm3=0
 								u=u+1
+								print ('none')
 							else:
 								mm3=1
+								print ('m3 yes')
 							if u==3:
 								mm3=1
 							print ('go')
