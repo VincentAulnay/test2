@@ -52,7 +52,7 @@ while up==0:
 		up=1
 	else:
 		i=i+1
-#print(i)
+print(i)
 
 #-------EMAIL VALUE-----------
 
@@ -206,7 +206,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 			i=i+1
 		except:
 			break
-	#print (li)
+	print (li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
@@ -1007,8 +1007,8 @@ while end==0:
 		#print ('COMP_2')
 		wbx.save(path_RESULT.filename)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		run=email(DIR2,NAMEFile,now)
-		#rootdriver.quit()
+		#run=email(DIR2,NAMEFile,now)
+		rootdriver.quit()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
 		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
