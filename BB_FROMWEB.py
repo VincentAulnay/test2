@@ -951,7 +951,9 @@ while end==0:
 						#name_mois3=month31.find('strong').text
 						print ('test M3')
 						mm3=0
+						u=0
 						while mm3==0:
+							time.sleep(3)
 							name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_kuxo8ai']//div[@class='_gucugi']/strong"))).text
 							print ('name m3='+str(name_mois3))
 							if name_mois3=='':
