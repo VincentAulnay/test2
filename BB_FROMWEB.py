@@ -954,15 +954,16 @@ while end==0:
 						u=0
 						while mm3==0:
 							time.sleep(3)
-							name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_kuxo8ai']//div[@class='_gucugi']/strong"))).text
+							name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_gucugi'][3]/strong"))).text
 							print ('name m3='+str(name_mois3))
-							if name_mois3=='':
+							if name_mois3==None:
 								mm3=0
 								u=u+1
 							else:
 								mm3=1
 							if u==3:
 								mm3=1
+							print ('go')
 						run_c=A_Colonne_mois(name_mois3,k)
 						m3_write=c_write
 						m3_newmonth=new_month
