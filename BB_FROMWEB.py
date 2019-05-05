@@ -855,6 +855,7 @@ end=0
 EE=0
 Tr=0
 C_mois=0
+drive=0
 date = int(datetime.datetime.now().day)
 #Hr=dt.datetime.now().hour
 #wbx = load_workbook(path_RESULT.filename)
@@ -877,18 +878,13 @@ while end==0:
 
 				ResAirbnb=''
 				
-				drive=0
+				
 				while drive==0:
 					try:
 						#update=soup.find('div', attrs={"class":u"_q401y8m"})
 						#V_up=update.find('span').text
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-						print (V_up)
-						ws.cell(row=j, column=k).value=V_up
-						#wbx.save(path_RESULT.filename)
 						drive=1
-						if V_up!="Mis à jour aujourd'hui":
-							ResAirbnb='/A'
 					except:
 						print ('V_up pas capturé')
 						rootdriver.quit()
@@ -898,6 +894,13 @@ while end==0:
 						rootdriver.get(h)
 						drive=0
 						pass
+				V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
+				print (V_up)
+				ws.cell(row=j, column=k).value=V_up
+				#wbx.save(path_RESULT.filename)
+				drive=1
+				if V_up!="Mis à jour aujourd'hui":
+					ResAirbnb='/A'
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				time.sleep(1)
