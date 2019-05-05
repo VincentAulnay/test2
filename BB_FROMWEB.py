@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 #import xlwt
-#import xlrd
+import xlrd
 import time
 from xlutils.copy import copy
 import datetime
@@ -39,7 +39,7 @@ print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
 #sheet_write = wb.get_sheet(0)
 #sheet_read = book.sheet_by_index(0)
 
-wbx = load_workbook(path_RESULT.filename)
+wbx = load_workbook(data_only=True, path_RESULT.filename)
 ws = wbx.active
 
 #-------FIND COLUMN UPDATE------
