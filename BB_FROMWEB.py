@@ -809,10 +809,11 @@ def COMPUTE_M1(name_mois1):
 			rr=0
 			#nobA=0
 			nbnoA=0
+			print ('ICI')
 			while rr<nAlen:
 				pnlA=newLfornoA[rr].split(':')
-				#del pnlA[0]
-				pla=pnlA[1].split(',')
+				del pnlA[0]
+				pla=pnlA[0].split(',')
 				print (len(pla))
 				nbnoA=nbnoA+len(pla)
 				rr=rr+1
