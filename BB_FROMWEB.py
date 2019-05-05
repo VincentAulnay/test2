@@ -150,9 +150,11 @@ def A_Colonne_mois(name_mois,c):
 #4- si condition alors c_write=c pour définir la colonne où écrire
 	global c_write
 	global new_month
-	book_mois = xlrd.open_workbook(path_RESULT.filename)
+	book_mois = xlrd.open_workbook(path_RESULT.filename, on_demand = True)
 	sheet_mois = book_mois.sheet_by_index(0)
 	nc=sheet_mois.ncols
+	book_mois.release_resources()
+	del book_mois
 	#wbx = load_workbook(path_RESULT.filename)
 	#ws = wbx.active
 	
@@ -1022,7 +1024,7 @@ while end==0:
 		wbx.save(path_RESULT.filename)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		#run=email(DIR2,NAMEFile,now)
-		rootdriver.quit()
+		#rootdriver.quit()
 		wbx.close()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
