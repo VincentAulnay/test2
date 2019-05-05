@@ -979,6 +979,8 @@ while end==0:
 		print ('|  |       |  |   |  |\ \ |  |')
 		print ('|  |       |  |   |  | \ \|  |')
 		print ('|__|       |__|   |__|  \____|')
+		wbx = load_workbook(path_RESULT.filename)
+		ws = wbx.active
 		COMPUTE_M1(name_mois1)
 		COMPUTE_M1(name_mois2)
 		wbx.save(path_RESULT.filename)
