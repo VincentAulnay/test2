@@ -880,7 +880,7 @@ while end==0:
 
 				ResAirbnb=''
 				
-				
+				V_up="Mis à jour aujourd'hui"
 				while drive==0:
 					try:
 						#update=soup.find('div', attrs={"class":u"_q401y8m"})
@@ -896,14 +896,17 @@ while end==0:
 						rootdriver.get(h)
 						drive=0
 						pass
-				V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-				print (V_up)
-				ws.cell(row=j, column=k).value=V_up
+				try:
+					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
+					print (V_up)
+					ws.cell(row=j, column=k).value=V_up
+				except:
+					pass
+				
 				#wbx.save(path_RESULT.filename)
-				drive=1
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
-				time.sleep(3)
+				time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				time.sleep(2)
