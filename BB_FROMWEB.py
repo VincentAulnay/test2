@@ -1046,8 +1046,8 @@ while end==0:
 		#print ('COMP_2')
 		wbx.save(path_RESULT.filename)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		#run=email(DIR2,NAMEFile,now)
-		#rootdriver.quit()
+		run=email(DIR2,NAMEFile,now)
+		rootdriver.quit()
 		wbx.close()
 	except:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
