@@ -181,6 +181,9 @@ def A_Colonne_mois(name_mois,c):
 			ws.cell(row=1, column=c+9).value = 'SUM_nJ'
 			ws.cell(row=1, column=c+10).value = 'SUM_all_nJ/A'
 			ws.cell(row=1, column=c+11).value = 'SUM_all_nJ'
+			ws.cell(row=1, column=c+12).value = 'nb_/P'
+			ws.cell(row=1, column=c+13).value = 'nJ_/D'
+			ws.cell(row=1, column=c+14).value = 'TOTAL_J'
 			c_write=c+1
 			find_month=1
 			new_month=1
