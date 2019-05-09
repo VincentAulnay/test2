@@ -52,7 +52,7 @@ while up==0:
 		up=1
 	else:
 		k=k+1
-print('V_UP est à la cellule: '+str(k))
+#print('V_UP est à la cellule: '+str(k))
 
 #-------EMAIL VALUE-----------
 
@@ -208,7 +208,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday):
 			i=i+1
 		except:
 			break
-	print (li)
+	#print (li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
@@ -506,7 +506,7 @@ def Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo):
 		Pcomment=Scomment.split(' ')
 		ws.cell(row=j, column=c_write+1).value=Pcomment[0]
 	except:
-		print('NO COMMENT')
+		#print('NO COMMENT')
 		pass
 		#wbx.save(path_RESULT.filename)
 
@@ -617,7 +617,7 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 				#sheet_write.write(j,c_write+3,lenli)
 				ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
-				print (r)
+				#print (r)
 				#sheet_write.write(j,c_write,r)
 				ws.cell(row=j, column=c_write).value=r
 	except:
@@ -865,17 +865,17 @@ date = int(datetime.datetime.now().day)
 while end==0:
 	try:
 		while j<=nrow:
-			print('-------------')
-			print (j-1)
+			#print('-------------')
+			#print (j-1)
 			h=ws.cell(row=j, column=2).value
-			print(h)
+			print('------'+str(j-1)+'------'+str(h))
 			if 'airbnb' in h:
 				rootdriver.get(h)
 				try:
 					WAITLOAD = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong")))
 					time.sleep(2)
 				except:
-					print('ANNONCE PLUS LA !!!')
+					#print('ANNONCE PLUS LA !!!')
 					pass
 
 				ResAirbnb=''
@@ -888,7 +888,7 @@ while end==0:
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
 						drive=1
 					except:
-						print ('V_up pas capturé')
+						#print ('V_up pas capturé')
 						rootdriver.quit()
 						rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 						rootdriver.set_window_size(2000, 1000)
@@ -898,7 +898,7 @@ while end==0:
 						pass
 				try:
 					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-					print (V_up)
+					#print (V_up)
 					ws.cell(row=j, column=k).value=V_up
 				except:
 					pass
@@ -923,7 +923,7 @@ while end==0:
 						run_c=A_Colonne_mois(name_mois1,k)
 						m1_write=c_write
 						m1_newmonth=new_month
-					print('   ---')
+					#print('   ---')
 					print('le mois N est '+name_mois1)
 					run_day=A_Statu_day2(date,m1_write,1,j,0,ResAirbnb,m1_newmonth,500)
 				except:
@@ -941,14 +941,14 @@ while end==0:
 						run_c=A_Colonne_mois(name_mois2,k)
 						m2_write=c_write
 						m2_newmonth=new_month
-					print('   ---')
+					#print('   ---')
 					print('le mois N+1 est '+name_mois2)
 					run_day=A_Statu_day2(1,m2_write,2,j,1,ResAirbnb,m2_newmonth,MNday1)
 				except:
 					pass
 				try:
 				#-----RECUPERATION CALANDAR MOIS 3--------
-					print('   ---')
+					#print('   ---')
 					if C_mois==0:
 						month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
 						name_mois3=month31.find('strong').text
@@ -979,7 +979,7 @@ while end==0:
 					run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
 					#print('Jours disponible déjà capturés')
 				except:
-					print('PAS DE MOIS 3')
+					#print('PAS DE MOIS 3')
 					pass
 				wbx.save(path_RESULT.filename)
 				C_mois=1
@@ -1050,6 +1050,10 @@ while end==0:
 		rootdriver.quit()
 		wbx.close()
 	except:
+		try:
+			rootdriver.quit()
+		except:
+			pass
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
 		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 		#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
