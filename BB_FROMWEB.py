@@ -909,10 +909,10 @@ while end==0:
 				#wbx.save(path_RESULT.filename)
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
-				time.sleep(2)
+				time.sleep(1)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
-				time.sleep(2)
+				time.sleep(1)
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
 					if C_mois==0:
@@ -977,7 +977,7 @@ while end==0:
 						run_c=A_Colonne_mois(name_mois3,k)
 						m3_write=c_write
 						m3_newmonth=new_month
-					d=ws.cell(row=j, column=m3_write+2).value
+					#d=ws.cell(row=j, column=m3_write+2).value
 					print('le mois N+2 est '+name_mois3)
 					run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
 					#print('Jours disponible déjà capturés')
