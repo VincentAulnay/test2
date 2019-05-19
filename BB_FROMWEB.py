@@ -984,61 +984,6 @@ while end==0:
 				except:
 					#print('PAS DE MOIS 3')
 					pass
-			#-----MOIS 4-5 -----
-				try:
-					rootdriver.execute_script("window.scrollBy(0,1500);")
-					ele=rootdriver.find_element_by_xpath("//div[@class='_vy3ibx']/h2/span")
-					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-					rootdriver.execute_script("window.scrollBy(0,-500);")
-					next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
-					next_calendar.click()
-					time.sleep(1)
-					next_calendar.click()
-					time.sleep(1)
-					next_calendar.click()
-					time.sleep(1)
-					html = rootdriver.page_source
-					soup = BeautifulSoup(html, 'html.parser')
-					time.sleep(1)
-					try:
-					#-----RECUPERATION CALANDAR MOIS 4--------
-						if C_mois==0:
-							name_mois4 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//div[@class='_gucugi']/strong"))).text
-							print(name_mois4)
-							Mname4=name_mois4.split(' ')
-							MN4=Mname4[0]
-							run_MN=MnumDay(MN4)
-							print (MNumday)
-							MNday4=MNumday
-							run_c=A_Colonne_mois(name_mois4,i)
-							m4_write=c_write
-							m4_newmonth=new_month
-						print('   ---')
-						print('le mois N est '+name_mois4)
-						run_day=A_Statu_day4(m4_write,j,ResAirbnb,m4_newmonth)
-					except:
-						pass
-				#-----RECUPERATION CALANDAR MOIS 5--------
-					try:
-						if C_mois==0:
-							name_mois5 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][2]//div[@class='_gucugi']/strong"))).text
-							print(name_mois5)
-							Mname5=name_mois5.split(' ')
-							MN5=Mname5[0]
-							run_MN=MnumDay(MN5)
-							print (MNumday)
-							MNday5=MNumday
-							run_c=A_Colonne_mois(name_mois5,i)
-							m5_write=c_write
-							m5_newmonth=new_month
-						print('   ---')
-						print('le mois N+1 est '+name_mois5)
-						run_day=A_Statu_day4(m5_write,j,ResAirbnb,m5_newmonth)
-					except:
-						pass
-				except:
-					print('----click KO')
-					pass
 				wbx.save(path_RESULT.filename)
 				C_mois=1
 				j=j+1
