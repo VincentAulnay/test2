@@ -843,9 +843,9 @@ while end==0:
 		ws = wbx.active
 		COMPUTE_M1(name_mois1)
 		COMPUTE_M1(name_mois2)
-		COMPUTE_M1(name_mois3)
-		COMPUTE_M1(name_mois4)
-		COMPUTE_M1(name_mois5)
+		#COMPUTE_M1(name_mois3)
+		#COMPUTE_M1(name_mois4)
+		#COMPUTE_M1(name_mois5)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		run=email(DIR2,NAMEFile,now)
 		rootdriver.quit()
