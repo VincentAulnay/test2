@@ -154,17 +154,12 @@ def A_Colonne_mois(name_mois,c):
 	nc=sheet_mois.ncols
 	book_mois.release_resources()
 	del book_mois
-	#wbx = load_workbook(path_RESULT.filename)
-	#ws = wbx.active
 	
 	new_month=0
 	
 	find_month=0
 	while find_month==0:
 		this_month=ws.cell(row=1, column=c+1).value
-		#print(this_month)
-		#Cell_MA=sheet_mois.cell(0,c-7).value
-		#Cell_MA=ws.cell(row=c+1, column=c+2).value
 		if this_month==name_mois:
 			c_write=c+1
 			break
@@ -345,192 +340,24 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 				t=t.replace("[","")
 				t=t.replace("]","")
 				r=t
-				#print(r)
 				lenli=len(li)
 				ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
-				#sheet_write.write(j,c_write,r)
 				ws.cell(row=j, column=c_write).value=r
 	except:
 		pass
-	#wb.save(path_RESULT.filename)
-	
-def Colonne_mois(name_mois,c,year):
-#1- récupération book Result qui évolue au court du script
-#2- compter le nombre de colonne
-#3- déterminer si colonne == name_mois de airbnb
-#4- si condition alors c_write=c pour définir la colonne où écrire
-	global c_write
-	global new_month
-	book_mois = xlrd.open_workbook(path_RESULT.filename)
-	sheet_mois = book_mois.sheet_by_index(0)
-	nc=sheet_mois.ncols
-	#wbx = load_workbook(path_RESULT.filename)
-	#ws = wbx.active
-	
-	new_month=0
-	
-	find_month=0
-	month_year=name_mois+'_'+year
-	while find_month==0:
-		this_month=ws.cell(row=1, column=c+1).value
-		#print(this_month)
-		#Cell_MA=sheet_mois.cell(0,c-7).value
-		#Cell_MA=ws.cell(row=c+1, column=c+2).value
-		if this_month==month_year:
-			c_write=c+1
-			break
-		elif this_month==None:
-			ws.cell(row=1, column=c+1).value = month_year
-			ws.cell(row=1, column=c+2).value = 'calendar y a 3 mois'
-			ws.cell(row=1, column=c+3).value = 'jours disponible y a 3 mois'
-			ws.cell(row=1, column=c+4).value = 'total réservé'
-			ws.cell(row=1, column=c+5).value = 'NB_Comment'
-			ws.cell(row=1, column=c+6).value = 'DIF_Comment'
-			ws.cell(row=1, column=c+7).value = 'DIF_Nuitée'
-			ws.cell(row=1, column=c+8).value = 'SOM_Nuitée'
-			c_write=c+1
-			find_month=1
-			new_month=1
-			print ('plus une colonne')
-			wbx.save(path_RESULT.filename)
-			break
-		else:
-			c=c+1
 
-
-def Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo):	
-	int_timeday=int(date)
-	month=soup.findAll('tbody', attrs={"class":"day-wrap"})[g]
+def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):	
+	month5=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
 	i=0
 	li=[]
 	if new_mo==1:
 		ResAirbnb='/D'
 	while i<=31:
 		try:
-			the_tr= month.findAll('div', {"class": re.compile("pm-unavailable")})[i]
-			div=the_tr.find('div', attrs={"class": "day-template__day"}).text
-			intdiv=int(div)
-			if intdiv>=int_timeday:
-				li.append(intdiv)
-			i=i+1
-		except:
-			break
-	
-	try:
-		if len(li)>0:
-			ca=ws.cell(row=j, column=c_write).value
-			#-------DATE DU JOUR-------
-			date = int(datetime.datetime.now().day)
-			month = int(datetime.datetime.now().month)
-			toto=str(date)+'-'+str(month)
-			if ca!=None:
-				li_ca=ca.split(";")
-			else:
-				li_ca=[]
-
-			lie=[]
-			if li_ca!=[]:
-				lenL=len(li_ca)
-				h=0
-				LB=[]
-				while h!=lenL:
-					LA=li_ca[h]
-					LA=LA.split(':')
-					del LA[0]
-					LA=LA[0].split(',')
-					lenLA=len(LA)
-					g=0
-					while g!=lenLA:
-						intV=int(LA[g])
-						LB.append(intV)
-						g=g+1
-					h=h+1
-			
-				lie=[elem for elem in li if elem not in LB ]
-				if len(lie)!=0:
-					t=ResAirbnb+toto+':'+str(lie)
-					t=t.replace("[","")
-					t=t.replace("]","")
-					r=str(ca)+';    '+t
-					lenli=len(lie)+len(LB)
-					#ws.cell(row=j, column=c_write+3).value=lenli
-			else:
-				t=ResAirbnb+toto+':'+str(li)
-				t=t.replace("[","")
-				t=t.replace("]","")
-				r=t
-				#print(r)
-				lenli=len(li)
-				#ws.cell(row=j, column=c_write+3).value=lenli
-			if r!='set()':
-				print (r)
-				ws.cell(row=j, column=c_write).value=r
-	except:
-		#print('rater 1')
-		pass
-	#COMMENTAIRE
-	try:
-		Bcomment=soup.find('h2', attrs={"class": "review-summary__header-overview-headline"})
-		Scomment=Bcomment.find('span').text
-		Pcomment=Scomment.split(' ')
-		ws.cell(row=j, column=c_write+1).value=Pcomment[0]
-	except:
-		#print('NO COMMENT')
-		pass
-		#wbx.save(path_RESULT.filename)
-
-def Statu_day3(date,c_write,j):	
-	int_timeday=int(date)
-	
-	#month4=soup.find('div', attrs={"class":u"_kuxo8ai"})
-	month4=soup.findAll('tbody', attrs={"class":"day-wrap"})[2]
-	i=0
-	li=[]
-	while i<=31:
-		try:
-			#the_tr= month4.findAll('td', attrs={"class": "_12fun97"})[i]
-			#div=the_tr.find('div', attrs={"class": "_1tpncgrb"}).text
-			the_tr= month4.findAll('div', {"class": re.compile("day-template--available-stay")})[i]
-			div=the_tr.find('div', attrs={"class": "day-template__day"}).text
-			intdiv=int(div)
-			if intdiv>=int_timeday:
-				li.append(intdiv)
-			i=i+1
-		except:
-			break
-	
-	liste=[]
-	liste=li
-	liste.sort()
-	liste=set(liste)
-	lenli=len(liste)
-	#sheet_write.write(j,c_write+2,lenli)
-	ws.cell(row=j, column=c_write+2).value=lenli
-	#print (liste)
-	strli=str(liste)
-	str_repl_1=strli.replace("'","")
-	str_repl_2=str_repl_1.replace("{","") #
-	str_repl_3=str_repl_2.replace("}","") #
-	if str_repl_1!='set()':
-		#sheet_write.write(j,c_write+1,str_repl_3)
-		ws.cell(row=j, column=c_write+1).value=str_repl_3
-	#wb.save(path_RESULT.filename)
-	
-def Statu_day4(c_write,j,ResAirbnb,new_mo):	
-	#month5=soup.find('div', attrs={"class":u"_kuxo8ai"})
-	month5=soup.findAll('tbody', attrs={"class":"day-wrap"})[2]
-	i=0
-	li=[]
-	if new_mo==1:
-		ResAirbnb='/D'
-	while i<=31:
-		try:
-			#the_tr= month5.findAll('td', attrs={"class": "_z39f86g"})[i]
-			#div=the_tr.find('div', attrs={"class": "_1rcgiovb"}).text
-			the_tr= month5.findAll('div', {"class": re.compile("pm-unavailable")})[i]
-			div=the_tr.find('div', attrs={"class": "day-template__day"}).text
+			the_tr= month5.findAll('td', attrs={"class": "_z39f86g"})[i]
+			div=the_tr.find('div', attrs={"class": "_1fhupg9r"}).text
 			intdiv=int(div)
 			li.append(intdiv)
 			i=i+1
@@ -538,9 +365,6 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 			break
 	try:
 		if len(li)>0:
-			#book_date = xlrd.open_workbook(path_RESULT.filename)
-			#sheet_date = book_date.sheet_by_index(0)
-			#ca=sheet_date.cell(j,c_write).value
 			ca=ws.cell(row=j, column=c_write).value
 			#-------DATE DU JOUR-------
 			date = int(datetime.datetime.now().day)
@@ -576,24 +400,20 @@ def Statu_day4(c_write,j,ResAirbnb,new_mo):
 					t=t.replace("]","")
 					r=str(ca)+';    '+t
 					lenli=len(lie)+len(LB)
-					#sheet_write.write(j,c_write+3,lenli)
 					ws.cell(row=j, column=c_write+3).value=lenli
 			else:
 				t=ResAirbnb+toto+':'+str(li)
 				t=t.replace("[","")
 				t=t.replace("]","")
 				r=t
-				#print(r)
 				lenli=len(li)
-				#sheet_write.write(j,c_write+3,lenli)
 				ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
-				#print (r)
-				#sheet_write.write(j,c_write,r)
+				print (r)
 				ws.cell(row=j, column=c_write).value=r
 	except:
 		pass
-	#wb.save(path_RESULT.filename)
+	
 
 def COMPUTE_M1(name_mois1):
 	Dif_c=1
