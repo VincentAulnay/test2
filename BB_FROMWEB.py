@@ -797,7 +797,7 @@ while end==0:
 								m4_newmonth=new_month
 							print('   ---')
 							print('le mois N est '+name_mois4)
-							run_day=A_Statu_day4(m4_write,j,ResAirbnb,m4_newmonth)
+							run_day=A_Statu_day5(m4_write,j,ResAirbnb,m4_newmonth,0)
 						except:
 							pass
 					#-----RECUPERATION CALANDAR MOIS 5--------
@@ -815,7 +815,7 @@ while end==0:
 								m5_newmonth=new_month
 							print('   ---')
 							print('le mois N+1 est '+name_mois5)
-							run_day=A_Statu_day4(m5_write,j,ResAirbnb,m5_newmonth)
+							run_day=A_Statu_day5(m5_write,j,ResAirbnb,m5_newmonth,1)
 						except:
 							pass
 					except:
