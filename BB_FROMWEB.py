@@ -255,16 +255,16 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 					t=t.replace("[","")
 					t=t.replace("]","")
 					r=str(ca)+';    '+t
-					lenli=len(lie)+len(LB)
-					ws.cell(row=j, column=c_write+3).value=lenli
+					#lenli=len(lie)+len(LB)
+					#ws.cell(row=j, column=c_write+3).value=lenli
 			else:
 				t=ResAirbnb+toto+':'+str(li)
 				t=t.replace("[","")
 				t=t.replace("]","")
 				r=t
 				#print(r)
-				lenli=len(li)
-				ws.cell(row=j, column=c_write+3).value=lenli
+				#lenli=len(li)
+				#ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
 				ws.cell(row=j, column=c_write).value=r
@@ -333,15 +333,15 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 					t=t.replace("[","")
 					t=t.replace("]","")
 					r=str(ca)+';    '+t
-					lenli=len(lie)+len(LB)
-					ws.cell(row=j, column=c_write+3).value=lenli
+					#lenli=len(lie)+len(LB)
+					#ws.cell(row=j, column=c_write+3).value=lenli
 			else:
 				t=ResAirbnb+toto+':'+str(li)
 				t=t.replace("[","")
 				t=t.replace("]","")
 				r=t
-				lenli=len(li)
-				ws.cell(row=j, column=c_write+3).value=lenli
+				#lenli=len(li)
+				#ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
 				ws.cell(row=j, column=c_write).value=r
@@ -399,15 +399,15 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 					t=t.replace("[","")
 					t=t.replace("]","")
 					r=str(ca)+';    '+t
-					lenli=len(lie)+len(LB)
-					ws.cell(row=j, column=c_write+3).value=lenli
+					#lenli=len(lie)+len(LB)
+					#ws.cell(row=j, column=c_write+3).value=lenli
 			else:
 				t=ResAirbnb+toto+':'+str(li)
 				t=t.replace("[","")
 				t=t.replace("]","")
 				r=t
-				lenli=len(li)
-				ws.cell(row=j, column=c_write+3).value=lenli
+				#lenli=len(li)
+				#ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
 				ws.cell(row=j, column=c_write).value=r
