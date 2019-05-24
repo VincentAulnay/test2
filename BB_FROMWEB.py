@@ -766,7 +766,7 @@ while end==0:
 					pass
 			#-----MOIS 4-5 -----
 				v_m=ws.cell(row=j, column=c_mouth).value
-				if v_m!='X':
+				if v_m!='x':
 					try:
 						rootdriver.execute_script("window.scrollBy(0,1500);")
 						ele=rootdriver.find_element_by_xpath("//div[@class='_vy3ibx']/h2/span")
