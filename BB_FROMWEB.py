@@ -760,7 +760,10 @@ while end==0:
 						m3_write=c_write
 						m3_newmonth=new_month
 					print('le mois N+2 est '+name_mois3)
-					run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth)
+					RA4=ResAirbnb
+					if v_m=='X' and date==1:
+						RA4='/D'
+					run_resday=A_Statu_day4(m3_write,j,RA4,m3_newmonth)
 				except:
 					#print('PAS DE MOIS 3')
 					pass
