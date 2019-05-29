@@ -677,6 +677,7 @@ while end==0:
 				rootdriver.get(h)
 				ResAirbnb=''
 				V_up="Mis à jour aujourd'hui"
+				v_m=ws.cell(row=j, column=c_mouth).value
 				while drive==0:
 					try:
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
@@ -768,7 +769,6 @@ while end==0:
 					#print('PAS DE MOIS 3')
 					pass
 			#-----MOIS 4-5 -----
-				v_m=ws.cell(row=j, column=c_mouth).value
 				if v_m!='x':
 					try:
 						rootdriver.execute_script("window.scrollBy(0,1500);")
