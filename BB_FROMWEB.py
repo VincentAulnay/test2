@@ -689,12 +689,20 @@ while end==0:
 						wait = WebDriverWait(rootdriver, 5)
 						rootdriver.get(h)
 						pass
-				try:
-					V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-					ws.cell(row=j, column=k).value=V_up
-					print (V_up)
-				except:
-					pass
+				rootdriver.execute_script("window.scrollBy(0,1500);")
+				upr=0
+				while upr==0:
+					try:
+						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
+						ws.cell(row=j, column=k).value=V_up
+						print (V_up)
+						upr=1
+					except:
+						print('==========PAS DE UPDATE==========')
+						upt=upt+1
+						if upt==2:
+							upr=1
+						pass
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
 				time.sleep(1)
@@ -771,7 +779,6 @@ while end==0:
 			#-----MOIS 4-5 -----
 				if v_m!='x':
 					try:
-						rootdriver.execute_script("window.scrollBy(0,1500);")
 						ele=rootdriver.find_element_by_xpath("//div[@class='_vy3ibx']/h2/span")
 						rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
 						rootdriver.execute_script("window.scrollBy(0,-500);")
