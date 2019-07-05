@@ -701,7 +701,7 @@ while end==0:
 						print('==========PAS DE UPDATE==========')
 						upt=upt+1
 						if upt==2:
-							upr=1
+							upr=0
 						pass
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
