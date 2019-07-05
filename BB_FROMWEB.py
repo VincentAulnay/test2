@@ -673,7 +673,9 @@ while end==0:
 		while j<=nrow:
 			h=ws.cell(row=j, column=2).value
 			print('------'+str(j-1)+'------'+str(h))
-			if 'airbnb' in h:
+			if h==None:
+				j=j+1
+			elif 'airbnb' in h:
 				rootdriver.get(h)
 				ResAirbnb=''
 				V_up="Mis à jour aujourd'hui"
