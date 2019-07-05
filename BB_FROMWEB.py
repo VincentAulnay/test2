@@ -691,7 +691,10 @@ while end==0:
 						pass
 				rootdriver.execute_script("window.scrollBy(0,1500);")
 				upr=0
+				upt=0
 				while upr==0:
+					if upt==1:
+						upr=1
 					try:
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
 						ws.cell(row=j, column=k).value=V_up
@@ -699,9 +702,7 @@ while end==0:
 						upr=1
 					except:
 						print('==========PAS DE UPDATE==========')
-						upt=upt+1
-						if upt==2:
-							upr=0
+						upt=1
 						pass
 				if V_up!="Mis à jour aujourd'hui":
 					ResAirbnb='/A'
