@@ -660,6 +660,7 @@ nrow=ws.max_row
 print('NROW'+str(nrow))
 j=2
 z=0
+q=1
 end=0
 EE=0
 Tr=0
@@ -679,7 +680,6 @@ while end==0:
 				V_up="Mis à jour aujourd'hui"
 				v_m=ws.cell(row=j, column=c_mouth).value
 				while drive==0:
-					q=1
 					try:
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
 						drive=1
