@@ -842,6 +842,8 @@ while end==0:
 				j=j+1
 			elif 'abritel' in h:
 				j=j+1
+			else:
+				j=j+1
 		
 		end=1
 		now = str(datetime.datetime.now())[:19]
