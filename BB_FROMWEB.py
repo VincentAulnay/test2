@@ -675,6 +675,7 @@ while end==0:
 			print('------'+str(j-1)+'------'+str(h))
 			if h==None:
 				j=j+1
+				print('h=None')
 			elif 'airbnb' in h:
 				rootdriver.get(h)
 				ResAirbnb=''
