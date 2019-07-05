@@ -660,7 +660,6 @@ nrow=ws.max_row
 print('NROW'+str(nrow))
 j=2
 z=0
-q=1
 end=0
 EE=0
 Tr=0
@@ -680,7 +679,7 @@ while end==0:
 				V_up="Mis à jour aujourd'hui"
 				v_m=ws.cell(row=j, column=c_mouth).value
 				while drive==0:
-					rootdriver.execute_script("window.scrollBy(0,1500);")
+					rootdriver.execute_script("window.scrollBy(0,1600);")
 					try:
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
 						drive=1
@@ -689,9 +688,7 @@ while end==0:
 						rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 						rootdriver.set_window_size(2000, 1000)
 						wait = WebDriverWait(rootdriver, 5)
-						#rootdriver.get(h)
-						rootdriver.get(ws.cell(row=j+q, column=2).value)
-						q=q+1
+						rootdriver.get(h)
 						pass
 				rootdriver.execute_script("window.scrollBy(0,1500);")
 				upr=0
