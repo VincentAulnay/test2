@@ -691,7 +691,7 @@ while end==0:
 				p3=p2[0].replace('_updated_at":"', '')
 				p4=p3.replace('","', '')
 				print (p4)
-				if p4=!V_up:
+				if p4!=V_up:
 					ResAirbnb='/A'
 					ws.cell(row=j, column=k).value=p4
 				time.sleep(1)
