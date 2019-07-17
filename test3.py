@@ -694,6 +694,7 @@ while end==0:
 					print (p4)
 					if p4==V_up:
 						ResAirbnb='/A'
+					else:
 						ws.cell(row=j, column=k).value=p4
 				except:
 					pass
