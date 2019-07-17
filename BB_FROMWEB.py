@@ -679,44 +679,25 @@ while end==0:
 			elif 'airbnb' in h:
 				rootdriver.get(h)
 				ResAirbnb=''
-				V_up="Mis à jour aujourd'hui"
+				V_up=ws.cell(row=j, column=k).value
 				v_m=ws.cell(row=j, column=c_mouth).value
-				ab=0
-				while drive==0:
-					rootdriver.execute_script("window.scrollBy(0,1600);")
-					if ab==12:
-						drive=1
-					try:
-						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-						drive=1
-					except:
-						rootdriver.quit()
-						rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
-						rootdriver.set_window_size(2000, 1000)
-						wait = WebDriverWait(rootdriver, 5)
-						rootdriver.get(h)
-						ab=ab+1
-						pass
-				rootdriver.execute_script("window.scrollBy(0,1500);")
-				upr=0
-				upt=0
-				while upr==0:
-					if upt==1:
-						upr=1
-					try:
-						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
-						ws.cell(row=j, column=k).value=V_up
-						print (V_up)
-						upr=1
-					except:
-						print('==========PAS DE UPDATE==========')
-						upt=1
-						pass
-				if V_up!="Mis à jour aujourd'hui":
-					ResAirbnb='/A'
-				time.sleep(1)
+
+				time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
+				try:
+					script=soup.find('script', attrs={"data-state":u"true"}).text
+					p1=script.split("calendar_last")
+					p2=p1[1].split("guest_controls")
+					p3=p2[0].replace('_updated_at":"', '')
+					p4=p3.replace('","', '')
+					print (p4)
+					if p4==V_up:
+						ResAirbnb='/A'
+					else:
+						ws.cell(row=j, column=k).value=p4
+				except:
+					pass
 				time.sleep(1)
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
@@ -872,7 +853,6 @@ while end==0:
 		rootdriver.quit()
 		wbx.close()
 	except:
-		drive=0
 		try:
 			rootdriver.quit()
 		except:
