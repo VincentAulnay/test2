@@ -61,11 +61,11 @@ if V_mouth!='3/5_mois':
 	ws.cell(row=1, column=c_mouth).value = '3/5_mois'
 
 #-----RECUP INFO XPATH FROM EXCEL------
-book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
-sheet_GMAIL = book_GMAIL.sheet_by_index(0)
-ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
-PSW_GMAIL=sheet_GMAIL.cell(1,1).value
-RECEIVER=sheet_GMAIL.cell(2,1).value
+#book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
+#sheet_GMAIL = book_GMAIL.sheet_by_index(0)
+#ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
+#PSW_GMAIL=sheet_GMAIL.cell(1,1).value
+#RECEIVER=sheet_GMAIL.cell(2,1).value
 
 #-------DATE DU JOUR-------
 date = int(datetime.datetime.now().day)
@@ -868,7 +868,7 @@ while end==0:
 		#COMPUTE_M1(name_mois4)
 		#COMPUTE_M1(name_mois5)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		run=email(DIR2,NAMEFile,now)
+		#run=email(DIR2,NAMEFile,now)
 		rootdriver.quit()
 		wbx.close()
 	except:
