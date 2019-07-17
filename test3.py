@@ -682,7 +682,7 @@ while end==0:
 				V_up=ws.cell(row=j, column=k).value
 				v_m=ws.cell(row=j, column=c_mouth).value
 
-				time.sleep(1)
+				time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				script=soup.find('script', attrs={"data-state":u"true"}).text
