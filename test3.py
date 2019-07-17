@@ -685,15 +685,18 @@ while end==0:
 				time.sleep(2)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
-				script=soup.find('script', attrs={"data-state":u"true"}).text
-				p1=script.split("calendar_last")
-				p2=p1[1].split("guest_controls")
-				p3=p2[0].replace('_updated_at":"', '')
-				p4=p3.replace('","', '')
-				print (p4)
-				if p4==V_up:
-					ResAirbnb='/A'
-					ws.cell(row=j, column=k).value=p4
+				try:
+					script=soup.find('script', attrs={"data-state":u"true"}).text
+					p1=script.split("calendar_last")
+					p2=p1[1].split("guest_controls")
+					p3=p2[0].replace('_updated_at":"', '')
+					p4=p3.replace('","', '')
+					print (p4)
+					if p4==V_up:
+						ResAirbnb='/A'
+						ws.cell(row=j, column=k).value=p4
+				except:
+					pass
 				time.sleep(1)
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
