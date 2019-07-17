@@ -681,8 +681,11 @@ while end==0:
 				ResAirbnb=''
 				V_up="Mis à jour aujourd'hui"
 				v_m=ws.cell(row=j, column=c_mouth).value
+				ab=0
 				while drive==0:
 					rootdriver.execute_script("window.scrollBy(0,1600);")
+					if ab==12:
+						drive=1
 					try:
 						V_up = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_q401y8m']//span"))).text
 						drive=1
@@ -692,6 +695,7 @@ while end==0:
 						rootdriver.set_window_size(2000, 1000)
 						wait = WebDriverWait(rootdriver, 5)
 						rootdriver.get(h)
+						ab=ab+1
 						pass
 				rootdriver.execute_script("window.scrollBy(0,1500);")
 				upr=0
@@ -868,6 +872,7 @@ while end==0:
 		rootdriver.quit()
 		wbx.close()
 	except:
+		drive=0
 		try:
 			rootdriver.quit()
 		except:
