@@ -581,15 +581,15 @@ def COMPUTE_M1(name_mois1):
 			count_AP=STR_NBA.count('/A/P')
 			count_NBA=STR_NBA.count('/A')
 			real_NBA=count_NBA-count_AP
-			count_P=STR_NBA.count('/P')
+			count_P=STR_NBA.count(' /P')
 			count_D=STR_NBA.count('/D')
 			count=STR_NBA.count(':')
 			
-			NBNOA=count-count_D-real_NBA-count_P-count_AP
+			NBNOA=count-count_D-count_NBA-count_P
 			#print (('NB_NO/A ===')+str(NBNOA))
 			ws.cell(row=c, column=C_nbA).value=real_NBA
 			ws.cell(row=c, column=C_nbnoA).value=NBNOA
-			ws.cell(row=c, column=C_nb_P).value=count_P
+			ws.cell(row=c, column=C_nb_P).value=count_P+count_AP
 			write=int(NBNOA)+int(real_NBA)
 			ws.cell(row=c, column=C_SUMnb).value=write
 		#---------COUNT nJ ---------
