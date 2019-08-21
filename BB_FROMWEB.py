@@ -198,7 +198,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 	while i<=31:
 		try:
 			the_tr= month.findAll('td', attrs={"class": "_z39f86g"})[i]
-			div=the_tr.find('div', attrs={"class": "_1fhupg9r"}).text
+			div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
 			intdiv=int(div)
 			if intdiv>=int_timeday:
 				li.append(intdiv)
@@ -291,7 +291,7 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 	while i<=31:
 		try:
 			the_tr= month5.findAll('td', attrs={"class": "_z39f86g"})[i]
-			div=the_tr.find('div', attrs={"class": "_1fhupg9r"}).text
+			div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
 			intdiv=int(div)
 			li.append(intdiv)
 			i=i+1
@@ -357,7 +357,7 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 	while i<=31:
 		try:
 			the_tr= month5.findAll('td', attrs={"class": "_z39f86g"})[i]
-			div=the_tr.find('div', attrs={"class": "_1fhupg9r"}).text
+			div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
 			intdiv=int(div)
 			li.append(intdiv)
 			i=i+1
