@@ -736,12 +736,14 @@ while end==0:
 				try:
 				#-----RECUPERATION CALANDAR MOIS 3--------
 					if C_mois==0:
-						month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
+						month311=soup.find('div', attrs={"class":u"_kuxo8ai"})
+						month31=month311.find('div', attrs={"class":u"_gucugi"})
 						name_mois3=month31.find('strong').text
 						mm3=0
 						u=0
 						while mm3==0:
-							month31=soup.findAll('div', attrs={"class":u"_gucugi"})[3]
+							month311=soup.find('div', attrs={"class":u"_kuxo8ai"})
+							month31=month311.find('div', attrs={"class":u"_gucugi"})
 							name_mois3=month31.find('strong').text
 							#name_mois3 = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_gucugi'][3]/strong"))).text
 							print ('name m3='+str(name_mois3))
