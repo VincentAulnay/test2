@@ -1064,9 +1064,9 @@ while end==0:
 			elif 'airbnb' in h:
 				rootdriver.get(h)
 				time.sleep(2)
-				ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
-				rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-				rootdriver.execute_script("window.scrollBy(0,-500);")
+				#ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
+				#rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+				rootdriver.execute_script("window.scrollBy(0,5000);")
 				ResAirbnb=''
 				V_up=ws.cell(row=j, column=k).value
 				v_m=ws.cell(row=j, column=c_mouth).value
