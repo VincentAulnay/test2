@@ -995,11 +995,11 @@ while f_xpathdate==0:
 		print("x date trouve")
 		f_xpathdate=1
 	except:
-		rootdriver.quit()
-		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
-		rootdriver.set_window_size(1000, 1500)
-		wait = WebDriverWait(rootdriver, 3)
-		fm=fm+1
+		if fff!=5:
+			rootdriver.quit()
+			rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
+			rootdriver.set_window_size(1000, 1500)
+			wait = WebDriverWait(rootdriver, 3)
 	
 while end==0:
 	try:
