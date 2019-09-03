@@ -792,7 +792,7 @@ date = int(datetime.datetime.now().day)
 f_mounth=1
 fm=2
 fff=0
-f_xpathdate=1
+f_xpathdate=0
 w_month=0
 c_month=0
 while f_mounth==0:
@@ -980,11 +980,11 @@ while c_month==0:
 while f_xpathdate==0:
 	h=ws.cell(row=fm, column=2).value
 	print(h)
-	if fff==2:
+	if fff==5:
 		f_mounth=1
 		f_xpathdate=1
 		end=1
-		run=emailfalde2()
+		#run=emailfalde2()
 	fff=fff+1
 	try:
 		rootdriver.get(h)
@@ -996,6 +996,10 @@ while f_xpathdate==0:
 		print("x date trouve")
 		f_xpathdate=1
 	except:
+		rootdriver.quit()
+		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
+		rootdriver.set_window_size(1000, 1500)
+		wait = WebDriverWait(rootdriver, 3)
 		fm=fm+1
 	
 while end==0:
