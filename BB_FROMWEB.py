@@ -1063,11 +1063,15 @@ while end==0:
 				print('h=None')
 			elif 'airbnb' in h:
 				rootdriver.get(h)
+				time.sleep(2)
+				ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
+				rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+				rootdriver.execute_script("window.scrollBy(0,-500);")
 				ResAirbnb=''
 				V_up=ws.cell(row=j, column=k).value
 				v_m=ws.cell(row=j, column=c_mouth).value
 
-				time.sleep(4)
+				time.sleep(3)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				try:
@@ -1109,10 +1113,10 @@ while end==0:
 			#-----MOIS 4-5 -----
 				if v_m!='x':
 					try:
-						ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
-						rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-						rootdriver.execute_script("window.scrollBy(0,-500);")
-						time.sleep(1)
+						#ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
+						#rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+						#rootdriver.execute_script("window.scrollBy(0,-500);")
+						#time.sleep(1)
 						next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
 						next_calendar.click()
 						time.sleep(2)
