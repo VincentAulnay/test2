@@ -847,7 +847,7 @@ date = int(datetime.datetime.now().day)
 f_mounth=1
 fm=2
 fff=0
-f_xpathdate=0
+f_xpathdate=1
 w_month=0
 c_month=0
 while f_mounth==0:
@@ -1064,11 +1064,14 @@ while end==0:
 			elif 'airbnb' in h:
 				rootdriver.get(h)
 				time.sleep(2)
-				print('ici')
-				#ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
-				#rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-				rootdriver.execute_script("window.scrollBy(0,-5000);")
-				print('la')
+				try:
+					print('ici')
+					ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
+					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+					rootdriver.execute_script("window.scrollBy(0,-500);")
+					print('la')
+				except:
+					pass
 				ResAirbnb=''
 				V_up=ws.cell(row=j, column=k).value
 				v_m=ws.cell(row=j, column=c_mouth).value
@@ -1116,9 +1119,9 @@ while end==0:
 			#-----MOIS 4-5 -----
 				if v_m!='x':
 					try:
-						ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
-						rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-						rootdriver.execute_script("window.scrollBy(0,-500);")
+						#ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
+						#rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+						#rootdriver.execute_script("window.scrollBy(0,-500);")
 						time.sleep(1)
 						next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
 						next_calendar.click()
