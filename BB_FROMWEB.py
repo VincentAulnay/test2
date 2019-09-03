@@ -368,13 +368,12 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 				t=t.replace("[","")
 				t=t.replace("]","")
 				r=t
-				print(r)
+				#print(r)
 				#lenli=len(li)
 				#ws.cell(row=j, column=c_write+3).value=lenli
 			if r!='set()':
 				print (r)
 				ws.cell(row=j, column=c_write).value=r
-				print('ici2')
 	except:
 		#print('rater 1')
 		pass
