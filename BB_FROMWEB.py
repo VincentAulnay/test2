@@ -311,29 +311,6 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 			i=i+1
 		except:
 			break
-	v_li=ws.cell(row=j, column=c_write+1).value
-	print("vli = "+str(v_li))
-	try:
-		t=v_li
-		t=t.replace("[","")
-		t=t.replace("]","")
-		l_t=t.split(",")
-		len_t=len(l_t)
-		h=0
-		li_t=[]
-		while h<len_t:
-			w=int(l_t[h])
-			li_t.append(w)
-			h=h+1
-		print (li_t)
-		lieIN=[]
-		lieOUT=[]
-		lieIN=[elem for elem in li if elem not in li_t ]
-		lieOUT=[elem for elem in li_t if elem not in li ]
-		print(lieIN)
-		print(lieOUT)
-	except:
-		pass
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	try:
 		if len(li)>0:
@@ -426,37 +403,7 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 			i=i+1
 		except:
 			break
-	print (li)
-	v_li=ws.cell(row=j, column=c_write+1).value
-	print("vli = "+str(v_li))
-	try:
-		t=v_li
-		print('ici1')
-		t=t.replace("[","")
-		print('ici2')
-		t=t.replace("]","")
-		print('ici3')
-		l_t=t.split(",")
-		print('ici4 l_t = '+str(l_t))
-		len_t=len(l_t)
-		print('ici5 len_t = '+str(len_t))
-		h=0
-		li_t=[]
-		while h<len_t:
-			w=int(l_t[h])
-			li_t.append(w)
-			h=h+1
-		print (li_t)
-		lieIN=[]
-		lieOUT=[]
-		lieIN=[elem for elem in li if elem not in li_t ]
-		lieOUT=[elem for elem in li_t if elem not in li ]
-		print(lieIN)
-		print(lieOUT)
-	except:
-		pass
 	ws.cell(row=j, column=c_write+1).value = str(li)
-	print('ici1')
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
@@ -523,7 +470,6 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 			i=i+1
 		except:
 			break
-	print(li)
 	v_li=ws.cell(row=j, column=c_write+1).value
 	try:
 		t=str(li)
@@ -536,7 +482,6 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 		while h<len_t:
 			li_t.append(l_t[h])
 			h=h+1
-		print('waaaaaaaa')
 	except:
 		pass
 	ws.cell(row=j, column=c_write+1).value=str(li)
@@ -1135,14 +1080,12 @@ while end==0:
 						time.sleep(1)
 						try:
 						#-----RECUPERATION CALANDAR MOIS 4--------
-							print('   ---')
 							print('le mois N est '+name_mois4)
 							run_day=A_Statu_day5(m4_write,j,ResAirbnb,m4_newmonth,0)
 						except:
 							pass
 					#-----RECUPERATION CALANDAR MOIS 5--------
 						try:
-							print('   ---')
 							print('le mois N+1 est '+name_mois5)
 							run_day=A_Statu_day5(m5_write,j,ResAirbnb,m5_newmonth,1)
 						except:
@@ -1176,11 +1119,11 @@ while end==0:
 		ws = wbx.active
 		COMPUTE_M1(name_mois1)
 		COMPUTE_M1(name_mois2)
-		#COMPUTE_M1(name_mois3)
+		COMPUTE_M1('juin 2019')
 		#COMPUTE_M1(name_mois4)
 		#COMPUTE_M1(name_mois5)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		#run=email(DIR2,NAMEFile,now)
+		run=email(DIR2,NAMEFile,now)
 		rootdriver.quit()
 		wbx.close()
 	except:
