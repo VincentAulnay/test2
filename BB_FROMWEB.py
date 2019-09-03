@@ -1011,13 +1011,10 @@ while end==0:
 				print('h=None')
 			elif 'airbnb' in h:
 				rootdriver.get(h)
-				time.sleep(2)
 				try:
-					print('ici')
 					#ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
 					#rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
 					#rootdriver.execute_script("window.scrollBy(0,-500);")
-					print('la')
 				except:
 					pass
 				ResAirbnb=''
