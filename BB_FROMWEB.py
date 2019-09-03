@@ -1067,7 +1067,7 @@ while end==0:
 				print('ici')
 				#ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
 				#rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-				rootdriver.execute_script("window.scrollBy(0,5000);")
+				rootdriver.execute_script("window.scrollBy(0,-5000);")
 				print('la')
 				ResAirbnb=''
 				V_up=ws.cell(row=j, column=k).value
