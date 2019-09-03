@@ -990,7 +990,7 @@ while f_xpathdate==0:
 		#time.sleep(2)
 		#html = rootdriver.page_source
 		#soup = BeautifulSoup(html, 'html.parser')
-		time.sleep(3)
+		time.sleep(4)
 		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 		print("x date trouve")
 		f_xpathdate=1
@@ -1015,10 +1015,10 @@ while end==0:
 				V_up=ws.cell(row=j, column=k).value
 				v_m=ws.cell(row=j, column=c_mouth).value
 
-				time.sleep(3)
+				time.sleep(4)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
-				time.sleep(1)
+				time.sleep(2)
 				try:
 					script=soup.find('script', attrs={"data-state":u"true"}).text
 					p1=script.split("calendar_last")
