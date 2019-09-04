@@ -1031,7 +1031,7 @@ while end==0:
 					p2=p1[1].split("guest_controls")
 					p3=p2[0].replace('_updated_at":"', '')
 					p4=p3.replace('","', '')
-					print (p4)
+					#print (p4)
 					if p4==V_up:
 						#ResAirbnb='/A'
 						ResAirbnb=''
@@ -1040,7 +1040,6 @@ while end==0:
 						ResAirbnb=''
 				except:
 					pass
-				time.sleep(1)
 				try:
 				#-----RECUPERATION CALANDAR MOIS 1--------
 					print('le mois N est '+name_mois1)
