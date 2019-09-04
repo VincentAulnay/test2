@@ -312,7 +312,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 		except:
 			break
 	ws.cell(row=j, column=c_write+1).value = str(li)
-	print(li)
+	#print(li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
@@ -404,7 +404,7 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 		except:
 			break
 	ws.cell(row=j, column=c_write+1).value = str(li)
-	print(li)
+	#print(li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
@@ -486,7 +486,7 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 	except:
 		pass
 	ws.cell(row=j, column=c_write+1).value=str(li)
-	print(li)
+	#print(li)
 	try:
 		if len(li)>0:
 			ca=ws.cell(row=j, column=c_write).value
