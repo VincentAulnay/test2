@@ -1011,14 +1011,17 @@ while end==0:
 				print('h=None')
 			elif 'airbnb' in h:
 				rootdriver.get(h)
-				ResAirbnb=''
-				V_up=ws.cell(row=j, column=k).value
-				v_m=ws.cell(row=j, column=c_mouth).value
-
-				time.sleep(4)
+				time.sleep(5)
+				try:
+					x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
+				except:
+					time.sleep(3)
 				html = rootdriver.page_source
 				soup = BeautifulSoup(html, 'html.parser')
 				time.sleep(2)
+				ResAirbnb=''
+				V_up=ws.cell(row=j, column=k).value
+				v_m=ws.cell(row=j, column=c_mouth).value
 				try:
 					script=soup.find('script', attrs={"data-state":u"true"}).text
 					p1=script.split("calendar_last")
