@@ -1124,7 +1124,10 @@ while end==0:
 		#COMPUTE_M1(name_mois4)
 		#COMPUTE_M1(name_mois5)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
-		run=email(DIR2,NAMEFile,now)
+		try:
+			run=email(DIR2,NAMEFile,now)
+		except:
+			print('rien')
 		rootdriver.quit()
 		wbx.close()
 	except:
