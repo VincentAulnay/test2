@@ -1276,6 +1276,7 @@ while end==0:
 			elif 'airbnb' in h:
 				rootdriver.get(h)
 				time.sleep(5)
+				x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='_18hrqvin']"))).text
 				try:
 					x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				except:
@@ -1389,6 +1390,7 @@ while end==0:
 		rootdriver.quit()
 		wbx.close()
 	except:
+		j=j+1
 		try:
 			rootdriver.quit()
 		except:
