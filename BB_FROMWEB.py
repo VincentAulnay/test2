@@ -511,6 +511,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 		try:
 			the_tr= month.findAll('td', attrs={"class": "_z39f86g"})[i]
 			div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
+			#_1lds9wb
 			intdiv=int(div)
 			if intdiv>=int_timeday:
 				li.append(intdiv)
@@ -1336,6 +1337,7 @@ while end==0:
 				if v_m!='x':
 					try:
 						next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
+						#or button class _f8a140
 						next_calendar.click()
 						time.sleep(2)
 						next_calendar.click()
