@@ -1014,7 +1014,7 @@ C_mois5=0
 drive=0
 date = int(datetime.datetime.now().day)
 f_mounth=1
-fm=2
+fm=3
 fff=0
 f_xpathdate=0
 w_month=0
@@ -1223,7 +1223,7 @@ while f_xpathdate==0:
 			rootdriver.quit()
 			rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 			#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
-			rootdriver.set_window_size(1000, 1500)
+			rootdriver.set_window_size(2000, 1000)
 			wait = WebDriverWait(rootdriver, 3)
 
 while end==0:
@@ -1285,12 +1285,12 @@ while end==0:
 				try:
 					ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
 					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-					rootdriver.execute_script("window.scrollBy(0,-500);")
+					rootdriver.execute_script("window.scrollBy(0,-200);")
 					time.sleep(2)
 				except:
 					time.sleep(2)
 				html = rootdriver.page_source
-				time.sleep(1)
+				time.sleep(2)
 				soup = BeautifulSoup(html, 'html.parser')
 				time.sleep(2)
 				ResAirbnb=''
@@ -1345,9 +1345,9 @@ while end==0:
 						next_calendar.click()
 						time.sleep(2)
 						html = rootdriver.page_source
-						time.sleep(1)
+						time.sleep(2)
 						soup = BeautifulSoup(html, 'html.parser')
-						time.sleep(1)
+						time.sleep(2)
 						try:
 						#-----RECUPERATION CALANDAR MOIS 4--------
 							#print('le mois N est '+name_mois4)
@@ -1400,7 +1400,7 @@ while end==0:
 		# EXCEPT si Chrome se ferme tout seul, ici il va le réouvrir et relancer la boucle d'extraction
 		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 		#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
-		rootdriver.set_window_size(1000, 1500)
+		rootdriver.set_window_size(2000, 1000)
 		wait = WebDriverWait(rootdriver, 3)
 		f_xpathdate=0
 		fff=0
@@ -1426,7 +1426,7 @@ while end==0:
 					rootdriver.quit()
 					rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 					#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
-					rootdriver.set_window_size(1000, 1500)
+					rootdriver.set_window_size(2000, 1000)
 					wait = WebDriverWait(rootdriver, 3)
 
 		
