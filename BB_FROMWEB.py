@@ -560,12 +560,13 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 		t_add=ResAirbnb+toto+':'+str(c_added)
 		t_add=t_add.replace("[","")
 		t_add=t_add.replace("]","")
-		print (t_add)
-	if len(c_remove)>0:
-		t_rem='/L'+toto+':'+str(c_remove)
-		t_rem=t_rem.replace("[","")
-		t_rem=t_rem.replace("]","")
-		print(t_rem)
+		#print (t_add)
+	if c_remove!=['']:
+		if c_remove!=[]:
+			t_rem='/L'+toto+':'+str(c_remove)
+			t_rem=t_rem.replace("[","")
+			t_rem=t_rem.replace("]","")
+			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	if ca==None:
 		if t_add!='vide':
@@ -653,12 +654,13 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 		t_add=ResAirbnb+toto+':'+str(c_added)
 		t_add=t_add.replace("[","")
 		t_add=t_add.replace("]","")
-		print (t_add)
-	if len(c_remove)>0:
-		t_rem='/L'+toto+':'+str(c_remove)
-		t_rem=t_rem.replace("[","")
-		t_rem=t_rem.replace("]","")
-		print(t_rem)
+		#print (t_add)
+	if c_remove!=['']:
+		if c_remove!=[]:
+			t_rem='/L'+toto+':'+str(c_remove)
+			t_rem=t_rem.replace("[","")
+			t_rem=t_rem.replace("]","")
+			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	if ca==None:
 		if t_add!='vide':
@@ -729,12 +731,13 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 		t_add=ResAirbnb+toto+':'+str(c_added)
 		t_add=t_add.replace("[","")
 		t_add=t_add.replace("]","")
-		print (t_add)
-	if len(c_remove)>0:
-		t_rem='/L'+toto+':'+str(c_remove)
-		t_rem=t_rem.replace("[","")
-		t_rem=t_rem.replace("]","")
-		print(t_rem)
+		#print (t_add)
+	if c_remove!=['']:
+		if c_remove!=[]:
+			t_rem='/L'+toto+':'+str(c_remove)
+			t_rem=t_rem.replace("[","")
+			t_rem=t_rem.replace("]","")
+			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	if ca==None:
 		if t_add!='vide':
