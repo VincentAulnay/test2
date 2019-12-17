@@ -1337,7 +1337,7 @@ while end==0:
 					#print('PAS DE MOIS 3')
 					pass
 			#-----MOIS 4-5 -----
-				if v_m!='x':
+				if v_m!='z':
 					try:
 						next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
 						#or button class _f8a140
