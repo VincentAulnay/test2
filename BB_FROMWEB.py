@@ -606,6 +606,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 
 def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 	month5=soup.find('div', attrs={"class":u"_kuxo8ai"})
+	print('fevrier')
 	i=0
 	li=[]
 	ResAirbnb='/R'
