@@ -1293,6 +1293,7 @@ while end==0:
 					time.sleep(2)
 				except:
 					time.sleep(2)
+					print('DOWN KO')
 				html = rootdriver.page_source
 				time.sleep(2)
 				soup = BeautifulSoup(html, 'html.parser')
