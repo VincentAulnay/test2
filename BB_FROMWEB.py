@@ -1227,7 +1227,7 @@ while f_xpathdate==0:
 			rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 			#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 			rootdriver.set_window_size(2000, 1000)
-			wait = WebDriverWait(rootdriver, 3)
+			wait = WebDriverWait(rootdriver, 5)
 
 while end==0:
 	try:
@@ -1285,6 +1285,7 @@ while end==0:
 					x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				except:
 					time.sleep(2)
+					print('X DATE PAS OK')
 				try:
 					ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
 					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
@@ -1404,7 +1405,7 @@ while end==0:
 		rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 		#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 		rootdriver.set_window_size(2000, 1000)
-		wait = WebDriverWait(rootdriver, 3)
+		wait = WebDriverWait(rootdriver, 5)
 		f_xpathdate=0
 		fff=0
 		while f_xpathdate==0:
@@ -1430,7 +1431,7 @@ while end==0:
 					rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 					#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 					rootdriver.set_window_size(2000, 1000)
-					wait = WebDriverWait(rootdriver, 3)
+					wait = WebDriverWait(rootdriver, 5)
 
 		
 		
