@@ -1288,6 +1288,7 @@ while end==0:
 					time.sleep(2)
 					print('X DATE PAS OK')
 				try:
+					rootdriver.execute_script("window.scrollBy(0,1000);")
 					ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
 					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
 					rootdriver.execute_script("window.scrollBy(0,-200);")
