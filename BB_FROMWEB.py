@@ -583,7 +583,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 		if t_wri!='vide':
 			t_wri=str(ca)+';    '+t_wri
 	if t_wri!='vide':
-		print(t_wri)
+		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
 
 	#COMMENTAIRE
