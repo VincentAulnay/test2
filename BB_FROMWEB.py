@@ -55,7 +55,8 @@ if V_mouth!='3/5_mois':
 	ws.cell(row=1, column=c_mouth).value = '3/5_mois'
 
 #-----RECUP INFO XPATH FROM EXCEL------
-book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
+#book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
+book_GMAIL = xlrd.open_workbook('/home/ubuntu/Desktop/GMAIL_ACCOUNT.xls')
 sheet_GMAIL = book_GMAIL.sheet_by_index(0)
 ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
 PSW_GMAIL=sheet_GMAIL.cell(1,1).value
