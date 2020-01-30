@@ -520,20 +520,23 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 		except:
 			break
 	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			if ivb>=int_timeday:
-				bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
+	try:
+		if back_li!='[]':
+			back_li=back_li.replace("[","")
+			back_li=back_li.replace("]","")
+			back_li=back_li.split(",")
+			i=0
+			bl=[]
+			while i!=len(back_li):
+				ivb=int(back_li[i])
+				if ivb>=int_timeday:
+					bl.append(ivb)
+				i=i+1
+			back_li=bl
+			#print ("back_li="+str(back_li))
+		else:
+			back_li=[]
+	except:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -607,7 +610,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 
 def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 	month5=soup.find('div', attrs={"class":u"_kuxo8ai"})
-	print('fevrier')
+	#print('fevrier')
 	i=0
 	li=[]
 	ResAirbnb='/R'
@@ -624,19 +627,22 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo):
 			break
 	#print(li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
+	try:
+		if back_li!='[]':
+			back_li=back_li.replace("[","")
+			back_li=back_li.replace("]","")
+			back_li=back_li.split(",")
+			i=0
+			bl=[]
+			while i!=len(back_li):
+				ivb=int(back_li[i])
+				bl.append(ivb)
+				i=i+1
+			back_li=bl
+			#print ("back_li="+str(back_li))
+		else:
+			back_li=[]
+	except:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -701,19 +707,22 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g):
 			break
 	#print (li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
+	try:
+		if back_li!='[]':
+			back_li=back_li.replace("[","")
+			back_li=back_li.replace("]","")
+			back_li=back_li.split(",")
+			i=0
+			bl=[]
+			while i!=len(back_li):
+				ivb=int(back_li[i])
+				bl.append(ivb)
+				i=i+1
+			back_li=bl
+			#print ("back_li="+str(back_li))
+		else:
+			back_li=[]
+	except:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -1235,7 +1244,7 @@ while end==0:
 	try:
 		while j<=nrow:
 			h=ws.cell(row=j, column=2).value
-			print('------'+str(j-1)+'------'+str(h))
+			print('--'+str(j-1)+'--'+str(h))
 			if h==None:
 				j=j+1
 				print('h=None')
