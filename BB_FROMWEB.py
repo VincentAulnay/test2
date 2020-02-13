@@ -1357,7 +1357,7 @@ while end==0:
 					x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				except:
 					time.sleep(2)
-					print('X DATE PAS OK')
+					#print('X DATE PAS OK')
 				try:
 					rootdriver.execute_script("window.scrollBy(0,1000);")
 					ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
