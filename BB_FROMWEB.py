@@ -630,7 +630,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			pass
 
 def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
-	month5=soup.find('div', attrs={"class":u"_kuxo8ai"})
+	month=soup.find('div', attrs={"class":u"_kuxo8ai"})
 	#print('fevrier')
 	i=0
 	li=[]
@@ -710,6 +710,18 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
+	#------------
+	calist=[]
+	calist=ca.split(';')
+	calist=calist[:-1]
+	cat=str(calist)
+	cat=cat.replace("[","")
+	cat=cat.replace("]","")
+	cat=cat.replace("'","")
+	cat=cat.replace("    ",";    ")
+	cat=cat.replace(",;",";")
+	ws.cell(row=j, column=c_write).value=cat
+	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -726,11 +738,12 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			t_wri=str(ca)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
-		ws.cell(row=j, column=c_write).value=t_wri
+		#ws.cell(row=j, column=c_write).value=t_wri
+		toto=1
 
 
 def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):	
-	month5=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
+	month=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
 	i=0
 	li=[]
 	ResAirbnb='/R'
@@ -809,6 +822,19 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
+	#------------
+	calist=[]
+	calist=ca.split(';')
+	calist=calist[:-1]
+	cat=str(calist)
+	cat=cat.replace("[","")
+	cat=cat.replace("]","")
+	cat=cat.replace("'","")
+	cat=cat.replace("    ",";    ")
+	cat=cat.replace(",;",";")
+	ws.cell(row=j, column=c_write).value=cat
+	print(cat)
+	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -825,7 +851,8 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			t_wri=str(ca)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
-		ws.cell(row=j, column=c_write).value=t_wri
+		#ws.cell(row=j, column=c_write).value=t_wri
+		toto=1
 	
 
 def COMPUTE_M1(name_mois1):
