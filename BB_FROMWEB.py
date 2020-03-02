@@ -581,7 +581,8 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			if des==1:
 				try:
 					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
-					div=the_tr.span.div.div.div.get_text()
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
 					#_1lds9wb
 					intdiv=int(div)
 					if intdiv>=int_timeday:
@@ -591,7 +592,8 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 				try:
 					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
 			#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
-					div=the_tr.span.div.div.div.get_text()
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
 					intdiv=int(div)
 					if intdiv>=int_timeday:
 						li.append(intdiv)
@@ -722,7 +724,8 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			if des==1:
 				try:
 					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
-					div=the_tr.span.div.div.div.get_text()
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
 					#_1lds9wb
 					intdiv=int(div)
 					li.append(intdiv)
@@ -731,7 +734,8 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 				try:
 					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
 			#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
-					div=the_tr.span.div.div.div.get_text()
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
 					intdiv=int(div)
 					li.append(intdiv)
 				except:
@@ -835,7 +839,8 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			if des==1:
 				try:
 					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
-					div=the_tr.span.div.div.div.get_text()
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
 					#_1lds9wb
 					intdiv=int(div)
 					li.append(intdiv)
@@ -843,7 +848,8 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 					z=0
 				try:
 					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
-					div=the_tr.span.div.div.div.get_text()
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
 			#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
 					intdiv=int(div)
 					li.append(intdiv)
