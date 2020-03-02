@@ -37,7 +37,7 @@ def CLEAN():
 	wbx = load_workbook(path_RESULT.filename)
 	ws = wbx.active
 
-	wbreload = load_workbook(DIR2+NAMEFile+str('2020-03-01 09_06_56')+".xlsx")
+	wbreload = load_workbook(DIR2+NAMEFile+str('2020-03-01 04_37_23')+".xlsx")
 	wsr = wbreload.active
 	i=1
 	cname_mois1=0
