@@ -1387,9 +1387,10 @@ while end==0:
 						time.sleep(2)
 						bouton_mois_suivant=1
 					except:
-						print('DOWN KO')
+						pp=1
+						#print('DOWN KO')
 					time.sleep(2)
-					print('DOWN KO')
+					#print('ECHEC DOWN')
 				try:
 					x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
 					des=1
