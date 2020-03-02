@@ -682,10 +682,12 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 				t_wri=str(t_rem)
 		if t_wri!='vide':
 			#t_wri=str(ca)+';    '+t_wri
-			t_wri=str(ca)+';    '+t_wri
+			t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
+	else:
+		ws.cell(row=j, column=c_write).value=cat
 
 	#COMMENTAIRE
 	ONC=ONCOM
@@ -819,6 +821,8 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
 		#toto=1
+	else:
+		ws.cell(row=j, column=c_write).value=cat
 
 
 def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):	
@@ -933,6 +937,8 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
+	else:
+		ws.cell(row=j, column=c_write).value=cat
 	
 
 def COMPUTE_M1(name_mois1):
