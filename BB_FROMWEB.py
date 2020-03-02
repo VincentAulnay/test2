@@ -33,6 +33,67 @@ print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
 
 #-----EXCEL RESULT OPEN AND READ-----
 
+def CLEAN():
+	wbx = load_workbook(path_RESULT.filename)
+	ws = wbx.active
+
+	wbreload = load_workbook(DIR2+NAMEFile+str('2020-03-01 09_06_56')+".xlsx")
+	wsr = wbreload.active
+	i=1
+	cname_mois1=0
+	while cname_mois1==0:
+		h=wsr.cell(row=1, column=i).value
+		if h=='mars 2020':
+			cname_mois1=i
+		i=i+1
+	i=1
+	cname_mois2=0
+	while cname_mois2==0:
+		h=wsr.cell(row=1, column=i).value
+		if h=='avril 2020':
+			cname_mois2=i
+		i=i+1
+	i=1
+	cname_mois3=0
+	while cname_mois3==0:
+		h=wsr.cell(row=1, column=i).value
+		if h=='mai 2020':
+			cname_mois3=i
+		i=i+1
+	i=1
+	cname_mois4=0
+	while cname_mois4==0:
+		h=wsr.cell(row=1, column=i).value
+		if h=='juin 2020':
+			cname_mois4=i
+		i=i+1
+	i=1
+	cname_mois5=0
+	while cname_mois5==0:
+		h=wsr.cell(row=1, column=i).value
+		if h=='juillet 2020':
+			cname_mois5=i
+		i=i+1	
+
+	nrow=ws.max_row
+	j=2
+	while j<=nrow:
+		cop1=wsr.cell(row=j, column=cname_mois1+1).value
+		cop2=wsr.cell(row=j, column=cname_mois2+1).value
+		cop3=wsr.cell(row=j, column=cname_mois3+1).value
+		cop4=wsr.cell(row=j, column=cname_mois4+1).value
+		cop5=wsr.cell(row=j, column=cname_mois5+1).value
+		ws.cell(row=j, column=cname_mois1+1).value=cop1
+		ws.cell(row=j, column=cname_mois2+1).value=cop2
+		ws.cell(row=j, column=cname_mois3+1).value=cop3
+		ws.cell(row=j, column=cname_mois4+1).value=cop4
+		ws.cell(row=j, column=cname_mois5+1).value=cop5
+		j=j+1
+	wbx.save(path_RESULT.filename)
+try:
+	run_clean=CLEAN()
+except:
+	print('clean faild')
 wbx = load_workbook(path_RESULT.filename)
 ws = wbx.active
 
@@ -593,6 +654,18 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
+	#------------
+	calist=[]
+	calist=ca.split(';')
+	calist=calist[:-1]
+	cat=str(calist)
+	cat=cat.replace("[","")
+	cat=cat.replace("]","")
+	cat=cat.replace("'","")
+	cat=cat.replace("    ",";    ")
+	cat=cat.replace(",;",";")
+	#ws.cell(row=j, column=c_write).value=cat
+	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -606,6 +679,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			if t_rem!='vide':
 				t_wri=str(t_rem)
 		if t_wri!='vide':
+			#t_wri=str(ca)+';    '+t_wri
 			t_wri=str(ca)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
@@ -711,15 +785,15 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	#------------
-	#calist=[]
-	#calist=ca.split(';')
-	#calist=calist[:-1]
-	#cat=str(calist)
-	#cat=cat.replace("[","")
-	#cat=cat.replace("]","")
-	#cat=cat.replace("'","")
-	#cat=cat.replace("    ",";    ")
-	#cat=cat.replace(",;",";")
+	calist=[]
+	calist=ca.split(';')
+	calist=calist[:-1]
+	cat=str(calist)
+	cat=cat.replace("[","")
+	cat=cat.replace("]","")
+	cat=cat.replace("'","")
+	cat=cat.replace("    ",";    ")
+	cat=cat.replace(",;",";")
 	#ws.cell(row=j, column=c_write).value=cat
 	#------------
 	if ca==None:
@@ -735,7 +809,8 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			if t_rem!='vide':
 				t_wri=str(t_rem)
 		if t_wri!='vide':
-			t_wri=str(ca)+';    '+t_wri
+			#t_wri=str(ca)+';    '+t_wri
+			t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
@@ -822,6 +897,18 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
+	#------------
+	calist=[]
+	calist=ca.split(';')
+	calist=calist[:-1]
+	cat=str(calist)
+	cat=cat.replace("[","")
+	cat=cat.replace("]","")
+	cat=cat.replace("'","")
+	cat=cat.replace("    ",";    ")
+	cat=cat.replace(",;",";")
+	#ws.cell(row=j, column=c_write).value=cat
+	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -835,7 +922,8 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			if t_rem!='vide':
 				t_wri=str(t_rem)
 		if t_wri!='vide':
-			t_wri=str(ca)+';    '+t_wri
+			#t_wri=str(ca)+';    '+t_wri
+			t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
@@ -1488,13 +1576,14 @@ while end==0:
 		end=1
 		now = str(datetime.datetime.now())[:19]
 		now = now.replace(":","_")
+		date_object = str(datetime.date.today())
 		Tr=date
 		print ('FIN')
 		wbx = load_workbook(path_RESULT.filename)
 		ws = wbx.active
 		COMPUTE_M1(name_mois1)
 		COMPUTE_M1(name_mois2)
-		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
+		wbx.save(DIR2+NAMEFile+date_object+".xlsx")
 		try:
 			run=email(DIR2,NAMEFile,now)
 			print('sent email')
