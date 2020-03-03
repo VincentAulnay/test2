@@ -90,10 +90,10 @@ def CLEAN():
 		ws.cell(row=j, column=cname_mois5+1).value=cop5
 		j=j+1
 	wbx.save(path_RESULT.filename)
-try:
-	run_clean=CLEAN()
-except:
-	print('clean faild')
+#try:
+#	run_clean=CLEAN()
+#except:
+#	print('clean faild')
 wbx = load_workbook(path_RESULT.filename)
 ws = wbx.active
 
@@ -657,15 +657,15 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	#------------
-	calist=[]
-	calist=ca.split(';')
-	calist=calist[:-1]
-	cat=str(calist)
-	cat=cat.replace("[","")
-	cat=cat.replace("]","")
-	cat=cat.replace("'","")
-	cat=cat.replace("    ",";    ")
-	cat=cat.replace(",;",";")
+	#calist=[]
+	#calist=ca.split(';')
+	#calist=calist[:-1]
+	#cat=str(calist)
+	#cat=cat.replace("[","")
+	#cat=cat.replace("]","")
+	#cat=cat.replace("'","")
+	#cat=cat.replace("    ",";    ")
+	#cat=cat.replace(",;",";")
 	#ws.cell(row=j, column=c_write).value=cat
 	#------------
 	if ca==None:
@@ -681,8 +681,8 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			if t_rem!='vide':
 				t_wri=str(t_rem)
 		if t_wri!='vide':
-			#t_wri=str(ca)+';    '+t_wri
-			t_wri=str(cat)+';    '+t_wri
+			t_wri=str(ca)+';    '+t_wri
+			#t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
@@ -791,15 +791,15 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	#------------
-	calist=[]
-	calist=ca.split(';')
-	calist=calist[:-1]
-	cat=str(calist)
-	cat=cat.replace("[","")
-	cat=cat.replace("]","")
-	cat=cat.replace("'","")
-	cat=cat.replace("    ",";    ")
-	cat=cat.replace(",;",";")
+	#calist=[]
+	#calist=ca.split(';')
+	#calist=calist[:-1]
+	#cat=str(calist)
+	#cat=cat.replace("[","")
+	#cat=cat.replace("]","")
+	#cat=cat.replace("'","")
+	#cat=cat.replace("    ",";    ")
+	#cat=cat.replace(",;",";")
 	#ws.cell(row=j, column=c_write).value=cat
 	#------------
 	if ca==None:
@@ -815,8 +815,8 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			if t_rem!='vide':
 				t_wri=str(t_rem)
 		if t_wri!='vide':
-			#t_wri=str(ca)+';    '+t_wri
-			t_wri=str(cat)+';    '+t_wri
+			t_wri=str(ca)+';    '+t_wri
+			#t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
@@ -908,15 +908,15 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
 	#------------
-	calist=[]
-	calist=ca.split(';')
-	calist=calist[:-1]
-	cat=str(calist)
-	cat=cat.replace("[","")
-	cat=cat.replace("]","")
-	cat=cat.replace("'","")
-	cat=cat.replace("    ",";    ")
-	cat=cat.replace(",;",";")
+	#calist=[]
+	#calist=ca.split(';')
+	#calist=calist[:-1]
+	#cat=str(calist)
+	#cat=cat.replace("[","")
+	#cat=cat.replace("]","")
+	#cat=cat.replace("'","")
+	#cat=cat.replace("    ",";    ")
+	#cat=cat.replace(",;",";")
 	#ws.cell(row=j, column=c_write).value=cat
 	#------------
 	if ca==None:
@@ -932,8 +932,8 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			if t_rem!='vide':
 				t_wri=str(t_rem)
 		if t_wri!='vide':
-			#t_wri=str(ca)+';    '+t_wri
-			t_wri=str(cat)+';    '+t_wri
+			t_wri=str(ca)+';    '+t_wri
+			#t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
