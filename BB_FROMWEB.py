@@ -1597,7 +1597,7 @@ while end==0:
 		COMPUTE_M1(name_mois2)
 		wbx.save(DIR2+NAMEFile+date_object+".xlsx")
 		try:
-			run=email(DIR2,NAMEFile,now)
+			run=email(DIR2,NAMEFile,date_object)
 			print('sent email')
 		except:
 			print('rien')
