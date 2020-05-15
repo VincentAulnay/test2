@@ -526,7 +526,6 @@ def A_Statu_PLUS2(c_write,j,ResAirbnb,new_mo,page):
 def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):	
 	int_timeday=int(date)
 	month=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
-	print('ici1')
 	i=0
 	li=[]
 	fakeli=[]
