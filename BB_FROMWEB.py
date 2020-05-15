@@ -20,8 +20,8 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from openpyxl import load_workbook
-#import threading
-#import sys
+import threading
+import sys
 
 
 chrome_options = webdriver.ChromeOptions()
@@ -31,69 +31,11 @@ chrome_options.add_experimental_option("prefs", prefs)
 #chrome_options.add_argument("-disable-gpu")
 print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
 
+now = str(datetime.datetime.now())[:19]
+now = now.replace(":","_")
+print(now)
 #-----EXCEL RESULT OPEN AND READ-----
 
-def CLEAN():
-	wbx = load_workbook(path_RESULT.filename)
-	ws = wbx.active
-
-	wbreload = load_workbook(DIR2+NAMEFile+str('2020-03-01 04_37_23')+".xlsx")
-	wsr = wbreload.active
-	i=1
-	cname_mois1=0
-	while cname_mois1==0:
-		h=wsr.cell(row=1, column=i).value
-		if h=='mars 2020':
-			cname_mois1=i
-		i=i+1
-	i=1
-	cname_mois2=0
-	while cname_mois2==0:
-		h=wsr.cell(row=1, column=i).value
-		if h=='avril 2020':
-			cname_mois2=i
-		i=i+1
-	i=1
-	cname_mois3=0
-	while cname_mois3==0:
-		h=wsr.cell(row=1, column=i).value
-		if h=='mai 2020':
-			cname_mois3=i
-		i=i+1
-	i=1
-	cname_mois4=0
-	while cname_mois4==0:
-		h=wsr.cell(row=1, column=i).value
-		if h=='juin 2020':
-			cname_mois4=i
-		i=i+1
-	i=1
-	cname_mois5=0
-	while cname_mois5==0:
-		h=wsr.cell(row=1, column=i).value
-		if h=='juillet 2020':
-			cname_mois5=i
-		i=i+1	
-
-	nrow=ws.max_row
-	j=2
-	while j<=nrow:
-		cop1=wsr.cell(row=j, column=cname_mois1+1).value
-		cop2=wsr.cell(row=j, column=cname_mois2+1).value
-		cop3=wsr.cell(row=j, column=cname_mois3+1).value
-		cop4=wsr.cell(row=j, column=cname_mois4+1).value
-		cop5=wsr.cell(row=j, column=cname_mois5+1).value
-		ws.cell(row=j, column=cname_mois1+1).value=cop1
-		ws.cell(row=j, column=cname_mois2+1).value=cop2
-		ws.cell(row=j, column=cname_mois3+1).value=cop3
-		ws.cell(row=j, column=cname_mois4+1).value=cop4
-		ws.cell(row=j, column=cname_mois5+1).value=cop5
-		j=j+1
-	wbx.save(path_RESULT.filename)
-#try:
-#	run_clean=CLEAN()
-#except:
-#	print('clean faild')
 wbx = load_workbook(path_RESULT.filename)
 ws = wbx.active
 
@@ -108,12 +50,12 @@ while up==0:
 	else:
 		k=k+1
 		
-c_mouth=k+1
+c_mouth=k
 
-V_mouth=ws.cell(row=1, column=c_mouth).value
-if V_mouth!='3/5_mois':
-	ws.insert_cols(c_mouth)
-	ws.cell(row=1, column=c_mouth).value = '3/5_mois'
+#V_mouth=ws.cell(row=1, column=c_mouth).value
+#if V_mouth!='3/5_mois':
+#	ws.insert_cols(c_mouth)
+#	ws.cell(row=1, column=c_mouth).value = '3/5_mois'
 
 #-----RECUP INFO XPATH FROM EXCEL------
 book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
@@ -131,11 +73,14 @@ Hr=dt.datetime.now().hour
 #------RECUP INFO CALANDAR------
 
 def email(DIR2,NAMEFile,now):
+	#sender = ADRESS_GMAIL
+	#sender_password = PSW_GMAIL
 	sender = ADRESS_GMAIL
 	sender_password = PSW_GMAIL
 	receivers = RECEIVER
 
 	s = smtplib.SMTP('smtp.gmail.com', 587)
+	#s = smtplib.SMTP('mail.gmx.com', 587)
 	s.starttls()
 	s.login(sender, sender_password)
 	msg = MIMEMultipart()
@@ -272,7 +217,7 @@ def whatmounth():
 	elif month==12:
 		name_mois1='décembre 2019'
 		name_mois2='janvier 2020'
-		name_mois3='février 2020'
+		name_mois3='fevrier 2020'
 		name_mois4='mars 2020'
 		name_mois5='avril 2020'
 
@@ -281,7 +226,7 @@ def MnumDay (Mmois):
 	if Mmois=='janvier':
 		MNumday=31
 	elif Mmois=='février':
-		MNumday=29
+		MNumday=28
 	elif Mmois=='mars':
 		MNumday=31	
 	elif Mmois=='avril':
@@ -357,6 +302,7 @@ def A_Colonne_mois(name_mois,c):
 
 def A_Statu_PLUS(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):	
 	int_timeday=int(date)
+	month=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
 	i=0
 	li=[]
 	#SEMAINE
@@ -368,240 +314,31 @@ def A_Statu_PLUS(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM):
 	ResAirbnb='/R'
 	if new_mo==1:
 		ResAirbnb='/D'
-	while (tr <=5):
-		while(td<=7):
-			XP_day ="//div[@class='_14676s3']/div[2]/div/div["+str(page)+"]//tr["+str(tr)+"]/td["+str(td)+"]"
-			link = rootdriver.find_element_by_xpath(XP_day)
-			class_att=link.get_attribute("class")
-			if len(class_att) !=0:
-				if class_att=='_z39f86g':
-					XP_date="//div[@class='_14676s3']/div[2]/div/div["+str(page)+"]//tr["+str(tr)+"]/td["+str(td)+"]/span/div/div/div"
-					NM_date = wait.until(EC.presence_of_element_located((By.XPATH, XP_date))).text
-					int_date=int(NM_date)
-					if int_date>=int_timeday:
-						li.append(int_date)
-						#print (li)
-					else:
-						a=1
-				else:
-					a=1
-			else:
-				a=1
-			td=td+1
-		tr=tr+1
-		td=1
-	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			if ivb>=int_timeday:
-				bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
-		back_li=[]
-	ws.cell(row=j, column=c_write+1).value = str(li)
-	#print(li)
-	c_added=[]
-	c_remove=[]
-	c_added=[elem for elem in li if elem not in back_li ]
-	c_remove=[elem for elem in back_li if elem not in li ]
-	#print(c_added)
-	#print(c_remove)
-	date = int(datetime.datetime.now().day)
-	month = int(datetime.datetime.now().month)
-	toto=str(date)+'-'+str(month)
-	t_add='vide'
-	t_rem='vide'
-	t_wri='vide'
-	if len(c_added)>0:
-		if len(c_added)==1:
-			dif=c_added[0]-date
-			if dif==0 or dif==1 or dif==2 or dif==6:
-				ResAirbnb='/P'
-			elif dif<0:
-				difP=MNday-date+lie[0]
-				if difP==0 or difP==1 or difP==2 or difP==6:
-					ResAirbnb='/P'		
-		t_add=ResAirbnb+toto+':'+str(c_added)
-		t_add=t_add.replace("[","")
-		t_add=t_add.replace("]","")
-		#print (t_add)
-	if len(c_remove)>0:
-		t_rem='/L'+toto+':'+str(c_remove)
-		t_rem=t_rem.replace("[","")
-		t_rem=t_rem.replace("]","")
-		#print(t_rem)
-	ca=ws.cell(row=j, column=c_write).value
-	if ca==None:
-		if t_add!='vide':
-			t_wri=str(t_add)
-	else:
-		if t_add!='vide':
-			if t_rem!='vide':
-				t_wri=str(t_add)+';    '+str(t_rem)
-			else:
-				t_wri=str(t_add)
-		else:
-			if t_rem!='vide':
-				t_wri=str(t_rem)
-		if t_wri!='vide':
-			t_wri=str(ca)+';    '+t_wri
-	if t_wri!='vide':
-		print(t_wri)
-		ws.cell(row=j, column=c_write).value=t_wri
-	#COMMENTAIRE
-	ONC=ONCOM
-	if ONC==1:
-		try:
-			#//span[@class='_so3dpm2']
-			#Bcomment=soup.find('button', attrs={"class": "_ff6jfq"})
-			#Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
-			Lcomment=[]
-			Icomment=0
-			Scomment=soup.find('span', attrs={"class": "_1oftqjo1"}).text
-			Scomment=Scomment.replace("(","")
-			Scomment=Scomment.replace(")","")
-			Scomment=Scomment.replace(" ","")
-			Lcomment=Scomment.split("c")
-			Icomment=int(Lcomment[0])
-			ws.cell(row=j, column=c_write+2).value=S=Icomment
-		except:
-			pass
-
-def A_Statu_PLUS2(c_write,j,ResAirbnb,new_mo,page):	
-	i=0
-	li=[]
-	#SEMAINE
-	tr=1
-	#JOUR
-	td=1
-	if new_mo==1:
-		ResAirbnb='/D'
-	while (tr <=5):
-		while(td<=7):
-			XP_day ="//div[@class='_14676s3']/div[2]/div/div["+str(page)+"]//tr["+str(tr)+"]/td["+str(td)+"]"
-			link = rootdriver.find_element_by_xpath(XP_day)
-			class_att=link.get_attribute("class")
-			if len(class_att) !=0:
-				if class_att=='_z39f86g':
-					XP_date="//div[@class='_14676s3']/div[2]/div/div["+str(page)+"]//tr["+str(tr)+"]/td["+str(td)+"]/span/div/div/div"
-					NM_date = wait.until(EC.presence_of_element_located((By.XPATH, XP_date))).text
-					int_date=int(NM_date)
-					li.append(int_date)
-					#print (li)
-				else:
-					a=1
-			else:
-				a=1
-			td=td+1
-		tr=tr+1
-		td=1
-	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
-		back_li=[]
-	ws.cell(row=j, column=c_write+1).value = str(li)
-	#print(li)
-	c_added=[]
-	c_remove=[]
-	c_added=[elem for elem in li if elem not in back_li ]
-	c_remove=[elem for elem in back_li if elem not in li ]
-	#print(c_added)
-	#print(c_remove)
-	date = int(datetime.datetime.now().day)
-	month = int(datetime.datetime.now().month)
-	toto=str(date)+'-'+str(month)
-	t_add='vide'
-	t_rem='vide'
-	t_wri='vide'
-	if len(c_added)>0:		
-		t_add=ResAirbnb+toto+':'+str(c_added)
-		t_add=t_add.replace("[","")
-		t_add=t_add.replace("]","")
-		print (t_add)
-	if len(c_remove)>0:
-		t_rem='/L'+toto+':'+str(c_remove)
-		t_rem=t_rem.replace("[","")
-		t_rem=t_rem.replace("]","")
-		print(t_rem)
-	ca=ws.cell(row=j, column=c_write).value
-	if ca==None:
-		if t_add!='vide':
-			t_wri=str(t_add)
-	else:
-		if t_add!='vide':
-			if t_rem!='vide':
-				t_wri=str(t_add)+';    '+str(t_rem)
-			else:
-				t_wri=str(t_add)
-		else:
-			if t_rem!='vide':
-				t_wri=str(t_rem)
-		if t_wri!='vide':
-			t_wri=str(ca)+';    '+t_wri
-	if t_wri!='vide':
-		#print(t_wri)
-		ws.cell(row=j, column=c_write).value=t_wri
-			
-def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):	
-	int_timeday=int(date)
-	month=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
-	i=0
-	li=[]
-	ResAirbnb='/R'
-	if new_mo==1:
-		ResAirbnb='/D'
 	while i<=31:
 		try:
-			if des==0:
-				the_tr= month.findAll('td', attrs={"class": "_z39f86g"})[i]
-				div=the_tr.span.div.div.div.get_text()
+			try:
+				the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
+				#div=the_tr.span.div.div.div.get_text()
+				div=the_tr.div.get_text()
 				#_1lds9wb
 				intdiv=int(div)
 				if intdiv>=int_timeday:
 					li.append(intdiv)
-			if des==1:
-				try:
-					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
-					#div=the_tr.span.div.div.div.get_text()
-					div=the_tr.div.get_text()
-					#_1lds9wb
-					intdiv=int(div)
-					if intdiv>=int_timeday:
-						li.append(intdiv)
-				except:
-					z=0
-				try:
-					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
-			#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
-					#div=the_tr.span.div.div.div.get_text()
-					div=the_tr.div.get_text()
-					intdiv=int(div)
-					if intdiv>=int_timeday:
-						li.append(intdiv)
-				except:
-					z=0
+			except:
+				z=0
+			try:
+				the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
+		#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
+				#div=the_tr.span.div.div.div.get_text()
+				div=the_tr.div.get_text()
+				intdiv=int(div)
+				if intdiv>=int_timeday:
+					li.append(intdiv)
+			except:
+				z=0
+			i=i+1
 		except:
 			break
-		i=i+1
 	li.sort()
 	back_li=ws.cell(row=j, column=c_write+1).value
 	try:
@@ -656,18 +393,6 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
-	#------------
-	#calist=[]
-	#calist=ca.split(';')
-	#calist=calist[:-1]
-	#cat=str(calist)
-	#cat=cat.replace("[","")
-	#cat=cat.replace("]","")
-	#cat=cat.replace("'","")
-	#cat=cat.replace("    ",";    ")
-	#cat=cat.replace(",;",";")
-	#ws.cell(row=j, column=c_write).value=cat
-	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -682,13 +407,9 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 				t_wri=str(t_rem)
 		if t_wri!='vide':
 			t_wri=str(ca)+';    '+t_wri
-			#t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
-		#print(t_wri)
+		print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
-	else:
-		ws.cell(row=j, column=c_write).value=cat
-
 	#COMMENTAIRE
 	ONC=ONCOM
 	if ONC==1:
@@ -697,13 +418,249 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			#Bcomment=soup.find('button', attrs={"class": "_ff6jfq"})
 			#Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
 			Lcomment=[]
-			Scomment=soup.find('span', attrs={"class": "_1plk0jz1"}).text
-			Scomment=Scomment.replace("(","")
-			Scomment=Scomment.replace(")","")
-			Scomment=Scomment.replace(" ","")
-			Lcomment=Scomment.split("c")
-			Icomment=int(Lcomment[0])
-			ws.cell(row=j, column=c_write+2).value=S=Icomment
+			Icomment=0
+			Scomment=soup.find('span', attrs={"class": "_bq6krt"}).text
+			Lcomment=Scomment.split("(")
+			Tcomment=Lcomment[1].replace(")","")
+			Icomment=int(Tcomment)
+			ws.cell(row=j, column=c_write+2).value=Icomment
+		except:
+			pass
+
+def A_Statu_PLUS2(c_write,j,ResAirbnb,new_mo,page):	
+	month=soup.find('div', attrs={"class":u"_kuxo8ai"})
+	i=0
+	li=[]
+	#SEMAINE
+	tr=1
+	#JOUR
+	td=1
+	if new_mo==1:
+		ResAirbnb='/D'
+	while i<=31:
+		try:
+			try:
+				the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
+				#div=the_tr.span.div.div.div.get_text()
+				div=the_tr.div.get_text()
+				#_1lds9wb
+				intdiv=int(div)
+				if intdiv>=int_timeday:
+					li.append(intdiv)
+			except:
+				z=0
+			try:
+				the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
+		#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
+				#div=the_tr.span.div.div.div.get_text()
+				div=the_tr.div.get_text()
+				intdiv=int(div)
+				if intdiv>=int_timeday:
+					li.append(intdiv)
+			except:
+				z=0
+			i=i+1
+		except:
+			break
+	li.sort()
+	back_li=ws.cell(row=j, column=c_write+1).value
+	if back_li!=None:
+		back_li=back_li.replace("[","")
+		back_li=back_li.replace("]","")
+		back_li=back_li.split(",")
+		i=0
+		bl=[]
+		while i!=len(back_li):
+			ivb=int(back_li[i])
+			bl.append(ivb)
+			i=i+1
+		back_li=bl
+		#print ("back_li="+str(back_li))
+	else:
+		back_li=[]
+	ws.cell(row=j, column=c_write+1).value = str(li)
+	#print(li)
+	c_added=[]
+	c_remove=[]
+	c_added=[elem for elem in li if elem not in back_li ]
+	c_remove=[elem for elem in back_li if elem not in li ]
+	#print(c_added)
+	#print(c_remove)
+	date = int(datetime.datetime.now().day)
+	month = int(datetime.datetime.now().month)
+	toto=str(date)+'-'+str(month)
+	t_add='vide'
+	t_rem='vide'
+	t_wri='vide'
+	if len(c_added)>0:		
+		t_add=ResAirbnb+toto+':'+str(c_added)
+		t_add=t_add.replace("[","")
+		t_add=t_add.replace("]","")
+		#print (t_add)
+	if c_remove!=['']:
+		if c_remove!=[]:
+			t_rem='/L'+toto+':'+str(c_remove)
+			t_rem=t_rem.replace("[","")
+			t_rem=t_rem.replace("]","")
+			#print(t_rem)
+	ca=ws.cell(row=j, column=c_write).value
+	if ca==None:
+		if t_add!='vide':
+			t_wri=str(t_add)
+	else:
+		if t_add!='vide':
+			if t_rem!='vide':
+				t_wri=str(t_add)+';    '+str(t_rem)
+			else:
+				t_wri=str(t_add)
+		else:
+			if t_rem!='vide':
+				t_wri=str(t_rem)
+		if t_wri!='vide':
+			t_wri=str(ca)+';    '+t_wri
+	if t_wri!='vide':
+		#print(t_wri)
+		ws.cell(row=j, column=c_write).value=t_wri
+			
+def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):	
+	int_timeday=int(date)
+	month=soup.findAll('div', attrs={"class":u"_1lds9wb"})[g]
+	print('ici1')
+	i=0
+	li=[]
+	fakeli=[]
+	ResAirbnb='/R'
+	if new_mo==1:
+		ResAirbnb='/D'
+	while i<=31:
+		try:
+			if des==0:
+				the_tr= month.findAll('td', attrs={"class": "_z39f86g"})[i]
+				div=the_tr.span.div.div.div.get_text()
+				#_1lds9wb
+				intdiv=int(div)
+				if intdiv>=int_timeday:
+					li.append(intdiv)
+			if des==1:
+				try:
+					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\buniquement\b')})[i]
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
+					#_1lds9wb
+					intdiv=int(div)
+					if intdiv>=int_timeday:
+						li.append(intdiv)
+				except:
+					z=0
+				try:
+					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\bnon\b')})[i]
+			#div=the_tr.find('div', attrs={"class": "_13m7kz7i"}).text
+					#div=the_tr.span.div.div.div.get_text()
+					div=the_tr.div.get_text()
+					intdiv=int(div)
+					if intdiv>=int_timeday:
+						li.append(intdiv)
+				except:
+					z=0
+				try:
+					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\pas\b')})[i]
+					div=the_tr.div.get_text()
+					intdiv=int(div)
+					if intdiv>=int_timeday:
+						#li.append(intdiv)
+						fakeli.append(intdiv)
+				except:
+					z=0
+		except:
+			break
+		i=i+1
+	li.sort()
+	#print(li)
+	back_li=ws.cell(row=j, column=c_write+1).value
+	if back_li!=None:
+		back_li=back_li.replace("[","")
+		back_li=back_li.replace("]","")
+		back_li=back_li.split(",")
+		i=0
+		bl=[]
+		while i!=len(back_li):
+			ivb=int(back_li[i])
+			if ivb>=int_timeday:
+				bl.append(ivb)
+			i=i+1
+		back_li=bl
+		#print ("back_li="+str(back_li))
+	else:
+		back_li=[]
+	ws.cell(row=j, column=c_write+1).value = str(li)
+	#print(li)
+	c_added=[]
+	c_remove=[]
+	c_added=[elem for elem in li if elem not in back_li ]
+	c_remove=[elem for elem in back_li if elem not in li ]
+	#print(c_added)
+	#print(c_remove)
+	date = int(datetime.datetime.now().day)
+	month = int(datetime.datetime.now().month)
+	toto=str(date)+'-'+str(month)
+	t_add='vide'
+	t_rem='vide'
+	t_wri='vide'
+	if len(c_added)>0:
+		if len(c_added)==1:
+			dif=c_added[0]-date
+			if dif==0 or dif==1 or dif==2 or dif==6:
+				ResAirbnb='/P'
+			elif dif<0:
+				difP=MNday-date+lie[0]
+				if difP==0 or difP==1 or difP==2 or difP==6:
+					ResAirbnb='/P'		
+		t_add=ResAirbnb+toto+':'+str(c_added)
+		t_add=t_add.replace("[","")
+		t_add=t_add.replace("]","")
+		#print (t_add)
+	if c_remove!=['']:
+		if c_remove!=[]:
+			t_rem='/L'+toto+':'+str(c_remove)
+			t_rem=t_rem.replace("[","")
+			t_rem=t_rem.replace("]","")
+			#print(t_rem)
+	ca=ws.cell(row=j, column=c_write).value
+	if ca==None:
+		if t_add!='vide':
+			t_wri=str(t_add)
+	else:
+		if t_add!='vide':
+			if t_rem!='vide':
+				t_wri=str(t_add)+';    '+str(t_rem)
+			else:
+				t_wri=str(t_add)
+		else:
+			if t_rem!='vide':
+				t_wri=str(t_rem)
+		if t_wri!='vide':
+			t_wri=str(ca)+';    '+t_wri
+	if t_wri!='vide':
+		#print(t_wri)
+		ws.cell(row=j, column=c_write).value=t_wri
+
+	#COMMENTAIRE
+	ONC=ONCOM
+	if ONC==1:
+		try:
+			#print('comment')
+			#//span[@class='_so3dpm2']
+			#Bcomment=soup.find('button', attrs={"class": "_ff6jfq"})
+			#Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
+			Lcomment=[]
+			Icomment=0
+			SScomment=soup.findAll('span', attrs={"class": "_bq6krt"})[0]
+			Scomment=SScomment.get_text()
+			Lcomment=Scomment.split("(")
+			Tcomment=Lcomment[1].replace(")","")
+			Icomment=int(Tcomment)
+			#print(Icomment)
+			ws.cell(row=j, column=c_write+2).value=Icomment
 		except:
 			pass
 
@@ -742,27 +699,33 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 					li.append(intdiv)
 				except:
 					z=0
+				try:
+					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\pas\b')})[i]
+					div=the_tr.div.get_text()
+					intdiv=int(div)
+					#if intdiv>=int_timeday:
+					#	li.append(intdiv)
+				except:
+					z=0
 		except:
 			break
 		i=i+1
 	li.sort()
+	#print(li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	try:
-		if back_li!='[]':
-			back_li=back_li.replace("[","")
-			back_li=back_li.replace("]","")
-			back_li=back_li.split(",")
-			i=0
-			bl=[]
-			while i!=len(back_li):
-				ivb=int(back_li[i])
-				bl.append(ivb)
-				i=i+1
-			back_li=bl
-			#print ("back_li="+str(back_li))
-		else:
-			back_li=[]
-	except:
+	if back_li!=None:
+		back_li=back_li.replace("[","")
+		back_li=back_li.replace("]","")
+		back_li=back_li.split(",")
+		i=0
+		bl=[]
+		while i!=len(back_li):
+			ivb=int(back_li[i])
+			bl.append(ivb)
+			i=i+1
+		back_li=bl
+		#print ("back_li="+str(back_li))
+	else:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -790,18 +753,6 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
-	#------------
-	#calist=[]
-	#calist=ca.split(';')
-	#calist=calist[:-1]
-	#cat=str(calist)
-	#cat=cat.replace("[","")
-	#cat=cat.replace("]","")
-	#cat=cat.replace("'","")
-	#cat=cat.replace("    ",";    ")
-	#cat=cat.replace(",;",";")
-	#ws.cell(row=j, column=c_write).value=cat
-	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -816,13 +767,9 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 				t_wri=str(t_rem)
 		if t_wri!='vide':
 			t_wri=str(ca)+';    '+t_wri
-			#t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
-		#toto=1
-	else:
-		ws.cell(row=j, column=c_write).value=cat
 
 
 def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):	
@@ -837,6 +784,7 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			if des==0:
 				the_tr= month.findAll('td', attrs={"class": "_z39f86g"})[i]
 				div=the_tr.span.div.div.div.get_text()
+				#div=the_tr.div.get_text()
 				#_1lds9wb
 				intdiv=int(div)
 				li.append(intdiv)
@@ -859,27 +807,33 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 					li.append(intdiv)
 				except:
 					z=0
+				try:
+					the_tr= month.findAll('td', attrs={'aria-label':re.compile(r'\pas\b')})[i]
+					div=the_tr.div.get_text()
+					intdiv=int(div)
+				#	if intdiv>=int_timeday:
+				#		li.append(intdiv)
+				except:
+					z=0
 		except:
 			break
 		i=i+1
 	li.sort()
+	#print (li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	try:
-		if back_li!='[]':
-			back_li=back_li.replace("[","")
-			back_li=back_li.replace("]","")
-			back_li=back_li.split(",")
-			i=0
-			bl=[]
-			while i!=len(back_li):
-				ivb=int(back_li[i])
-				bl.append(ivb)
-				i=i+1
-			back_li=bl
-			#print ("back_li="+str(back_li))
-		else:
-			back_li=[]
-	except:
+	if back_li!=None:
+		back_li=back_li.replace("[","")
+		back_li=back_li.replace("]","")
+		back_li=back_li.split(",")
+		i=0
+		bl=[]
+		while i!=len(back_li):
+			ivb=int(back_li[i])
+			bl.append(ivb)
+			i=i+1
+		back_li=bl
+		#print ("back_li="+str(back_li))
+	else:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -907,18 +861,6 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 			t_rem=t_rem.replace("]","")
 			#print(t_rem)
 	ca=ws.cell(row=j, column=c_write).value
-	#------------
-	#calist=[]
-	#calist=ca.split(';')
-	#calist=calist[:-1]
-	#cat=str(calist)
-	#cat=cat.replace("[","")
-	#cat=cat.replace("]","")
-	#cat=cat.replace("'","")
-	#cat=cat.replace("    ",";    ")
-	#cat=cat.replace(",;",";")
-	#ws.cell(row=j, column=c_write).value=cat
-	#------------
 	if ca==None:
 		if t_add!='vide':
 			t_wri=str(t_add)
@@ -933,12 +875,9 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 				t_wri=str(t_rem)
 		if t_wri!='vide':
 			t_wri=str(ca)+';    '+t_wri
-			#t_wri=str(cat)+';    '+t_wri
 	if t_wri!='vide':
 		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
-	else:
-		ws.cell(row=j, column=c_write).value=cat
 	
 
 def COMPUTE_M1(name_mois1):
@@ -1200,7 +1139,7 @@ C_mois5=0
 drive=0
 date = int(datetime.datetime.now().day)
 f_mounth=1
-fm=3
+fm=2
 fff=0
 f_xpathdate=0
 w_month=0
@@ -1209,11 +1148,11 @@ bouton_mois_suivant=0
 while f_mounth==0:
 	h=ws.cell(row=fm, column=2).value
 	print(h)
-	if fff==2:
-		f_mounth=1
-		f_xpathdate=1
-		end=1
-		run=emailfalde()
+	#if fff==2:
+	#	f_mounth=1
+	#	f_xpathdate=1
+	#	end=1
+	#	run=emailfalde()
 	fff=fff+1
 	try:
 		print('ici1')
@@ -1390,6 +1329,7 @@ while c_month==0:
 
 while f_xpathdate==0:
 	h=ws.cell(row=fm, column=2).value
+	fm=fm+1
 	print(h)
 	if fff==5:
 		f_mounth=1
@@ -1399,13 +1339,19 @@ while f_xpathdate==0:
 	fff=fff+1
 	try:
 		rootdriver.get(h)
-		time.sleep(4)
+		time.sleep(6)
 		#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
-		print("x date trouve")
+		print('date find')
+		#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_18hrqvin']")))
+		x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
+		print('title trouve')
 		f_xpathdate=1
-		b_cookie = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='optanon-allow-all accept-cookies-button']")))
-		b_cookie.click()
+		try:
+			b_cookie = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='optanon-allow-all accept-cookies-button']")))
+			b_cookie.click()
+		except:
+			pass
 	except:
 		if fff!=5:
 			rootdriver.quit()
@@ -1413,97 +1359,147 @@ while f_xpathdate==0:
 			#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 			rootdriver.set_window_size(2000, 1000)
 			wait = WebDriverWait(rootdriver, 5)
+def f1(a):
+	global des
+	try:
+		x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
+		#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='_18hrqvin']")))
+		des=1
+	except:
+		des=0
+def f2(bouton_mois_suivant):
+	global next_calendar
+	try:
+		if bouton_mois_suivant==0:
+			next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
+		else:
+			next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
+	except:
+		a=1
 
 while end==0:
 	try:
 		while j<=nrow:
 			h=ws.cell(row=j, column=2).value
-			print('--'+str(j-1)+'--'+str(h))
+			checker=0
+			#print('------'+str(j-1)+'------'+str(h))
 			if h==None:
 				j=j+1
 				print('h=None')
 			elif 'plus' in h:
 				ResAirbnb=''
 				rootdriver.get(h)
-				rootdriver.execute_script("window.scrollBy(0,100);")
-				time.sleep(2)
+				time.sleep(5)
+				des=1
 				try:
-					b_add_date = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='_3uatz29']")))
-					b_add_date.click()
+					ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
+					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+					rootdriver.execute_script("window.scrollBy(0,-200);")
+					time.sleep(2)
+					html = rootdriver.page_source
+					time.sleep(2)
+					soup = BeautifulSoup(html, 'html.parser')
+					time.sleep(2)
+					next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
+				#b_add_date = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='_3uatz29']")))
+					#b_add_date.click()
+					#b_arrival = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@class='_153lip8'][1]")))
+					#b_arrival.click
 					time.sleep(1)
-					b_arrival = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@class='_153lip8'][1]")))
-					b_arrival.click()
-					time.sleep(3)
+					print('1')
+					run_day=A_Statu_day2(date,m1_write,1,j,0,ResAirbnb,m1_newmonth,500,0,des)
+					print('2')
+					run_day=A_Statu_day2(1,m2_write,2,j,1,ResAirbnb,m2_newmonth,MNday1,0,des)
+					print('3')
+					run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth,des)
 					#(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM)
-					run_PLUS_1=A_Statu_PLUS(date,m1_write,2,j,0,ResAirbnb,m1_newmonth,500,1)
-					ResAirbnb=''
-					b_next = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1h5uiygl']")))
-					b_next.click()
-					time.sleep(1)
-					run_PLUS_2=A_Statu_PLUS(1,m2_write,2,j,1,ResAirbnb,m2_newmonth,MNday1,0)
-					b_next = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1h5uiygl']")))
-					b_next.click()
-					rootdriver.execute_script("window.scrollBy(0,-100);")
-					time.sleep(1)
-					run_PLUS_3=A_Statu_PLUS2(m3_write,j,ResAirbnb,m3_newmonth,2)
-					b_next = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1h5uiygl']")))
-					b_next.click()
-					rootdriver.execute_script("window.scrollBy(0,-100);")
-					time.sleep(1)
-					run_PLUS_4=A_Statu_PLUS2(m4_write,j,ResAirbnb,m4_newmonth,2)
-					b_next = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1h5uiygl']")))
-					b_next.click()
-					rootdriver.execute_script("window.scrollBy(0,-100);")
-					time.sleep(1)
-					run_PLUS_5=A_Statu_PLUS2(m5_write,j,ResAirbnb,m5_newmonth,2)
+					#run_PLUS_1=A_Statu_PLUS(date,m1_write,2,j,0,ResAirbnb,m1_newmonth,500,1)
+					#run_PLUS_2=A_Statu_PLUS(1,m2_write,2,j,1,ResAirbnb,m2_newmonth,MNday1,0)
+					#run_PLUS_3=A_Statu_PLUS2(m3_write,j,ResAirbnb,m3_newmonth,2)
+					print('4')
+					next_calendar.click()
+					time.sleep(2)
+					next_calendar.click()
+					time.sleep(2)
+					next_calendar.click()
+					time.sleep(2)
+					html = rootdriver.page_source
+					time.sleep(2)
+					soup = BeautifulSoup(html, 'html.parser')
+					time.sleep(2)
+					try:
+					#-----RECUPERATION CALANDAR MOIS 4--------
+						run_day=A_Statu_day5(m4_write,j,ResAirbnb,m4_newmonth,0,des)
+					except:
+						pass
+				#-----RECUPERATION CALANDAR MOIS 5--------
+					try:
+						run_day=A_Statu_day5(m5_write,j,ResAirbnb,m5_newmonth,1,des)
+					except:
+						pass
+					print('6')
 					#https://www.airbnb.fr/rooms/plus/21846063
+					try:
+						#//span[@class='_so3dpm2']
+						#Bcomment=soup.find('button', attrs={"class": "_ff6jfq"})
+						#Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
+						Lcomment=[]
+						Icomment=0
+						Scomment=soup.find('span', attrs={"class": "_bq6krt"}).text
+						Lcomment=Scomment.split("(")
+						Tcomment=Lcomment[1].replace(")","")
+						Icomment=int(Tcomment)
+						print(Icomment)
+						ws.cell(row=j, column=c_write+2).value=Icomment
+					except:
+						pass
 				except:
 					print('ECHEC PLUS')
-				if (j/10).is_integer():
+				if (j/20).is_integer():
 					wbx.save(path_RESULT.filename)
 				j=j+1
 			elif 'airbnb' in h:
 				rootdriver.get(h)
 				time.sleep(7)
 				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='_18hrqvin']"))).text
-				try:
-					x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
-				except:
-					time.sleep(2)
-					#print('X DATE PAS OK')
-				try:
-					rootdriver.execute_script("window.scrollBy(0,1000);")
-					ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
-					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
-					rootdriver.execute_script("window.scrollBy(0,-200);")
-					time.sleep(2)
-					bouton_mois_suivant=0
-				except:
+				#threading.Thread(target=scroll, args=(1,)).start()
+				#try:
+				#	rootdriver.execute_script("window.scrollBy(0,1200);")
+				#except:
+				#	time.sleep(1)
+				#	pass
+				f_ele=0
+				threading.Thread(target=f1, args=(h,)).start()
+				while f_ele<=3:
 					try:
-						rootdriver.execute_script("window.scrollBy(0,1000);")
-						ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
+						ele=rootdriver.find_element_by_xpath("//div[@aria-label='Avancez pour passer au mois suivant.']")
 						rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
 						rootdriver.execute_script("window.scrollBy(0,-200);")
-						time.sleep(2)
-						bouton_mois_suivant=1
+						f_ele=6
+						bouton_mois_suivant=0
 					except:
-						pp=1
+						try:
+							ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
+							rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+							rootdriver.execute_script("window.scrollBy(0,-200);")
+							bouton_mois_suivant=1
+							f_ele=6
+						except:
+							#print('DOWN KO')
+							time.sleep(1)
+						#rootdriver.execute_script("window.scrollBy(0,2000);")
 						#print('DOWN KO')
-					time.sleep(2)
-					#print('ECHEC DOWN')
-				try:
-					x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
-					des=1
-				except:
-					des=0
-				time.sleep(1)
+						
+					f_ele=f_ele+1
+				#time.sleep(1)
+				threading.Thread(target=f2, args=(bouton_mois_suivant,)).start()
 				html = rootdriver.page_source
-				time.sleep(2)
 				soup = BeautifulSoup(html, 'html.parser')
-				time.sleep(2)
+				time.sleep(1)
 				ResAirbnb=''
-				V_up=ws.cell(row=j, column=k).value
-				v_m=ws.cell(row=j, column=c_mouth).value
+				#V_up=ws.cell(row=j, column=k).value
+				v_m='8'
+
 				#try:
 				#	script=soup.find('script', attrs={"data-state":u"true"}).text
 				#	p1=script.split("calendar_last")
@@ -1544,10 +1540,10 @@ while end==0:
 			#-----MOIS 4-5 -----
 				if v_m!='z':
 					try:
-						if bouton_mois_suivant==0:
-							next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
-						else:
-							next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
+						#if bouton_mois_suivant==0:
+						#	next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Avancez pour passer au mois suivant.']")))
+						#else:
+						#	next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
 						#or button class _f8a140
 						next_calendar.click()
 						time.sleep(2)
@@ -1569,14 +1565,19 @@ while end==0:
 						try:
 							#print('le mois N+1 est '+name_mois5)
 							run_day=A_Statu_day5(m5_write,j,ResAirbnb,m5_newmonth,1,des)
+							#run_resday=A_Statu_day4(m5_write,j,RA4,m5_newmonth,des)
 						except:
 							pass
 					except:
-						print('----click KO')
+						#print('----click KO')
+						zzz=1
 						pass
 					C_mois5=1
-				if (j/10).is_integer():
+					checker=1
+				if (j/20).is_integer():
 					wbx.save(path_RESULT.filename)
+					#if checker==1:
+					#	x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1b3ij9t']")))
 				C_mois=1
 				j=j+1
 			elif 'abritel' in h:
@@ -1588,22 +1589,23 @@ while end==0:
 		end=1
 		now = str(datetime.datetime.now())[:19]
 		now = now.replace(":","_")
-		date_object = str(datetime.date.today())
+		print(now)
 		Tr=date
 		print ('FIN')
 		wbx = load_workbook(path_RESULT.filename)
 		ws = wbx.active
 		COMPUTE_M1(name_mois1)
 		COMPUTE_M1(name_mois2)
-		wbx.save(DIR2+NAMEFile+date_object+".xlsx")
+		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		try:
-			run=email(DIR2,NAMEFile,date_object)
+			run=email(DIR2,NAMEFile,now)
 			print('sent email')
 		except:
 			print('rien')
 		rootdriver.quit()
 		wbx.close()
 	except:
+		print(j)
 		j=j+1
 		try:
 			rootdriver.quit()
@@ -1618,8 +1620,9 @@ while end==0:
 		fff=0
 		while f_xpathdate==0:
 			h=ws.cell(row=fm, column=2).value
+			fm=fm+1
 			print(h)
-			if fff==5:
+			if fff==8:
 				f_mounth=1
 				f_xpathdate=1
 				end=0
@@ -1627,21 +1630,28 @@ while end==0:
 			fff=fff+1
 			try:
 				rootdriver.get(h)
-				time.sleep(4)
+				time.sleep(6)
 				#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
-				print("x date trouve")
+				print('date')
+				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1b3ij9t']")))
+				x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
+				#print('x date trouve')
 				f_xpathdate=1
-				b_cookie = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='optanon-allow-all accept-cookies-button']")))
-				b_cookie.click()
+				try:
+					b_cookie = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='optanon-allow-all accept-cookies-button']")))
+					b_cookie.click()
+				except:
+					f_xpathdate=1
 			except:
-				if fff!=5:
+				if fff!=8:
 					rootdriver.quit()
 					rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 					#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 					rootdriver.set_window_size(2000, 1000)
 					wait = WebDriverWait(rootdriver, 5)
-
+				else:
+					f_xpathdate=1
 		
 		
 try:
