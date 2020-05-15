@@ -1126,7 +1126,7 @@ rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_op
 #rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 #rootdriver.set_page_load_timeout(2)
 rootdriver.set_window_size(2000, 1000)
-wait = WebDriverWait(rootdriver, 5)
+wait = WebDriverWait(rootdriver, 7)
 nrow=ws.max_row
 print('NROW'+str(nrow))
 j=2
@@ -1339,7 +1339,7 @@ while f_xpathdate==0:
 	fff=fff+1
 	try:
 		rootdriver.get(h)
-		time.sleep(6)
+		time.sleep(10)
 		#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
 		print('date find')
@@ -1389,7 +1389,7 @@ while end==0:
 			elif 'plus' in h:
 				ResAirbnb=''
 				rootdriver.get(h)
-				time.sleep(5)
+				time.sleep(10)
 				des=1
 				try:
 					ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
@@ -1460,7 +1460,7 @@ while end==0:
 				j=j+1
 			elif 'airbnb' in h:
 				rootdriver.get(h)
-				time.sleep(7)
+				time.sleep(10)
 				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='_18hrqvin']"))).text
 				#threading.Thread(target=scroll, args=(1,)).start()
 				#try:
