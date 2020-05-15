@@ -30,6 +30,7 @@ chrome_options.add_experimental_option("prefs", prefs)
 #chrome_options.add_argument("-headless")
 #chrome_options.add_argument("-disable-gpu")
 print ('▀▄▀▄▀▄ STOPBNB ▄▀▄▀▄▀')
+print('v1.1')
 
 now = str(datetime.datetime.now())[:19]
 now = now.replace(":","_")
@@ -1339,7 +1340,7 @@ while f_xpathdate==0:
 	fff=fff+1
 	try:
 		rootdriver.get(h)
-		time.sleep(10)
+		time.sleep(20)
 		#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
 		print('date find')
@@ -1389,7 +1390,7 @@ while end==0:
 			elif 'plus' in h:
 				ResAirbnb=''
 				rootdriver.get(h)
-				time.sleep(10)
+				time.sleep(15)
 				des=1
 				try:
 					ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
@@ -1460,7 +1461,7 @@ while end==0:
 				j=j+1
 			elif 'airbnb' in h:
 				rootdriver.get(h)
-				time.sleep(10)
+				time.sleep(15)
 				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//span[@class='_18hrqvin']"))).text
 				#threading.Thread(target=scroll, args=(1,)).start()
 				#try:
@@ -1494,8 +1495,9 @@ while end==0:
 				#time.sleep(1)
 				threading.Thread(target=f2, args=(bouton_mois_suivant,)).start()
 				html = rootdriver.page_source
+				time.sleep(3)
 				soup = BeautifulSoup(html, 'html.parser')
-				time.sleep(1)
+				time.sleep(3)
 				ResAirbnb=''
 				#V_up=ws.cell(row=j, column=k).value
 				v_m='8'
@@ -1630,7 +1632,7 @@ while end==0:
 			fff=fff+1
 			try:
 				rootdriver.get(h)
-				time.sleep(6)
+				time.sleep(20)
 				#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
 				print('date')
