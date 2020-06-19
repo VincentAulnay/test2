@@ -577,20 +577,23 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 	li.sort()
 	#print(li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			if ivb>=int_timeday:
-				bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
+	try:
+		if back_li!=[]:
+			back_li=back_li.replace("[","")
+			back_li=back_li.replace("]","")
+			back_li=back_li.split(",")
+			i=0
+			bl=[]
+			while i!=len(back_li):
+				ivb=int(back_li[i])
+				if ivb>=int_timeday:
+					bl.append(ivb)
+				i=i+1
+			back_li=bl
+			#print ("back_li="+str(back_li))
+		else:
+			back_li=[]
+	except:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -648,19 +651,16 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 	ONC=ONCOM
 	if ONC==1:
 		try:
-			#print('comment')
-			#//span[@class='_so3dpm2']
-			#Bcomment=soup.find('button', attrs={"class": "_ff6jfq"})
-			#Scomment=Bcomment.find('span', attrs={"class": "_so3dpm2"}).text
-			Lcomment=[]
-			Icomment=0
-			SScomment=soup.findAll('span', attrs={"class": "_bq6krt"})[0]
-			Scomment=SScomment.get_text()
-			Lcomment=Scomment.split("(")
-			Tcomment=Lcomment[1].replace(")","")
-			Icomment=int(Tcomment)
-			#print(Icomment)
-			ws.cell(row=j, column=c_write+2).value=Icomment
+			p_c=[]
+			tp_c=soup.findAll('span', attrs={"class": "_bq6krt"})[1].text
+			p_c=tp_c.replace("(","")
+			cc=p_c.replace(")","")
+			try:
+				pp=cc.split(' ')
+				cc=pp[1]
+			except:
+				pass
+			ws.cell(row=j, column=c_write+2).value=cc
 		except:
 			pass
 
@@ -713,19 +713,23 @@ def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 	li.sort()
 	#print(li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
+	try:
+		if back_li!=[]:
+			back_li=back_li.replace("[","")
+			back_li=back_li.replace("]","")
+			back_li=back_li.split(",")
+			i=0
+			bl=[]
+			while i!=len(back_li):
+				ivb=int(back_li[i])
+				if ivb>=int_timeday:
+					bl.append(ivb)
+				i=i+1
+			back_li=bl
+			#print ("back_li="+str(back_li))
+		else:
+			back_li=[]
+	except:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
@@ -821,19 +825,23 @@ def A_Statu_day5(c_write,j,ResAirbnb,new_mo,g,des):
 	li.sort()
 	#print (li)
 	back_li=ws.cell(row=j, column=c_write+1).value
-	if back_li!=None:
-		back_li=back_li.replace("[","")
-		back_li=back_li.replace("]","")
-		back_li=back_li.split(",")
-		i=0
-		bl=[]
-		while i!=len(back_li):
-			ivb=int(back_li[i])
-			bl.append(ivb)
-			i=i+1
-		back_li=bl
-		#print ("back_li="+str(back_li))
-	else:
+	try:
+		if back_li!=[]:
+			back_li=back_li.replace("[","")
+			back_li=back_li.replace("]","")
+			back_li=back_li.split(",")
+			i=0
+			bl=[]
+			while i!=len(back_li):
+				ivb=int(back_li[i])
+				if ivb>=int_timeday:
+					bl.append(ivb)
+				i=i+1
+			back_li=bl
+			#print ("back_li="+str(back_li))
+		else:
+			back_li=[]
+	except:
 		back_li=[]
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(li)
