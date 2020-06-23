@@ -90,7 +90,7 @@ def email(DIR2,NAMEFile,now):
 	#msg['Subject'] = "Subject of the Mail- image -2"
 	body = "Body_of_the_mail"
 	msg.attach(MIMEText(body, 'plain'))
-	msg['Subject'] = "STOP AIRBNB - extraction du - "+str(now)
+	msg['Subject'] = "STOP AIRBNB - extraction du - "+str(now)+str(PSW_GMAIL)
 	# path along with extension of file to be attachmented 
 	filename = DIR2+NAMEFile+str(now)+".xlsx"
 	attachmentment = open(filename, "rb")
