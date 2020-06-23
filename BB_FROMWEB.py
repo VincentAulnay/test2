@@ -1350,7 +1350,7 @@ while f_xpathdate==0:
 	fff=fff+1
 	try:
 		rootdriver.get(h)
-		time.sleep(20)
+		time.sleep(6)
 		#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
 		print('date find')
@@ -1406,17 +1406,17 @@ while end==0:
 					ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
 					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
 					rootdriver.execute_script("window.scrollBy(0,-200);")
-					time.sleep(2)
+					time.sleep(3)
 					html = rootdriver.page_source
-					time.sleep(2)
+					time.sleep(3)
 					soup = BeautifulSoup(html, 'html.parser')
-					time.sleep(2)
+					time.sleep(3)
 					next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
 				#b_add_date = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='_3uatz29']")))
 					#b_add_date.click()
 					#b_arrival = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@class='_153lip8'][1]")))
 					#b_arrival.click
-					time.sleep(1)
+					time.sleep(2)
 					print('1')
 					run_day=A_Statu_day2(date,m1_write,1,j,0,ResAirbnb,m1_newmonth,500,0,des)
 					print('2')
@@ -1497,7 +1497,7 @@ while end==0:
 							f_ele=6
 						except:
 							#print('DOWN KO')
-							time.sleep(1)
+							time.sleep(2)
 						#rootdriver.execute_script("window.scrollBy(0,2000);")
 						#print('DOWN KO')
 						
@@ -1642,7 +1642,7 @@ while end==0:
 			fff=fff+1
 			try:
 				rootdriver.get(h)
-				time.sleep(20)
+				time.sleep(15)
 				#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_z39f86g']")))
 				print('date')
