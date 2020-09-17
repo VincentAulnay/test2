@@ -1452,7 +1452,68 @@ def f2(bouton_mois_suivant):
 	except:
 		a=1
 
+def checkmounth(name_mois1,bouton_mois_suivant):
+	which_mount = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1lds9wb'][1]//h1[@class='_14i3z6h']"))).text
+	if name_mois1=='septembre 2020':
+		nmount=9
+	elif name_mois1=='octobre 2020':
+		nmount=10	
+	elif name_mois1=='novembre 2020':
+		nmount=11
+	elif name_mois1=='décembre 2020':
+		nmount=12
+	elif name_mois1=='janvier 2020':
+		nmount=1
+	elif name_mois1=='février 2020':
+		nmount=2
+	elif name_mois1=='mars 2020':
+		nmount=3
+	elif name_mois1=='avril 2020':
+		nmount=4
 
+		
+	if which_mount!=name_mois1:
+		if which_mount=='septembre 2020':
+			goback=9
+		elif which_mount=='octobre 2020':
+			goback=10
+		elif which_mount=='novembre 2020':
+			goback=11
+		elif which_mount=='décembre 2020':
+			goback=12
+		elif which_mount=='janvier 2021':
+			goback=1
+		elif which_mount=='février 2021':
+			goback=2
+		elif which_mount=='mars 2021':
+			goback=3
+		elif which_mount=='avril 2021':
+			goback=4
+		elif which_mount=='mai 2021':
+			goback=5
+		elif which_mount=='juin 2021':
+			goback=6
+		elif which_mount=='juillet 2021':
+			goback=7
+		
+		if goback<nmount:
+			backnumber=12-nmount+goback
+		else:
+			backnumber=goback-nmount
+		
+		try:
+			if bouton_mois_suivant==0:
+				previous_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@aria-label='Reculez pour passer au mois précédent.']")))
+			else:
+				previous_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Reculez pour passer au mois précédent.']")))
+			loop=0
+			while loop<backnumber:
+				previous_calendar.click()
+				time.sleep(3)
+				loop=loop+1
+			time.sleep(3)
+		except:
+			a=1
 
 while end==0:
 	try:
@@ -1490,6 +1551,10 @@ while end==0:
 					rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
 					rootdriver.execute_script("window.scrollBy(0,-200);")
 					time.sleep(2)
+					try:
+						run_checkmounth=checkmounth(name_mois1,bouton_mois_suivant)
+					except:
+						zzzz=1
 					html = rootdriver.page_source
 					time.sleep(3)
 					soup = BeautifulSoup(html, 'html.parser')
@@ -1588,6 +1653,10 @@ while end==0:
 					f_ele=f_ele+1
 				#time.sleep(1)
 				threading.Thread(target=f2, args=(bouton_mois_suivant,)).start()
+				try:
+					run_checkmounth=checkmounth(name_mois1,bouton_mois_suivant)
+				except:
+					zzzz=1
 				html = rootdriver.page_source
 				time.sleep(3)
 				soup = BeautifulSoup(html, 'html.parser')
