@@ -977,92 +977,122 @@ def COMPUTE_M1(name_mois1):
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='NB_/A':
+			if V_up=='Sum_Nuitee':
+				up=1
+			else:
+				i=i-1
+		C_N1SumNuitee=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='Sum_Nuitee':
 				up=1
 			else:
 				i=i+1
-		C_nbA=i
+		C_SumNuitee=i
 
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='NB_NO/A':
+			if V_up=='Nuitee_bloquee':
 				up=1
 			else:
 				i=i+1
-		C_nbnoA=i
+		C_NuitBloquee=i
 		
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='SUM_NB':
+			if V_up=='R5_ACT':
 				up=1
 			else:
 				i=i+1
-		C_SUMnb=i
+		C_R5A=i
 
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='nJ_/A':
+			if V_up=='R15_ACT':
 				up=1
 			else:
 				i=i+1
-		C_nJA=i
+		C_R15A=i
 		
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='nJ_NO/A':
+			if V_up=='R30_ACT':
 				up=1
 			else:
 				i=i+1
-		C_NOnJA=i
+		C_R30A=i
 		
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='SUM_nJ':
+			if V_up=='R5_Jours':
 				up=1
 			else:
 				i=i+1
 		#print('SUM_nJ='+str(i))
-		C_SUMnJ=i
+		C_R5J=i
 
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='SUM_all_nJ':
+			if V_up=='R15_Jours':
 				up=1
 			else:
 				i=i+1
-		C_SUM_all_nJ=i
+		C_R15J=i
 		
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='nb_/P':
+			if V_up=='R30_Jours':
 				up=1
 			else:
 				i=i+1
-		C_nb_P=i
+		C_R30J=i
 		
 		up=0
 		i=Cmois
 		while up==0:
 			V_up=ws.cell(row=1, column=i).value
-			if V_up=='nJ_/D':
+			if V_up=='L_ACT':
 				up=1
 			else:
 				i=i+1
-		C_nJD=i
+		C_L=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='P_NB':
+				up=1
+			else:
+				i=i+1
+		C_P=i
+		
+		up=0
+		i=Cmois
+		while up==0:
+			V_up=ws.cell(row=1, column=i).value
+			if V_up=='D_Jours':
+				up=1
+			else:
+				i=i+1
+		C_D=i
 		
 		up=0
 		i=Cmois
@@ -1092,38 +1122,34 @@ def COMPUTE_M1(name_mois1):
 				pass
 	#--------COUNT NB/A and NB NO/A---------
 		STR_NBA=ws.cell(row=c, column=Cmois).value
+		#if STR_NBA==None:
+		#	STR_NBA="/X1-7:3"
 		continu=1
 		if STR_NBA==None:
 			continu=0
+			ws.cell(row=c, column=C_L).value=0
+			ws.cell(row=c, column=C_P).value=0
+			ws.cell(row=c, column=C_D).value=0
+			ws.cell(row=c, column=C_R5A).value=0
+			ws.cell(row=c, column=C_R15A).value=0
+			ws.cell(row=c, column=C_R30A).value=0
+			ws.cell(row=c, column=C_R5J).value=0
+			ws.cell(row=c, column=C_R15J).value=0
+			ws.cell(row=c, column=C_R30J).value=0
+			ws.cell(row=c, column=C_NuitBloquee).value=0
+			N1nuit=ws.cell(row=c, column=C_N1SumNuitee).value
+			if N1nuit is None:
+				N1nuit=0
+			ws.cell(row=c, column=C_SumNuitee).value=N1nuit
 		if continu==1:
-			count_AP=0
-			count_D=0
-			count_P=0
-			count=0
-			count_NBA=0
-			count_R=0
-			count_L=0
-			count_RP=0
-			count_RP=STR_NBA.count('/R/P')
-			count_AP=STR_NBA.count('/A/P')
-			count_NBA=STR_NBA.count('/A')
-			real_NBA=count_NBA-count_AP
-			count_P=STR_NBA.count('/P')
-			count_D=STR_NBA.count('/D')
-			count=STR_NBA.count(':')
 			count_R=STR_NBA.count('/R')
 			count_L=STR_NBA.count('/L')
-			
-			NBNOA=count-count_D-count_NBA-count_P-count_L
-			#print (('NB_NO/A ===')+str(NBNOA))
-			ws.cell(row=c, column=C_nbA).value=real_NBA
-			ws.cell(row=c, column=C_nbnoA).value=NBNOA
-			ws.cell(row=c, column=C_nb_P).value=count_P+count_AP+count_RP
-			write=int(NBNOA)+int(real_NBA)
-			ws.cell(row=c, column=C_SUMnb).value=write
-		#---------COUNT nJ ---------
+			count_P=STR_NBA.count('/P')
+			ws.cell(row=c, column=C_L).value=count_L
+			ws.cell(row=c, column=C_P).value=count_P
+					#---------COUNT nJ ---------
 			list=STR_NBA.split(';')
-			B=['/P', '/D', '/A/P', '/R', '/L', '/R/P']
+			B=['/P', '/D', '/R', '/L', '/X']
 			blacklist = re.compile('|'.join([re.escape(word) for word in B]))
 			newL=[word for word in list if not blacklist.search(word)]
 			D=['/D']
@@ -1138,44 +1164,99 @@ def COMPUTE_M1(name_mois1):
 				pld=pnlD[0].split(',')
 				nbD=nbD+len(pld)
 				rd=rd+1
-			ws.cell(row=c, column=C_nJD).value=nbD
+			ws.cell(row=c, column=C_D).value=nbD
 			#[x for x in list if not x.startswith('/A/P') and not x.startswith('/D') and not x.startswith('/P')]
 			#[x for x in list if not any(bad in x for bad in B)]
 			#-----/A--------
-			BA=['/A']
+			BA=['/R']
 			blacklistA = re.compile('|'.join([re.escape(wordA) for wordA in BA]))
-			newLforA=[wordA for wordA in newL if blacklistA.search(wordA)] #-------Creation list AVEC que les lot /A
-			newLfornoA=[wordA for wordA in newL if not blacklistA.search(wordA)] #-------Creation list SANS les lot /A
+			newLforA=[wordA for wordA in list if blacklistA.search(wordA)] #-------Creation list AVEC que les lot /R
+			newLfornoA=[wordA for wordA in list if not blacklistA.search(wordA)] #-------Creation list SANS les lot /R
 			nAlen=len(newLforA)
 			rr=0
 			nbA=0
-			try: #---Recuperation nJ dans les lot /A
+			R5=0
+			R15=0
+			R30=0
+			try: #---Recuperation nJ dans les lot /R
 				while rr<nAlen:
 					pnlA=newLforA[rr].split(':')
 					del pnlA[0]
 					pla=pnlA[0].split(',')
+					if len(pla)<=5:
+						R5=R5+1
+					elif len(pla)<=15:
+						R15=R15+1
+					else:
+						R30=R30+1
 					nbA=nbA+len(pla)
 					rr=rr+1
+				ws.cell(row=c, column=C_R5A).value=R5
+				ws.cell(row=c, column=C_R15A).value=R15
+				ws.cell(row=c, column=C_R30A).value=R30
 			except:
 				pass
-			ws.cell(row=c, column=C_nJA).value=nbA
-			nAlen=len(newLfornoA)
-			rr=0
-			NnoJA=0
-			try: #---Recuperation nJ dans les lot SANS /A
-				while rr<nAlen:
-					pnlA=newLfornoA[rr].split(':')
-					del pnlA[0]
-					pla=pnlA[0].split(',')
-					NnoJA=NnoJA+len(pla)
-					rr=rr+1
-			except:
-				pass
-			ws.cell(row=c, column=C_NOnJA).value=NnoJA
-			write=int(nbA)+int(NnoJA)
-			ws.cell(row=c, column=C_SUMnJ).value=write
+				
+			list.reverse()
+			s=0
+			listL=[]
+			listR=[]
+			LR1=[]
+			LR2=[]
+			LR11=[]
+			LR22=[]
+			NR5=0
+			NR15=0
+			NR30=0
+			sp3=[]
+			while s<len(list):
+				if "/R" in list[s]:
+					sp1=list[s].split(":")
+					sp2=sp1[1].split(",")
+					ffloat=0
+					while ffloat<len(sp2):
+						fsp2=int(sp2[ffloat])
+						sp3.append(fsp2)
+						ffloat=ffloat+1
+					LR1=[elem for elem in sp3 if elem not in listR ]
+					LR2=[elem for elem in LR1 if elem not in listL ]
+					if len(LR2)<=5:
+						NR5=NR5+len(LR2)
+					elif len(LR2)<=15:
+						NR15=NR15+len(LR2)
+					else:
+						NR30=NR30+len(LR2)
+					listR.extend(LR2)
+				elif "/L" in list[s]:
+					sp1=list[s].split(":")
+					sp2=sp1[1].split(",")
+					ffloat=0
+					while ffloat<len(sp2):
+						fsp2=int(sp2[ffloat])
+						sp3.append(fsp2)
+						ffloat=ffloat+1
+					listL.extend(sp3)
+				elif "/X" in list[s]:
+					sp1=list[s].split(":")
+					sp2=sp1[1].split(",")
+					ffloat=0
+					while ffloat<len(sp2):
+						fsp2=int(sp2[ffloat])
+						sp3.append(fsp2)
+						ffloat=ffloat+1
+					listL.extend(sp3)
+				s=s+1
+			ws.cell(row=c, column=C_R5J).value=NR5
+			ws.cell(row=c, column=C_R15J).value=NR15
+			ws.cell(row=c, column=C_R30J).value=NR30
+			ws.cell(row=c, column=C_NuitBloquee).value=NR30+NR15+NR5
+			N1nuit=ws.cell(row=c, column=C_N1SumNuitee).value
+			if N1nuit is None:
+				N1nuit=0
+			ws.cell(row=c, column=C_SumNuitee).value=N1nuit+NR30+NR15+NR5
 		c=c+1
 	wbx.save(path_RESULT.filename)
+	time.sleep(5)
 
 		
 #-----OPEN GOOGLE CHROME and AIRBNB PAGE---------
@@ -1754,8 +1835,8 @@ while end==0:
 		print ('FIN')
 		wbx = load_workbook(path_RESULT.filename)
 		ws = wbx.active
-		COMPUTE_M1(name_mois1)
-		COMPUTE_M1(name_mois2)
+		#COMPUTE_M1(name_mois1)
+		#COMPUTE_M1(name_mois2)
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		try:
 			print('///REPORT///')
