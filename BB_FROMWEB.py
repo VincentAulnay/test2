@@ -73,7 +73,7 @@ Hr=dt.datetime.now().hour
 
 #------RECUP INFO CALANDAR------
 
-def email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS):
+def email(DIR2,NAMEFile,now,total_R,total_L,total_P):
 	#sender = ADRESS_GMAIL
 	#sender_password = PSW_GMAIL
 	#sender = 'stopbnb33650@gmail.com'
@@ -1852,7 +1852,8 @@ while end==0:
 		except:
 			print('NO REPORT')
 		try:
-			run=email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS)
+			print('try sent')
+			run=email(DIR2,NAMEFile,now,total_R,total_L,total_P)
 			print('sent email')
 		except:
 			print('rien')
