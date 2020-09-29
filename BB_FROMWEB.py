@@ -80,8 +80,8 @@ def email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS):
 	sender_password = '@stop$n$33650'
 	receivers = RECEIVER
 
-	#s = smtplib.SMTP('smtp.gmail.com', 587)
-	s = smtplib.SMTP('mail.gmx.com', 587)
+	s = smtplib.SMTP('smtp.gmail.com', 587)
+	#s = smtplib.SMTP('mail.gmx.com', 587)
 	s.starttls()
 	s.login(sender, sender_password)
 	msg = MIMEMultipart()
