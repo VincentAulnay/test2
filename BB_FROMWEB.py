@@ -78,14 +78,17 @@ def email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS):
 	#sender_password = PSW_GMAIL
 	#sender = 'stopbnb33650@gmail.com'
 	#sender_password = '@stop$n$33650'
+	print('ici1')
 	sender = 'vincent.aulnay@gmx.fr'
 	sender_password = '@Vincent94'
 	receivers = RECEIVER
+	print('ici2')
 
 	#s = smtplib.SMTP('smtp.gmail.com', 587)
 	s = smtplib.SMTP('mail.gmx.com', 587)
 	s.starttls()
 	s.login(sender, sender_password)
+	print('ici3')
 	msg = MIMEMultipart()
 	msg['From'] = sender
 	msg['To'] = receivers
@@ -107,6 +110,7 @@ def email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS):
 	# attachment the instance  to instance 'msg'
 	msg.attach(attachment)
 	text = msg.as_string()
+	print('ici4')
 	s.sendmail(sender, receivers, text)
 	print('*** email sent ***') 
 	time.sleep(10)
