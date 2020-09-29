@@ -73,15 +73,15 @@ Hr=dt.datetime.now().hour
 
 #------RECUP INFO CALANDAR------
 
-def email(DIR2,NAMEFile,now):
+def email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS):
 	#sender = ADRESS_GMAIL
 	#sender_password = PSW_GMAIL
-	sender = ADRESS_GMAIL
-	sender_password = PSW_GMAIL
+	sender = 'stopbnb33650@gmail.com'
+	sender_password = '@stop$n$33650'
 	receivers = RECEIVER
 
-	s = smtplib.SMTP('smtp.gmail.com', 587)
-	#s = smtplib.SMTP('mail.gmx.com', 587)
+	#s = smtplib.SMTP('smtp.gmail.com', 587)
+	s = smtplib.SMTP('mail.gmx.com', 587)
 	s.starttls()
 	s.login(sender, sender_password)
 	msg = MIMEMultipart()
@@ -90,7 +90,7 @@ def email(DIR2,NAMEFile,now):
 	#msg['Subject'] = "Subject of the Mail- image -2"
 	body = "Body_of_the_mail"
 	msg.attach(MIMEText(body, 'plain'))
-	msg['Subject'] = "STOP AIRBNB - extraction du - "+str(now)
+	msg['Subject'] = "STOP AIRBNB - "+str(now)+"-R"+str(total_R)+"-L"+str(total_L)+"-P"+str(total_P)+"-PLUS"+str(total_PLUS)
 	# path along with extension of file to be attachmented 
 	filename = DIR2+NAMEFile+str(now)+".xlsx"
 	attachmentment = open(filename, "rb")
@@ -1846,7 +1846,7 @@ while end==0:
 		except:
 			print('NO REPORT')
 		try:
-			run=email(DIR2,NAMEFile,now)
+			run=email(DIR2,NAMEFile,now,total_R,total_L,total_P,total_PLUS)
 			print('sent email')
 		except:
 			print('rien')
