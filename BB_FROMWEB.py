@@ -84,8 +84,8 @@ def email(DIR2,NAMEFile,now,total_R,total_L,total_P):
 	receivers = RECEIVER
 	print('ici2')
 
-	#s = smtplib.SMTP('smtp.gmail.com', 587)
-	s = smtplib.SMTP('mail.gmx.com', 587)
+	s = smtplib.SMTP('smtp.gmail.com', 587)
+	#s = smtplib.SMTP('mail.gmx.com', 587)
 	s.starttls()
 	s.login(sender, sender_password)
 	print('ici3')
