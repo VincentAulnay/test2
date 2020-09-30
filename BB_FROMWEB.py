@@ -76,11 +76,11 @@ Hr=dt.datetime.now().hour
 def email(DIR2,NAMEFile,now,total_R,total_L,total_P):
 	sender = ADRESS_GMAIL
 	sender_password = PSW_GMAIL
-	#sender = 'stopbnb33650@gmail.com'
-	#sender_password = '@stop$n$33650'
+	sender = 'stopbnb33650@gmail.com'
+	sender_password = '@stop$n$33650'
 	print('ici1')
-	sender = 'vincent.aulnay@gmx.fr'
-	sender_password = '@Vincent94'
+	#sender = 'vincent.aulnay@gmx.fr'
+	#sender_password = '@Vincent94'
 	receivers = RECEIVER
 	print('ici2')
 
