@@ -229,7 +229,7 @@ def whatmounth():
 	elif month==12:
 		name_mois1='décembre 2020'
 		name_mois2='janvier 2021'
-		name_mois3='fevrier 2021'
+		name_mois3='février 2021'
 		name_mois4='mars 2021'
 		name_mois5='avril 2021'
 
