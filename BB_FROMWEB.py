@@ -83,17 +83,17 @@ def email(DIR2,NAMEFile,now,total_R,total_L,total_P):
 	sender_password = PSW_GMAIL
 	sender = 'stopbnb33650@gmail.com'
 	sender_password = '@stop$n$33650'
-	print('ici1')
+	#print('ici1')
 	#sender = 'vincent.aulnay@gmx.fr'
 	#sender_password = '@Vincent94'
 	receivers = RECEIVER
-	print('ici2')
+	#print('ici2')
 
 	s = smtplib.SMTP('smtp.gmail.com', 587)
 	#s = smtplib.SMTP('mail.gmx.com', 587)
 	s.starttls()
 	s.login(sender, sender_password)
-	print('ici3')
+	#print('ici3')
 	msg = MIMEMultipart()
 	msg['From'] = sender
 	msg['To'] = receivers
@@ -117,7 +117,7 @@ def email(DIR2,NAMEFile,now,total_R,total_L,total_P):
 	text = msg.as_string()
 	print('ici4')
 	s.sendmail(sender, receivers, text)
-	print('*** email sent ***') 
+	#print('*** email sent ***') 
 	time.sleep(10)
 	del filename
 	del attachmentment
@@ -135,7 +135,7 @@ def emailfalde():
 	s.login(sender, sender_password)
 	text = "echec de capture xpath mois"
 	s.sendmail(sender, receivers, text)
-	print('*** email sent ***') 
+	#print('*** email sent ***') 
 	time.sleep(10)
 	del text
 
@@ -149,7 +149,7 @@ def emailfalde2():
 	s.login(sender, sender_password)
 	text = "echec de xpathdate"
 	s.sendmail(sender, receivers, text)
-	print('*** email sent ***') 
+	#print('*** email sent ***') 
 	time.sleep(10)
 	del text
 
@@ -306,7 +306,7 @@ def A_Colonne_mois(name_mois,c):
 			c_write=c+1
 			find_month=1
 			new_month=1
-			print ('plus une colonne')
+			#print ('plus une colonne')
 			wbx.save(path_RESULT.filename)
 			break
 		else:
@@ -1635,7 +1635,7 @@ while end==0:
 			#print('------'+str(j-1)+'------'+str(h))
 			if h==None:
 				j=j+1
-				print('h=None')
+				#print('h=None')
 			elif 'plus' in h:
 				ResAirbnb=''
 				rootdriver.get(h)
@@ -1660,17 +1660,17 @@ while end==0:
 					#b_arrival = wait.until(EC.presence_of_element_located((By.XPATH, "//input[@class='_153lip8'][1]")))
 					#b_arrival.click
 					time.sleep(2)
-					print('1')
+					#print('1')
 					run_day=A_Statu_day2(date,m1_write,1,j,0,ResAirbnb,m1_newmonth,500,0,des)
-					print('2')
+					#print('2')
 					run_day=A_Statu_day2(1,m2_write,2,j,1,ResAirbnb,m2_newmonth,MNday1,0,des)
-					print('3')
+					#print('3')
 					run_resday=A_Statu_day4(m3_write,j,ResAirbnb,m3_newmonth,des)
 					#(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM)
 					#run_PLUS_1=A_Statu_PLUS(date,m1_write,2,j,0,ResAirbnb,m1_newmonth,500,1)
 					#run_PLUS_2=A_Statu_PLUS(1,m2_write,2,j,1,ResAirbnb,m2_newmonth,MNday1,0)
 					#run_PLUS_3=A_Statu_PLUS2(m3_write,j,ResAirbnb,m3_newmonth,2)
-					print('4')
+					#print('4')
 					next_calendar.click()
 					time.sleep(2)
 					next_calendar.click()
@@ -1691,7 +1691,7 @@ while end==0:
 						run_day=A_Statu_day5(m5_write,j,ResAirbnb,m5_newmonth,1,des)
 					except:
 						pass
-					print('6')
+					#print('6')
 					#https://www.airbnb.fr/rooms/plus/21846063
 					try:
 						#//span[@class='_so3dpm2']
@@ -1844,9 +1844,9 @@ while end==0:
 		end=1
 		now = str(datetime.datetime.now())[:19]
 		now = now.replace(":","_")
-		print(now)
+		#print(now)
 		Tr=date
-		print ('FIN')
+		#print ('FIN')
 		wbx = load_workbook(path_RESULT.filename)
 		ws = wbx.active
 		try:
@@ -1857,22 +1857,22 @@ while end==0:
 			zzzz=0
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		try:
-			print('///REPORT///')
-			print('Total R = '+str(total_R))
-			print('Total L = '+str(total_L))
-			print('Total P = '+str(total_P))
+			#print('///REPORT///')
+			#print('Total R = '+str(total_R))
+			#print('Total L = '+str(total_L))
+			#print('Total P = '+str(total_P))
 		except:
-			print('NO REPORT')
+			#print('NO REPORT')
 		try:
-			print('try sent')
+			#print('try sent')
 			run=email(DIR2,NAMEFile,now,total_R,total_L,total_P)
-			print('sent email')
+			#print('sent email')
 		except:
-			print('rien')
+			#print('rien')
 		rootdriver.quit()
 		wbx.close()
 	except:
-		print(j)
+		#print(j)
 		j=j+1
 		try:
 			rootdriver.quit()
@@ -1888,7 +1888,7 @@ while end==0:
 		while f_xpathdate==0:
 			h=ws.cell(row=fm, column=2).value
 			fm=fm+1
-			print(h)
+			#print(h)
 			if fff==8:
 				f_mounth=1
 				f_xpathdate=1
@@ -1900,7 +1900,7 @@ while end==0:
 				time.sleep(15)
 				#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
 				x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_l9wspk2']")))
-				print('date')
+				#print('date')
 				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1b3ij9t']")))
 				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
 				x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//h1[@class='_14i3z6h']")))
