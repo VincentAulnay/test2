@@ -1857,18 +1857,18 @@ while end==0:
 			zzzz=0
 		wbx.save(DIR2+NAMEFile+str(now)+".xlsx")
 		try:
-			#print('///REPORT///')
+			print('///REPORT///')
 			#print('Total R = '+str(total_R))
 			#print('Total L = '+str(total_L))
 			#print('Total P = '+str(total_P))
 		except:
-			#print('NO REPORT')
+			print('NO REPORT')
 		try:
 			#print('try sent')
 			run=email(DIR2,NAMEFile,now,total_R,total_L,total_P)
 			#print('sent email')
 		except:
-			#print('rien')
+			print('rien')
 		rootdriver.quit()
 		wbx.close()
 	except:
