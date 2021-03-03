@@ -250,15 +250,15 @@ def MnumDay (Mmois):
 	elif Mmois=='juillet':
 		MNumday=31
 	elif Mmois=='août':
-		MNumday=30
+		MNumday=31
 	elif Mmois=='septembre':
-		MNumday=31
+		MNumday=30
 	elif Mmois=='octobre':
-		MNumday=30
-	elif Mmois=='novembre':
 		MNumday=31
-	elif Mmois=='décembre':
+	elif Mmois=='novembre':
 		MNumday=30
+	elif Mmois=='décembre':
+		MNumday=31
 		
 def A_Colonne_mois(name_mois,c):
 #1- récupération book Result qui évolue au court du script
