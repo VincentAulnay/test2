@@ -694,7 +694,7 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			try:
 				pp=cc.split(' ')
 				#print(pp)
-				cc=pp[1]
+				cc=pp[0]
 			except:
 				pass
 			ws.cell(row=j, column=c_write+2).value=cc
