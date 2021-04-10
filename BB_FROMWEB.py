@@ -1537,9 +1537,10 @@ while f_xpathdate==0:
 		print('title trouve')
 		ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
 		rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+		time.sleep(1)
 		rootdriver.execute_script("window.scrollBy(0,-200);")
+		time.sleep(2)
 		next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
-		next_calendar.click()
 		print('next find')
 		f_xpathdate=1
 		try:
@@ -1855,7 +1856,7 @@ while end==0:
 						pass
 					C_mois5=1
 					checker=1
-				if (j/10).is_integer():
+				if (j/30).is_integer():
 					wbx.save(path_RESULT.filename)
 					#if checker==1:
 					#	x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1b3ij9t']")))
