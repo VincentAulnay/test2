@@ -616,7 +616,6 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 			back_li=[]
 	except:
 		back_li=[]
-		ResAirbnb='/D'
 	ws.cell(row=j, column=c_write+1).value = str(li)
 	#print(str(li))
 	c_added=[]
@@ -631,17 +630,40 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 	t_add='vide'
 	t_rem='vide'
 	t_wri='vide'
+	ONC=ONCOM
+	write_c=0
+	if ONC==1:
+		try:
+			oldcc=ws.cell(row=j, column=c_write+2).value
+			tp_c=soup.findAll('span', attrs={"class": "_bq6krt"})[1].text
+			#print(tp_c)
+			p_c=tp_c.replace("(","")
+			cc=p_c.replace(")","")
+			try:
+				pp=cc.split(' ')
+				#print(pp)
+				cc=pp[0]
+			except:
+				pass
+			ws.cell(row=j, column=c_write+2).value=cc
+			if oldcc!=cc:
+				write_c=1
+				v_com=int(cc)-int(oldcc)
+				t_com='/C'+toto+':'+str(v_com)
+		except:
+			pass
+	
 	if len(c_added)>0:
 		R=1
 		if len(c_added)==1:
 			dif=c_added[0]-date
-			if dif==0 or dif==1 or dif==2 or dif==6:
+			if dif==0 or dif==1 or dif==2 or dif==3 or dif==6 or dif==7:
 				ResAirbnb='/P'
 				P=1
 				R=0
 			elif dif<0:
 				difP=MNday-date+lie[0]
-				if difP==0 or difP==1 or difP==2 or difP==6:
+				if difP==0 or difP==1 or difP==2 or dif==3 or difP==6 or dif==7:
 					ResAirbnb='/P'
 					P=1
 					R=0
@@ -669,10 +691,16 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 		else:
 			if t_rem!='vide':
 				t_wri=str(t_rem)
+		if write_c==1:
+			if t_wri=='vide':
+				t_wri=str(t_com)
+			else:
+				t_wri=t_wri+';    '+str(t_com)
 		if t_wri!='vide':
 			t_wri=str(ca)+';    '+t_wri
+
+	
 	if t_wri!='vide':
-		#print(t_wri)
 		ws.cell(row=j, column=c_write).value=t_wri
 	if g==0:
 		R1=R
@@ -682,25 +710,6 @@ def A_Statu_day2(date,c_write,page,j,g,ResAirbnb,new_mo,MNday,ONCOM,des):
 		R2=R
 		L2=L
 		P2=P
-	#COMMENTAIRE
-	#print('comment')
-	ONC=ONCOM
-	if ONC==1:
-		try:
-			tp_c=soup.findAll('span', attrs={"class": "_bq6krt"})[1].text
-			#print(tp_c)
-			p_c=tp_c.replace("(","")
-			cc=p_c.replace(")","")
-			try:
-				pp=cc.split(' ')
-				#print(pp)
-				cc=pp[0]
-			except:
-				pass
-			ws.cell(row=j, column=c_write+2).value=cc
-			#print(cc)
-		except:
-			pass
 
 def A_Statu_day4(c_write,j,ResAirbnb,new_mo,des):
 	global R3
@@ -1313,6 +1322,13 @@ P2=0
 total_R=0
 total_L=0
 total_P=0
+i=1
+cANNONCE=0
+while cANNONCE==0:
+	g=ws.cell(row=1, column=i).value
+	if g=='ANNONCE':
+		cANNONCE=i
+	i=i+1	
 while f_mounth==0:
 	h=ws.cell(row=fm, column=2).value
 	print(h)
@@ -1495,11 +1511,14 @@ while c_month==0:
 	time.sleep(5)
 	c_month=1
 
+f_xpathdate=0
+fm=1
+fff=0
 while f_xpathdate==0:
-	h=ws.cell(row=fm, column=2).value
+	h=ws.cell(row=fm, column=cANNONCE).value
 	fm=fm+1
 	print(h)
-	if fff==5:
+	if fff==8:
 		f_mounth=1
 		f_xpathdate=1
 		end=0
@@ -1509,12 +1528,19 @@ while f_xpathdate==0:
 		rootdriver.get(h)
 		time.sleep(10)
 		#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
-		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_l9wspk2']")))
+		#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_l9wspk2']")))
+		x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[contains(@aria-label,'non')]")))
 		print('date find')
 		#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_18hrqvin']")))
 		#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
 		x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//h1[@class='_14i3z6h']")))
 		print('title trouve')
+		ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
+		rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+		rootdriver.execute_script("window.scrollBy(0,-200);")
+		next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
+		next_calendar.click()
+		print('next find')
 		f_xpathdate=1
 		try:
 			b_cookie = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='optanon-allow-all accept-cookies-button']")))
@@ -1630,7 +1656,7 @@ while end==0:
 			P1=0
 			P2=0
 			#----START TRAQUING----
-			h=ws.cell(row=j, column=2).value
+			h=ws.cell(row=j, column=cANNONCE).value
 			checker=0
 			#print('------'+str(j-1)+'------'+str(h))
 			if h==None:
@@ -1872,7 +1898,7 @@ while end==0:
 		rootdriver.quit()
 		wbx.close()
 	except:
-		#print(j)
+		print(j)
 		j=j+1
 		try:
 			rootdriver.quit()
@@ -1884,11 +1910,12 @@ while end==0:
 		rootdriver.set_window_size(2000, 1000)
 		wait = WebDriverWait(rootdriver, 5)
 		f_xpathdate=0
+		fm=1
 		fff=0
 		while f_xpathdate==0:
-			h=ws.cell(row=fm, column=2).value
+			h=ws.cell(row=fm, column=cANNONCE).value
 			fm=fm+1
-			#print(h)
+			print(h)
 			if fff==8:
 				f_mounth=1
 				f_xpathdate=1
@@ -1897,29 +1924,34 @@ while end==0:
 			fff=fff+1
 			try:
 				rootdriver.get(h)
-				time.sleep(15)
+				time.sleep(8)
 				#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_13m7kz7i']"))).text
-				x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_l9wspk2']")))
-				#print('date')
-				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_1b3ij9t']")))
+				#x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[@class='_l9wspk2']")))
+				x_date = wait.until(EC.presence_of_element_located((By.XPATH, "//td[contains(@aria-label,'non')]")))
+				print('date find')
+				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_18hrqvin']")))
 				#x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//div[@class='_5z4v7g']")))
 				x_title = wait.until(EC.presence_of_element_located((By.XPATH, "//h1[@class='_14i3z6h']")))
-				#print('x date trouve')
+				print('title trouve')
+				ele=rootdriver.find_element_by_xpath("//button[@aria-label='Avancez pour passer au mois suivant.']")
+				rootdriver.execute_script("arguments[0].scrollIntoView(true);", ele)
+				rootdriver.execute_script("window.scrollBy(0,-200);")
+				next_calendar = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@aria-label='Avancez pour passer au mois suivant.']")))
+				next_calendar.click()
+				print('next find')
 				f_xpathdate=1
 				try:
 					b_cookie = wait.until(EC.presence_of_element_located((By.XPATH, "//button[@class='optanon-allow-all accept-cookies-button']")))
 					b_cookie.click()
 				except:
-					f_xpathdate=1
+					pass
 			except:
-				if fff!=8:
+				if fff!=5:
 					rootdriver.quit()
 					rootdriver = webdriver.Chrome('/usr/lib/chromium-browser/chromedriver',chrome_options=chrome_options)
 					#rootdriver = webdriver.Chrome(chrome_options=chrome_options)
 					rootdriver.set_window_size(2000, 1000)
 					wait = WebDriverWait(rootdriver, 5)
-				else:
-					f_xpathdate=1
 		
 		
 try:
