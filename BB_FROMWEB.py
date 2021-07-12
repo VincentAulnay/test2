@@ -64,12 +64,12 @@ c_mouth=k
 #	ws.cell(row=1, column=c_mouth).value = '3/5_mois'
 
 #-----RECUP INFO XPATH FROM EXCEL------
-book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
+#book_GMAIL = xlrd.open_workbook('/home/pi/Desktop/GMAIL_ACCOUNT.xls')
 #book_GMAIL = xlrd.open_workbook('/home/ubuntu/Desktop/GMAIL_ACCOUNT.xls')
-sheet_GMAIL = book_GMAIL.sheet_by_index(0)
-ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
-PSW_GMAIL=sheet_GMAIL.cell(1,1).value
-RECEIVER=sheet_GMAIL.cell(2,1).value
+#sheet_GMAIL = book_GMAIL.sheet_by_index(0)
+#ADRESS_GMAIL=sheet_GMAIL.cell(0,1).value
+#PSW_GMAIL=sheet_GMAIL.cell(1,1).value
+#RECEIVER=sheet_GMAIL.cell(2,1).value
 
 #-------DATE DU JOUR-------
 date = int(datetime.datetime.now().day)
@@ -79,14 +79,14 @@ Hr=dt.datetime.now().hour
 #------RECUP INFO CALANDAR------
 
 def email(DIR2,NAMEFile,now,total_R,total_L,total_P):
-	sender = ADRESS_GMAIL
-	sender_password = PSW_GMAIL
+	#sender = ADRESS_GMAIL
+	#sender_password = PSW_GMAIL
 	#sender = 'stopbnb33650@gmail.com'
 	#sender_password = '@stop$n$33650'
 	print('ici1')
 	sender = 'vincent.aulnay@gmx.fr'
 	sender_password = '@Vincent94'
-	receivers = [RECEIVER, 'vincent.aulnay@gmx.fr', 'stopbnb33650@gmail.com']
+	receivers = ['taxedesejour@tourisme-montesquieu.com', 'vincent.aulnay@gmx.fr', 'stopbnb33650@gmail.com']
 	print('ici2')
 
 	#s = smtplib.SMTP('smtp.gmail.com', 587)
